@@ -1,0 +1,72 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    /*background-color: #1e1e1e; !* Dark background *!*/
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo img {
+    width: 50px; /* Adjust logo size */
+    margin-right: 10px;
+}
+
+.navbar-email {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+}
+
+.navbar-menu li {
+    margin: 0 10px;
+}
+
+.navbar-menu li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.navbar-menu li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #007bff; /* Blue underline */
+    transition: width 0.3s ease;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.navbar-menu li a:hover::after,
+.navbar-menu li a.active::after {
+    width: 100%;
+}
+
+.hire-me-button {
+    background: linear-gradient(90deg, #673ab7, #8e24aa);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.hire-me-button:hover {
+    opacity: 0.9;
+}
