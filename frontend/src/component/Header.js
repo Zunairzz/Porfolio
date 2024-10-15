@@ -46,8 +46,8 @@ const Header = ()=>{
                 <li>
                     <a
                         href="#portfolio"
-                        className={activeLink === 'portfolio' ? 'active' : ''}
-                        onClick={() => handleClick('portfolio')}
+                        className={activeLink === 'frontend' ? 'active' : ''}
+                        onClick={() => handleClick('frontend')}
                     >
                         Portfolios
                     </a>
