@@ -1,0 +1,70 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #181818;
+    color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #202020;
+}
+
+.header ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.header a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.hire-me-btn {
+    background-color: #6a0dad;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.profile {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.profile-info h1 {
+    color: #fff;
+    font-size: 3rem;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.service-item {
+    background-color: #292929;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.recent-works .works-gallery {
+    display: flex;
+    gap: 20px;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #202020;
+}
