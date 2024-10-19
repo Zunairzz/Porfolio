@@ -72,7 +72,7 @@
     position: relative;
     width: 500px; /* Adjust size as needed */
     height: auto; /* Half the height for half-circle effect */
-    background-color: #f57b00; /* Orange color */
+    background-color: #f39659; /* Orange color */
     border-top-left-radius: 300px;  /* Half-circle effect */
     border-top-right-radius: 300px; /* Half-circle effect */
     z-index: 1;
@@ -80,7 +80,7 @@
 
 .profile-pic {
     position: relative;
-    top: -100px;
+    top: -130px;
     left: -20px;
     right: 0;
     width: 600px;
@@ -88,7 +88,75 @@
     /*object-fit: cover;*/
 }
 
-/*!* Position the buttons below the image *!*/
+.combined-button {
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 250px;
+    transition: all 0.3s ease;
+    border: 2px solid #ff7f32;
+}
+
+.button-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left, .right {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: white;
+}
+
+
+/* Hover effect for "Portfolio" */
+.left:hover {
+    background-color: #ff7f32;
+}
+
+/* Hover effect for "Hire me" and make "Portfolio" transparent */
+.right:hover .arrow {
+    opacity: 1;
+}
+
+.right:hover {
+    background-color: #ff7f32;
+    color: white;
+}
+/* Show arrow on hover for Portfolio */
+.left .arrow {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.right .arrow {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* On hover over Portfolio, hide "Hire me" arrow */
+.left:hover .arrow {
+    opacity: 1;
+}
+
+.right:hover .arrow {
+    opacity: 1;
+}
+
+
+/*!* Position the buttons below he image *!*/
 /*.profile-buttons {*/
 /*    margin-top: 100px; !* Adjust the spacing between the image and the buttons *!*/
 /*    display: flex;*/
