@@ -1,0 +1,66 @@
+.my-services {
+    text-align: center;
+    background: #1b1b1b;
+    padding: 50px 0;
+    color: #fff;
+}
+
+.highlight {
+    color: #ff7f3f;
+}
+
+.description {
+    max-width: 500px;
+    margin: 0 auto 40px;
+    color: #bbb;
+}
+
+.services-slider {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
+.service-card {
+    background: #2c2c2c;
+    border-radius: 20px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.service-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: -30px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #555;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dot.active {
+    background-color: #ff7f3f;
+}

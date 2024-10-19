@@ -1,0 +1,28 @@
+.custom-navbar {
+    background-color: black;
+    border-radius: 20rem;
+    padding: 10px;
+    /*display: flex;*/
+    /*margin: 40px 100px 0 100px;*/
+    justify-content: center;
+    /*height: 80px;*/
+    width: 100%;
+}
+
+.custom-item {
+    width: 110px;
+    text-align: center;
+    border-radius: 5rem;
+}
+
+.custom-item:hover {
+    border-radius: 5rem;
+}
+
+.custom-hover-bg {
+    background-color: rgba(210, 210, 210, 0.27);
+}
+
+.custom-active-bg {
+    background-color: #FD853A;
+}
