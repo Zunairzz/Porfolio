@@ -1,0 +1,191 @@
+/*.profile-card {*/
+/*    width: 100%;*/
+/*    padding: 20px;*/
+/*    background-color: #ffffff;*/
+/*    border-radius: 15px;*/
+/*    text-align: center;*/
+/*    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);*/
+/*    position: relative;*/
+/*    height: 700px;*/
+/*}*/
+
+/*.profile-header {*/
+/*    margin-bottom: 20px;*/
+
+/*}*/
+
+/*.hello-badge {*/
+/*    display: inline-block;*/
+/*    background-color: #ffcc6b;*/
+/*    padding: 5px 10px;*/
+/*    border-radius: 50px;*/
+/*    font-size: 14px;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.profile-name {*/
+/*    font-size: 50px;*/
+/*    color: #333;*/
+/*}*/
+
+/*.highlight-name {*/
+/*    color: #f57b00;*/
+/*}*/
+
+/*.profile-body {*/
+/*    margin: 20px 0;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+
+/*}*/
+
+/*.profile-quote {*/
+/*    font-style: italic;*/
+/*    color: #666;*/
+/*    !*margin-bottom: 20px;*!*/
+/*    padding-right: 900px;*/
+/*    position: relative;*/
+/*    top: 80px;*/
+
+/*}*/
+
+/*.profile-experience {*/
+/*    !*display: flex;*!*/
+/*    !*justify-content: center;*!*/
+/*    !*align-items: center;*!*/
+/*    !*gap: 10px;*!*/
+/*    padding-left: 1000px;*/
+/*}*/
+
+/*!* Profile container that centers the entire content *!*/
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 50px;
+}
+
+/*!* Half-circle background *!*/
+.profile-background {
+    position: relative;
+    width: 500px; /* Adjust size as needed */
+    height: auto; /* Half the height for half-circle effect */
+    background-color: #f39659; /* Orange color */
+    border-top-left-radius: 300px;  /* Half-circle effect */
+    border-top-right-radius: 300px; /* Half-circle effect */
+    z-index: 1;
+}
+
+.profile-pic {
+    position: relative;
+    top: -130px;
+    left: -20px;
+    right: 0;
+    width: 600px;
+    height: auto;
+    /*object-fit: cover;*/
+}
+
+.combined-button {
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 250px;
+    transition: all 0.3s ease;
+    border: 2px solid #ff7f32;
+}
+
+.button-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left, .right {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: white;
+}
+
+
+/* Hover effect for "Portfolio" */
+.left:hover {
+    background-color: #ff7f32;
+}
+
+/* Hover effect for "Hire me" and make "Portfolio" transparent */
+.right:hover .arrow {
+    opacity: 1;
+}
+
+.right:hover {
+    background-color: #ff7f32;
+    color: white;
+}
+/* Show arrow on hover for Portfolio */
+.left .arrow {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.right .arrow {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* On hover over Portfolio, hide "Hire me" arrow */
+.left:hover .arrow {
+    opacity: 1;
+}
+
+.right:hover .arrow {
+    opacity: 1;
+}
+
+
+/*!* Position the buttons below he image *!*/
+/*.profile-buttons {*/
+/*    margin-top: 100px; !* Adjust the spacing between the image and the buttons *!*/
+/*    display: flex;*/
+/*    gap: 10px; !* Add some space between buttons *!*/
+/*}*/
+
+/*!* Style for the buttons *!*/
+/*.portfolio-button, .hireme-button {*/
+/*    background-color: #f57b00;*/
+/*    color: white;*/
+/*    padding: 10px 20px;*/
+/*    border: none;*/
+/*    border-radius: 25px;*/
+/*    font-size: 16px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*!* Hover effect for buttons *!*/
+/*.portfolio-button:hover, .hireme-button:hover {*/
+/*    background-color: #e76a00;*/
+/*}*/
+
+/*.stars {*/
+/*    color: #f57b00;*/
+/*    font-size: 18px;*/
+/*}*/
+
+/*.experience-years {*/
+/*    font-size: 16px;*/
+/*    color: #333;*/
+/*}*/
