@@ -1,5 +1,4 @@
 import React from 'react';
-import Base from "../component/Base";
 
 const Profile = () => {
     return (
