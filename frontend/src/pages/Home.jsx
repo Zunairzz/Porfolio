@@ -24,7 +24,7 @@ export function Home() {
                 </Row>
                 <Row className="d-flex">
                     {serviceData.map(item => (
-                        <Col>
+                        <Col xxl={4} xl={4} lg={6} md={6} sm={12}>
                             <CustomServiceCard heading={item.heading} image={item.image}/>
                         </Col>
                     ))}

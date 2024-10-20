@@ -9,26 +9,32 @@ const Profile = () => {
             <Row className="d-flex justify-content-center align-items-center">
                 <Col className="d-flex justify-content-center align-items-center">
                     <div className="text-center p-3">
-                        <div style={{ border:"1px solid black", borderRadius: '20px',display: 'inline-block',padding: '5px 15px',fontWeight:'500' }}>
+                        <div style={{
+                            border: "1px solid black",
+                            borderRadius: '20px',
+                            display: 'inline-block',
+                            padding: '5px 15px',
+                            fontWeight: '500'
+                        }}>
                             Hello!
                         </div>
                         <h1 className="profile-name mt-2">
-                            I'm <span style={{color:'#ff6600'}}>Zunair</span>,<br/>
+                            I'm <span style={{color: '#ff6600'}}>Zunair</span>,<br/>
                             Full Stack Developer
                         </h1>
                     </div>
                 </Col>
             </Row>
-            <Row style={{marginTop:"5rem"}}>
-                <Col xl={4} lg={4} md={4} className="d-flex" style={{  height: "286px"}}>
-                    <div className="profile-quote mt-3" style={{paddingLeft:"100px"}}>
+            <Row style={{marginTop: "5rem"}}>
+                <Col xl={4} lg={4} md={4} className="d-flex" style={{height: "286px"}}>
+                    <div className="profile-quote mt-3" style={{paddingLeft: "100px"}}>
                         <blockquote>
                             I break down complex user experience problems to create integrity-focused
                             solutions that connect billions of people.
                         </blockquote>
                     </div>
                 </Col>
-                <Col xl={5} lg={5} md={5} className="profile-background " style={{ height: "286px"}}>
+                <Col xl={5} lg={5} md={5} className="profile-background " style={{height: "286px"}}>
                     <Card className="d-flex justify-content-center align-items-center bg-transparent border-0">
                         <CardBody>
                             <img
@@ -48,7 +54,7 @@ const Profile = () => {
                         </CardBody>
                     </Card>
                 </Col>
-                <Col xl={3} lg={3} md={3} style={{ height: "286px"}}>
+                <Col xl={3} lg={3} md={3} style={{height: "286px"}}>
                     <div className=" text-center" style={{marginBottom: '-5rem'}}>
                         <div style={{fontSize: '2rem', color: '#ff6600', marginBottom: '-1rem'}}>★★★★★</div>
                         <div style={{fontSize: '3rem', fontWeight: '500', color: '#333', marginBottom: '-1rem'}}>3
@@ -101,9 +107,9 @@ const Profile = () => {
         //     </div>
     );
 };
-    //     <section className="profile">
-    //         <h1>This is profile page</h1>
-    //     </section>
-    // )
+//     <section className="profile">
+//         <h1>This is profile page</h1>
+//     </section>
+// )
 // }
 export default Profile;

@@ -4,6 +4,7 @@ const CardStyle = {
     backgroundColor: 'rgba(84,84,84,0.5)',
     border: '2px solid #b2b2b2',
     borderRadius: '2rem',
+    margin: "10px 0px",
 }
 
 const CardTextStyle = {
@@ -14,6 +15,22 @@ const CardTextStyle = {
     padding: "30px 0px 30px 20px",
 }
 
+const ParentLayer = {
+    position: "abso"
+}
+
+const ChildLayer1 = {
+    position: "absolute"
+}
+
+const ChildLayer2 = {
+    position: "absolute"
+}
+
+const ChildLayer3 = {
+    position: "absolute"
+}
+
 export function CustomServiceCard({heading, image}) {
     return (
         <Card style={CardStyle}>
@@ -21,15 +38,15 @@ export function CustomServiceCard({heading, image}) {
                 {heading}
             </CardHeader>
             <CardBody>
-                {/*<div className="layer">*/}
-                {/*    <div className="layer1"/>*/}
-                {/*    <div className="layer2"/>*/}
-                <img
-                    src={image}
-                    alt="title here"
-                    className="card-image"
-                />
-                {/*</div>*/}
+                <div style={ParentLayer}>
+                    <div style={ChildLayer1}/>
+                    <div style={ChildLayer2}/>
+                    <img
+                        src={image}
+                        alt="title here"
+                        style={ChildLayer3}
+                    />
+                </div>
             </CardBody>
         </Card>
         // <div className="card-container">
