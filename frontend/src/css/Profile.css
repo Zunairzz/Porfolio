@@ -59,34 +59,7 @@
 /*}*/
 
 /*!* Profile container that centers the entire content *!*/
-.profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    margin-top: 50px;
-}
 
-/*!* Half-circle background *!*/
-.profile-background {
-    position: relative;
-    width: 500px; /* Adjust size as needed */
-    height: auto; /* Half the height for half-circle effect */
-    background-color: #f39659; /* Orange color */
-    border-top-left-radius: 300px;  /* Half-circle effect */
-    border-top-right-radius: 300px; /* Half-circle effect */
-    z-index: 1;
-}
-
-.profile-pic {
-    position: relative;
-    top: -130px;
-    left: -20px;
-    right: 0;
-    width: 600px;
-    height: auto;
-    /*object-fit: cover;*/
-}
 
 .combined-button {
     border-radius: 30px;
@@ -155,37 +128,20 @@
     opacity: 1;
 }
 
+@media only screen and (max-width: 900px) {
+    /* Styles for screens smaller than 600px */
+    .profile-pic img {
+        margin-top: 100px;
+        padding: 0;
+        display: block;
+    }
+}
 
-/*!* Position the buttons below he image *!*/
-/*.profile-buttons {*/
-/*    margin-top: 100px; !* Adjust the spacing between the image and the buttons *!*/
-/*    display: flex;*/
-/*    gap: 10px; !* Add some space between buttons *!*/
-/*}*/
-
-/*!* Style for the buttons *!*/
-/*.portfolio-button, .hireme-button {*/
-/*    background-color: #f57b00;*/
-/*    color: white;*/
-/*    padding: 10px 20px;*/
-/*    border: none;*/
-/*    border-radius: 25px;*/
-/*    font-size: 16px;*/
-/*    cursor: pointer;*/
-/*    transition: background-color 0.3s ease;*/
-/*}*/
-
-/*!* Hover effect for buttons *!*/
-/*.portfolio-button:hover, .hireme-button:hover {*/
-/*    background-color: #e76a00;*/
-/*}*/
-
-/*.stars {*/
-/*    color: #f57b00;*/
-/*    font-size: 18px;*/
-/*}*/
-
-/*.experience-years {*/
-/*    font-size: 16px;*/
-/*    color: #333;*/
-/*}*/
+@media only screen and (max-width: 800px) {
+    /* Styles for screens smaller than 600px */
+    .profile-pic img {
+        margin-top: 100px;
+        padding: 0;
+        display: block;
+    }
+}
