@@ -1,65 +1,7 @@
-/*.profile-card {*/
-/*    width: 100%;*/
-/*    padding: 20px;*/
-/*    background-color: #ffffff;*/
-/*    border-radius: 15px;*/
-/*    text-align: center;*/
-/*    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);*/
-/*    position: relative;*/
-/*    height: 700px;*/
-/*}*/
-
-/*.profile-header {*/
-/*    margin-bottom: 20px;*/
-
-/*}*/
-
-/*.hello-badge {*/
-/*    display: inline-block;*/
-/*    background-color: #ffcc6b;*/
-/*    padding: 5px 10px;*/
-/*    border-radius: 50px;*/
-/*    font-size: 14px;*/
-/*    font-weight: bold;*/
-/*}*/
-
-/*.profile-name {*/
-/*    font-size: 50px;*/
-/*    color: #333;*/
-/*}*/
-
-/*.highlight-name {*/
-/*    color: #f57b00;*/
-/*}*/
-
-/*.profile-body {*/
-/*    margin: 20px 0;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    align-items: center;*/
-
-/*}*/
-
-/*.profile-quote {*/
-/*    font-style: italic;*/
-/*    color: #666;*/
-/*    !*margin-bottom: 20px;*!*/
-/*    padding-right: 900px;*/
-/*    position: relative;*/
-/*    top: 80px;*/
-
-/*}*/
-
-/*.profile-experience {*/
-/*    !*display: flex;*!*/
-/*    !*justify-content: center;*!*/
-/*    !*align-items: center;*!*/
-/*    !*gap: 10px;*!*/
-/*    padding-left: 1000px;*/
-/*}*/
-
-/*!* Profile container that centers the entire content *!*/
-
+.profile-name {
+    font-size: 80px;
+    color: #333;
+}
 
 .combined-button {
     border-radius: 30px;
@@ -108,6 +50,7 @@
     background-color: #ff7f32;
     color: white;
 }
+
 /* Show arrow on hover for Portfolio */
 .left .arrow {
     opacity: 0;
@@ -128,20 +71,38 @@
     opacity: 1;
 }
 
+/*@media only screen and (max-width: 1200px) {*/
+/*    !* Styles for screens smaller than 600px *!*/
+/*    .profile-pic img {*/
+/*        background-color: #6a0dad;*/
+/*        margin-top: -350px;*/
+/*    }*/
+/*}*/
+
 @media only screen and (max-width: 900px) {
     /* Styles for screens smaller than 600px */
     .profile-pic img {
-        margin-top: 100px;
+        margin-top: 250px;
         padding: 0;
         display: block;
     }
+
+    /*.left-text, .right-text {*/
+    /*    justify-content: center;*/
+    /*    text-align: center;*/
+    /*}*/
 }
 
 @media only screen and (max-width: 800px) {
     /* Styles for screens smaller than 600px */
     .profile-pic img {
-        margin-top: 100px;
+        margin-top: 300px;
         padding: 0;
         display: block;
+    }
+
+    .left-text, .right-text {
+        justify-content: center;
+        text-align: center;
     }
 }
