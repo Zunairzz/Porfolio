@@ -4,6 +4,7 @@ import React from "react";
 import '../css/HomePageMyService.css'
 import {MyServiceHomePage} from "../component/serviceComponent/MyServiceHomePage";
 import {WhyHireMyHomePage} from "../component/whyHireMeComponent/WhyHireMyHomePage";
+import WorkExperience from "./WorkExperience";
 
 export function Home() {
     return (
@@ -11,6 +12,7 @@ export function Home() {
             <Profile/>
             <MyServiceHomePage/>
             <WhyHireMyHomePage/>
+            <WorkExperience/>
         </Base>
     )
 }
