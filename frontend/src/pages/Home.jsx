@@ -5,6 +5,7 @@ import React from "react";
 import '../css/HomePageMyService.css'
 import {CustomServiceCard} from "../component/CustomServiceCard";
 import {serviceData} from "../data/ServiceData";
+import WorkExperience from "./WorkExperience";
 
 export function Home() {
     return (
@@ -30,6 +31,7 @@ export function Home() {
                     ))}
                 </Row>
             </div>
+            <WorkExperience/>
         </Base>
     )
 }
