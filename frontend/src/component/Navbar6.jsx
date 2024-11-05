@@ -21,21 +21,10 @@ export default function Navbar6() {
     const location = useLocation();
 
     return (
-        <div className="bg-white" style={{marginBottom: '10rem'}}>
+        <div className="bg-white" style={{marginBottom: '8rem'}}>
             <header className="absolute inset-x-0 top-0 z-50">
                 <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
                     <div className="flex lg:flex-1">
-                        {/*<NavItem className="nav-link">*/}
-                        {/*    <NavLink tag={ReactLink} to="/"*/}
-                        {/*             className="-m-1.5 p-1.5">*/}
-                        {/*        <span className="sr-only">Your Company</span>*/}
-                        {/*        <img*/}
-                        {/*            alt=""*/}
-                        {/*            src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"*/}
-                        {/*            className="h-8 w-auto"*/}
-                        {/*        />*/}
-                        {/*    </NavLink>*/}
-                        {/*</NavItem>*/}
                     </div>
                     <div className="flex lg:hidden">
                         <button

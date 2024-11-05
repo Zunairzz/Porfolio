@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
-import { FaCircle } from 'react-icons/fa';
+import {Col, Container, Row} from 'reactstrap';
+import {FaCircle} from "react-icons/fa";
+import '../css/WorkExperience.css';
 
 const WorkExperience = () => {
     const experiences = [
@@ -26,6 +27,7 @@ const WorkExperience = () => {
 
     const styles = {
         timeline: {
+            marginTop: "150px"
         },
         title: {
             textAlign: 'center',
@@ -35,12 +37,14 @@ const WorkExperience = () => {
             display: 'flex',
             marginBottom: '40px',
             position: 'relative',
-            maxHeight:'350px'
+            maxHeight: '350px'
         },
         iconContainer: {
+            backgroundColor: 'white',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            alignContent: 'center',
             width: '50px',
             height: '50px',
             border: '2px dashed #333',
@@ -55,19 +59,13 @@ const WorkExperience = () => {
             fontSize: '1.5rem',
         },
         verticalLine: {
-            display:'flex',
-            justifyContent: 'center',
+            position: 'absolute',
+            top: '50px',
+            left: '50%',
+            transform: 'translateX(-50%)', // Center-aligns the line horizontally
             borderLeft: '2px dashed #333',
             height: '100%',
-            position: 'absolute',
-            left: '20%',
-            top: '50px',
             zIndex: -1,
-        },
-        verticalLineMobile: {
-            borderLeft: '2px dashed #333',
-            height: '50px',
-            margin: '0 auto', // Align line in the center on mobile
         },
     };
 
@@ -76,36 +74,59 @@ const WorkExperience = () => {
             <h1 style={styles.title}>
                 My <span style={{color: '#ff6600'}}>Work Experience</span>
             </h1>
-            {experiences.map((exp, index) => {
-                const isLastItem = index === experiences.length - 1;
+            <div className="desktop-view">
+                {experiences.map((exp, index) => {
+                    const isLastItem = index === experiences.length - 1;
 
-                return (
-                    <Row key={index} style={styles.timelineItem}>
-                        <Col xl={5} lg={5} md={5} >
-                            <h5>{exp.company}</h5>
-                            <p>{exp.duration}</p>
-                        </Col>
-                        <Col xl={2} lg={2} md={2}  className="position-relative mb-3 mb-md-0">
-                            <div style={styles.iconContainer}>
-                                <FaCircle style={index % 2 === 0 ? styles.iconOrange : styles.iconDark} />
-                            </div>
-                            {!isLastItem && (
-                                <div
-                                    style={
-                                        window.innerWidth < 768
-                                            ? styles.verticalLineMobile
-                                            : styles.verticalLine
-                                    }
-                                ></div>
-                            )}
-                        </Col>
-                        <Col xl={5} lg={5} md={5} >
-                            <h5>{exp.position}</h5>
-                            <p>{exp.description}</p>
-                        </Col>
-                    </Row>
-                );
-            })}
+                    return (
+                        <Row key={index} style={styles.timelineItem}>
+                            <Col xl={5} lg={5} md={5}>
+                                <h5>{exp.company}</h5>
+                                <p>{exp.duration}</p>
+                            </Col>
+                            <Col xl={2} lg={2} md={2}
+                                 className="position-relative mb-3 mb-md-0 d-flex justify-content-center">
+                                <div style={styles.iconContainer}>
+                                    <FaCircle style={index % 2 === 0 ? styles.iconOrange : styles.iconDark}/>
+                                </div>
+                                {!isLastItem && (
+                                    <div style={styles.verticalLine}></div>
+                                )}
+                            </Col>
+                            <Col xl={5} lg={5} md={5}>
+                                <h5>{exp.position}</h5>
+                                <p>{exp.description}</p>
+                            </Col>
+                        </Row>
+                    );
+                })}
+            </div>
+
+            <div className="mobile-view">
+                {experiences.map((exp, index) => {
+                    const isLastItem = index === experiences.length - 1;
+
+                    return (
+                        <Row key={index} style={styles.timelineItem}>
+                            <Col xl={2} lg={2} md={2} sm={2}
+                                 className="position-relative mb-3 mb-md-0 d-flex justify-content-center">
+                                <div style={styles.iconContainer}>
+                                    <FaCircle style={index % 2 === 0 ? styles.iconOrange : styles.iconDark}/>
+                                </div>
+                                {!isLastItem && (
+                                    <div style={styles.verticalLine}></div>
+                                )}
+                            </Col>
+                            <Col xl={10} lg={10} md={10} sm={8}>
+                                <h3>{exp.company}</h3>
+                                <p>{exp.duration}</p>
+                                <h5>{exp.position}</h5>
+                                <p>{exp.description}</p>
+                            </Col>
+                        </Row>
+                    );
+                })}
+            </div>
         </Container>
     );
 };

@@ -1,0 +1,33 @@
+.heading-txt {
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+}
+
+.button {
+    border: 2px solid black;
+    padding: 26px 50px;
+    border-radius: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    transition: 0.5s ease;
+}
+
+.button:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+}
+
+.txt {
+    color: #98A2B3;
+}
+
+@media only screen and (max-width: 800px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .right-col {
+        margin-right: 50px;
+    }
+}
