@@ -1,0 +1,17 @@
+@media only screen and (max-width: 10000px) {
+    /* Styles for screens smaller than 600px */
+    .mobile-view {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    /* Styles for screens smaller than 600px */
+    .mobile-view {
+        display: block;
+    }
+
+    .desktop-view {
+        display: none;
+    }
+}

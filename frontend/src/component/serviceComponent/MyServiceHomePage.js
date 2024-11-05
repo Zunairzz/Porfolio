@@ -18,7 +18,7 @@ export function MyServiceHomePage() {
             </Row>
             <Row className="d-flex">
                 {serviceData.map(item => (
-                    <Col>
+                    <Col xxl={3} xl={4} lg={4} md={6} className="mb-4">
                         <CustomServiceCard heading={item.heading} image={item.image}/>
                     </Col>
                 ))}
