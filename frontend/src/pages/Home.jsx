@@ -5,12 +5,13 @@ import '../css/HomePageMyService.css'
 import {MyServiceHomePage} from "../component/serviceComponent/MyServiceHomePage";
 import {WhyHireMyHomePage} from "../component/whyHireMeComponent/WhyHireMyHomePage";
 import WorkExperience from "./WorkExperience";
+import {Testimonials} from "../component/Testimonials";
 import {TestimonialHome} from "../component/TestimonialHome";
 
 export function Home() {
     return (
         <Base>
-            <Profile/>
+            {/*<Profile/>*/}
             <MyServiceHomePage/>
             <WhyHireMyHomePage/>
             <WorkExperience/>
