@@ -6,6 +6,7 @@ import {MyServiceHomePage} from "../component/serviceComponent/MyServiceHomePage
 import {WhyHireMyHomePage} from "../component/whyHireMeComponent/WhyHireMyHomePage";
 import WorkExperience from "./WorkExperience";
 import {TestimonialHome} from "../component/TestimonialHome";
+import PortfolioItemHomePage from "../component/portfolioItemsComponent/PortfolioItemHomePage";
 
 export function Home() {
     return (
@@ -14,6 +15,7 @@ export function Home() {
             <MyServiceHomePage/>
             <WhyHireMyHomePage/>
             <WorkExperience/>
+            <PortfolioItemHomePage/>
             <TestimonialHome/>
         </Base>
     )
