@@ -11,7 +11,7 @@ import {TestimonialHome} from "../component/TestimonialHome";
 export function Home() {
     return (
         <Base>
-            {/*<Profile/>*/}
+            <Profile/>
             <MyServiceHomePage/>
             <WhyHireMyHomePage/>
             <WorkExperience/>
