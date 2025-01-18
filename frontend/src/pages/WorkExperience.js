@@ -60,7 +60,7 @@ const WorkExperience = () => {
         },
         verticalLine: {
             position: 'absolute',
-            top: '50px',
+            top: '20px',
             left: '50%',
             transform: 'translateX(-50%)', // Center-aligns the line horizontally
             borderLeft: '2px dashed #333',
@@ -102,26 +102,26 @@ const WorkExperience = () => {
                 })}
             </div>
 
+            {/* Mobile View */}
             <div className="mobile-view">
                 {experiences.map((exp, index) => {
                     const isLastItem = index === experiences.length - 1;
-
                     return (
-                        <Row key={index} style={styles.timelineItem}>
-                            <Col xl={2} lg={2} md={2} sm={2}
-                                 className="position-relative mb-3 mb-md-0 d-flex justify-content-center">
-                                <div style={styles.iconContainer}>
-                                    <FaCircle style={index % 2 === 0 ? styles.iconOrange : styles.iconDark}/>
+                        <Row key={index} className="timelineItem">
+                            <Col xl={2} lg={2} md={2} sm={2} xs={4}
+                                 className="position-relative d-flex justify-content-center">
+                                <div className="iconContainer">
+                                    <FaCircle className={index % 2 === 0 ? `iconOrange` : `iconDark`}/>
                                 </div>
                                 {!isLastItem && (
                                     <div style={styles.verticalLine}></div>
                                 )}
                             </Col>
-                            <Col xl={10} lg={10} md={10} sm={8}>
-                                <h3>{exp.company}</h3>
-                                <p>{exp.duration}</p>
-                                <h5>{exp.position}</h5>
-                                <p>{exp.description}</p>
+                            <Col xl={10} lg={10} md={10} sm={10} xs={7} className="px-0">
+                                <h3 className="mb-company">{exp.company}</h3>
+                                <p className="mb-duration">{exp.duration}</p>
+                                <h5 className="mb-position">{exp.position}</h5>
+                                <p className="mb-description">{exp.description}</p>
                             </Col>
                         </Row>
                     );

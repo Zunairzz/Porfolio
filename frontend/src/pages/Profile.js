@@ -5,17 +5,11 @@ import zuni from "../image/zuni_png.png"
 
 const Profile = () => {
     return (
-        <Container>
-            <Row className="d-flex justify-content-center align-items-center">
+        <Container className="profile-container">
+            <Row className="d-flex justify-content-center align-items-center profile-first-row">
                 <Col className="d-flex justify-content-center align-items-center">
                     <div className="text-center p-3">
-                        <div style={{
-                            border: "1px solid black",
-                            borderRadius: '20px',
-                            display: 'inline-block',
-                            padding: '5px 15px',
-                            fontWeight: '500'
-                        }}>
+                        <div className="profile-hello-button">
                             Hello!
                         </div>
                         <h1 className="profile-name mt-2">
@@ -25,9 +19,9 @@ const Profile = () => {
                     </div>
                 </Col>
             </Row>
-            <Row className="d-flex justify-content-between" style={{margin: "7rem 2rem"}}>
+            <Row className="d-flex justify-content-between profile-second-row">
                 <Col xl={4} lg={4} md={6} sm={12}>
-                    <div className="profile-quote mt-3 left-text" style={{fontWeight: 500}}>
+                    <div className="profile-quote left-text" style={{fontWeight: 500}}>
                         <blockquote>
                             I break down complex user experience problems to create integrity-focused solutions
                             that connect billions of people.
@@ -46,7 +40,7 @@ const Profile = () => {
             </Row>
 
             <Row className="d-flex justify-content-center align-items-center profile-pic">
-                <Col xl={6} lg={8} md={10} sm={12} className="text-center" style={{marginTop: "-350px"}}>
+                <Col xl={6} lg={8} md={10} sm={12} xs={10} className="text-center" style={{marginTop: "-350px"}}>
                     <img className="img-fluid" alt="Sample" src={zuni}/>
                 </Col>
             </Row>

@@ -1,3 +1,42 @@
+.timelineItem {
+    display: flex;
+    margin-bottom: 40px;
+    position: relative;
+    max-height: 350px;
+}
+
+.iconContainer {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 50px;
+    height: 50px;
+    border: 2px dashed #333;
+    border-radius: 50%;
+}
+
+.verticalContainer {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 2px dashed #333;
+    height: 100%;
+    z-index: -1;
+}
+
+.iconOrange {
+    color: #f57c00;
+    font-size: 1.5rem;
+}
+
+.iconDark {
+    color: #333;
+    font-size: 1.5rem;
+}
+
 @media only screen and (max-width: 10000px) {
     /* Styles for screens smaller than 600px */
     .mobile-view {
@@ -13,5 +52,30 @@
 
     .desktop-view {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .mb-company, .mb-position {
+        font-size: 16px;
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    .mb-duration, .mb-description {
+        font-size: 14px;
+    }
+
+    .iconContainer {
+        width: 40px;
+        height: 40px;
+    }
+
+    .iconOrange, .iconDark {
+        font-size: 18px;
+    }
+
+    .timelineItem {
+        margin-bottom: 20px;
     }
 }
