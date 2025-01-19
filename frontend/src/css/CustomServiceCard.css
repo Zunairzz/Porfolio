@@ -78,12 +78,8 @@
     justify-content: center;
 }
 
-.card-image {
-    position: absolute;
-    height: 100px;
-    width: 100px;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card-body {
+    width: 20%;
+    height: 20%;
+    background-color: white;
 }
