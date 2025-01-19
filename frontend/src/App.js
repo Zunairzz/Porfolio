@@ -7,6 +7,7 @@ import {About} from "./pages/About";
 import {Resume} from "./pages/Resume";
 import {Projects} from "./pages/Projects";
 import {ContactUs} from "./pages/ContactUs";
+import {ResumeUpdateForm} from "./pages/ResumeUpdateForm";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/resume" element={<Resume/>}/>
                     <Route path="/projects" element={<Projects/>}/>
                     <Route path="/contact" element={<ContactUs/>}/>
+                    <Route path="/resumeUpdateForm" element={<ResumeUpdateForm/>}/>
                     {/*<Route path="/booking/:roomId" element={<BookingPage/>}/>*/}
                     {/*<Route path="/about/:aboutUsId" element={<UpdateAbout/>}/>*/}
                     {/*<Route path="/user/forgot-password" element={<ForgotPassword/>}/>*/}

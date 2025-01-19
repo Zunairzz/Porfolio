@@ -5,9 +5,44 @@ import zunair from "../image/zuni_png.png";
 import zaman from "../image/zaman_png.png";
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import {Col, Row} from "reactstrap";
+import {useState} from "react";
 
 
 export function Resume() {
+
+    // Initialize state for subtitles with values from localStorage, or default to initial values
+    const [zunairSubTitle, setZunairSubTitle] = useState(() => {
+        const saved = localStorage.getItem('zunairSubTitle');
+        return saved ? saved : "Java Software Engineer";
+    });
+
+    const [zamanSubTitle, setZamanSubTitle] = useState(() => {
+        const saved = localStorage.getItem('zamanSubTitle');
+        return saved ? saved : "Java Software Engineer";
+    });
+
+    const items = [
+        {
+            id: 1,
+            title: "Zunair Sarwar",
+            subTitle: zunairSubTitle,
+            src: zunair,
+            phone: "0324 4165642",
+            email: "zunairsarwar1@gmail.com",
+            experience: "3 years",
+            resumeLink: "",
+        }, {
+            id: 2,
+            title: "Zaman Tariq",
+            subTitle: "Java Software Engineer",
+            src: zaman,
+            phone: "0324 4165642",
+            email: "zmantariq1@gmail.com",
+            experience: "2 years",
+            resumeLink: "",
+        }
+    ]
+
     return (
         <Base>
             <div className="resume-parent">
@@ -18,16 +53,17 @@ export function Resume() {
                         className="d-flex justify-content-center align-items-center"
                     >
                         <div style={{textAlign: 'left'}}>
-                            <p className="resume-title">Zunair Sarwar</p>
-                            <p className="resume-sub-title">Java Software Engineer</p>
+                            <p className="resume-title">{items[0].title}</p>
+                            <p className="resume-sub-title">{zunairSubTitle}</p>
+
                             <div className="resume-details">
-                                <p>Phone: 0324 4165642</p>
-                                <p>Email: zunairsarwar1@gmail.com</p>
-                                <p>Experience: 3 years</p>
+                                <p>Phone: {items[0].phone}</p>
+                                <p>Email: {items[0].email}</p>
+                                <p>Experience: {items[0].experience}</p>
                                 <Button
                                     variant="outlined"
                                     endIcon={<FileDownloadIcon/>}
-                                    href="www.google.com"  // This will point to the resume URL
+                                    href={items[0].resumeLink}  // This will point to the resume URL
                                     download           // This makes sure the file is downloaded
                                     sx={{
                                         border: "2px solid black",
@@ -64,16 +100,17 @@ export function Resume() {
                         className="d-flex justify-content-center align-items-center"
                     >
                         <div style={{textAlign: 'left'}}>
-                            <p className="resume-title">Zaman Tariq</p>
-                            <p className="resume-sub-title">Java Software Engineer</p>
+                            <p className="resume-title">{items[1].title}</p>
+                            <p className="resume-sub-title"> {zamanSubTitle}</p>
+
                             <div className="resume-details">
-                                <p>Phone: 0324 4165642</p>
-                                <p>Email: zamantariq277@gmail.com</p>
-                                <p>Experience: 3 years</p>
+                                <p>Phone: {items[1].phone}</p>
+                                <p>Email: {items[1].email}</p>
+                                <p>Experience: {items[1].experience}</p>
                                 <Button
                                     variant="outlined"
                                     endIcon={<FileDownloadIcon/>}
-                                    href="www.google.com"  // This will point to the resume URL
+                                    href={items[1].resumeLink}  // This will point to the resume URL
                                     download           // This makes sure the file is downloaded
                                     sx={{
                                         border: "2px solid black",
