@@ -1,0 +1,26 @@
+.parent {
+    margin-top: 10rem;
+}
+
+.team-heading {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.team-child {
+    margin-top: 5rem;
+    border: 3px solid #ff6600;
+    background-color: #f3f3f3;
+    border-radius: 20px;
+    padding: 60px 0 20px 0;
+}
+.team-card {
+    border: none;
+    box-shadow: none;
+}
+
+@media only screen and (max-width: 900px) {
+    .team-child {
+        border: none;
+    }
+}
