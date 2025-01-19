@@ -1,6 +1,6 @@
 .service-component {
     position: relative; /* Ensure the container is positioned */
-    background-image: url("../assests/my_services.jpeg");
+    background-image: url("../assests/service-image-1.jpg");
     background-size: cover;
     background-position: center;
     /*height: 400px;*/
@@ -36,4 +36,49 @@
     font-size: 30px;
     font-weight: bold;
     color: #FD853A;
+}
+
+.my-service-card {
+    background-color: rgba(84, 84, 84, 0.5);
+    border: 4px solid #b2b2b2;
+    border-radius: 2rem;
+    /*width: 300px;*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.my-service-card h3 {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 40px 0 30px 20px;
+}
+
+.card-body {
+    border-top: 4px solid #b2b2b2;
+}
+
+.my-service-card:hover {
+    transform: scale(1.05); /* Slightly enlarge card when hovered */
+}
+
+.card-image {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card-image img {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.my-service-card:hover .card-image img {
+    transform: scale(1.1); /* Zoom in image when card is hovered */
 }

@@ -1,8 +1,8 @@
 import {Col, Row} from "reactstrap";
 import {serviceData} from "../../data/ServiceData";
-import {CustomServiceCard} from "../CustomServiceCard";
 import React from "react";
 import "../../css/HomePageMyService.css";
+import {CustomServiceCard} from "./CustomServiceCard";
 
 export function MyServiceHomePage() {
     return (
@@ -18,8 +18,8 @@ export function MyServiceHomePage() {
             </Row>
             <Row className="d-flex">
                 {serviceData.map(item => (
-                    <Col xxl={3} xl={4} lg={4} md={6} className="mb-4">
-                        <CustomServiceCard heading={item.heading} image={item.image}/>
+                    <Col xxl={3} xl={3} lg={4} md={6} className="mb-5 mx-2">
+                        <CustomServiceCard index={item.id} heading={item.heading} image={item.image}/>
                     </Col>
                 ))}
             </Row>
