@@ -1,0 +1,30 @@
+.resume-parent {
+    margin-top: 10rem;
+}
+
+.resume-title {
+    padding: 0;
+    font-size: 70px;
+    font-family: "Times New Roman", serif;
+}
+
+.resume-sub-title {
+    font-size: 26px;
+    margin-top: -20px;
+}
+
+.resume-details {
+    margin-top: 50px;
+}
+
+.imageCol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .imageCol {
+        display: none;
+    }
+}
