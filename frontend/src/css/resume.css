@@ -2,6 +2,13 @@
     margin-top: 10rem;
 }
 
+.resume-parent h1 {
+    font-family: "Mulish", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+}
+
 .resume-title {
     padding: 0;
     font-size: 70px;
@@ -10,11 +17,22 @@
 
 .resume-sub-title {
     font-size: 26px;
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: inherit;
+    font-style: normal;
     margin-top: -20px;
 }
 
 .resume-details {
     margin-top: 50px;
+}
+
+.resume-details p {
+    font-family: "Mulish", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: inherit;
+    font-style: normal;
 }
 
 .imageCol {
@@ -26,5 +44,13 @@
 @media only screen and (max-width: 600px) {
     .imageCol {
         display: none;
+    }
+
+    .resume-title {
+        font-size: 45px;
+    }
+
+    .resume-sub-title {
+        font-size: 20px;
     }
 }

@@ -49,7 +49,7 @@ export function Resume() {
                 <h1 className="text-center">Hello!</h1>
                 <Row style={{height: '600px', marginTop: '50px'}}>
                     <Col
-                        style={{backgroundColor: '#b1b6a9'}}
+                        style={{backgroundColor: '#ffb680'}}
                         className="d-flex justify-content-center align-items-center"
                     >
                         <div style={{textAlign: 'left'}}>
@@ -57,9 +57,9 @@ export function Resume() {
                             <p className="resume-sub-title">{zunairSubTitle}</p>
 
                             <div className="resume-details">
-                                <p>Phone: {items[0].phone}</p>
-                                <p>Email: {items[0].email}</p>
-                                <p>Experience: {items[0].experience}</p>
+                                <p><b>Phone</b> {items[0].phone}</p>
+                                <p><b>Email</b> {items[0].email}</p>
+                                <p><b>Experience</b> {items[0].experience}</p>
                                 <Button
                                     variant="outlined"
                                     endIcon={<FileDownloadIcon/>}
@@ -69,7 +69,8 @@ export function Resume() {
                                         border: "2px solid black",
                                         color: 'black',
                                         '&:hover': {
-                                            backgroundColor: 'grey',  // Change background to grey on hover
+                                            border: '2px solid #AB4459',
+                                            backgroundColor: '#AB4459',  // Change background to grey on hover
                                             color: 'white',           // Change text color to white on hover
                                         },
                                         borderColor: 'grey',        // Keep the border grey
@@ -81,7 +82,7 @@ export function Resume() {
                         </div>
                     </Col>
                     <Col
-                        style={{backgroundColor: "#EFF3EA"}}
+                        style={{backgroundColor: "#f1f1f1"}}
                         className="imageCol"
                     >
                         <div style={{width: '240px', height: '300px', overflow: 'hidden', backgroundColor: "#F8FAFC"}}>
@@ -96,7 +97,7 @@ export function Resume() {
                 </Row>
                 <Row style={{height: '600px'}}>
                     <Col
-                        style={{backgroundColor: "#EFF3EA"}}
+                        style={{backgroundColor: '#f1f1f1'}}
                         className="d-flex justify-content-center align-items-center"
                     >
                         <div style={{textAlign: 'left'}}>
@@ -104,9 +105,9 @@ export function Resume() {
                             <p className="resume-sub-title"> {zamanSubTitle}</p>
 
                             <div className="resume-details">
-                                <p>Phone: {items[1].phone}</p>
-                                <p>Email: {items[1].email}</p>
-                                <p>Experience: {items[1].experience}</p>
+                                <p><b>Phone</b> {items[1].phone}</p>
+                                <p><b>Email</b> {items[1].email}</p>
+                                <p><b>Experience</b> {items[1].experience}</p>
                                 <Button
                                     variant="outlined"
                                     endIcon={<FileDownloadIcon/>}
@@ -116,7 +117,8 @@ export function Resume() {
                                         border: "2px solid black",
                                         color: 'black',
                                         '&:hover': {
-                                            backgroundColor: 'grey',  // Change background to grey on hover
+                                            border: '2px solid #AB4459',
+                                            backgroundColor: '#AB4459',  // Change background to grey on hover
                                             color: 'white',           // Change text color to white on hover
                                         },
                                         borderColor: 'grey',        // Keep the border grey
@@ -128,7 +130,7 @@ export function Resume() {
                         </div>
                     </Col>
                     <Col
-                        style={{backgroundColor: '#b1b6a9'}}
+                        style={{backgroundColor: '#ffb680'}}
                         className="imageCol"
                     >
                         <div style={{width: '240px', height: '300px', overflow: 'hidden', backgroundColor: "#F8FAFC"}}>
