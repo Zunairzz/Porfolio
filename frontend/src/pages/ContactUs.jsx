@@ -26,7 +26,7 @@ const styles = {
     contactStyle :{
         backgroundColor: 'rgb(243,243,243)',
         minHeight: '100vh',
-        padding: '50px 0',
+        padding: '100px 0',
     },
 };
 

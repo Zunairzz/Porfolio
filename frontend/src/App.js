@@ -5,7 +5,7 @@ import {ToastContainer} from "react-toastify";
 import {Home} from "./pages/Home";
 import {About} from "./pages/About";
 import {Resume} from "./pages/Resume";
-import {Projects} from "./pages/Projects";
+import Projects from "./pages/Projects";
 import {ContactUs} from "./pages/ContactUs";
 import {ResumeUpdateForm} from "./pages/ResumeUpdateForm";
 
