@@ -6,7 +6,7 @@ export function CustomServiceCard({index, heading, image}) {
             <div className="card-header">
                 <h3>{heading}</h3>
             </div>
-            <div className="card-body">
+            <div className="my-service-card-body">
                 <div className="card-image">
                     <img src={image} alt="Card Image"/>
                 </div>

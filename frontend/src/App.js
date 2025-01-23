@@ -23,7 +23,7 @@ function App() {
                     <Route path="/resume" element={<Resume/>}/>
                     <Route path="/projects" element={<Projects/>}/>
                     <Route path="/contact" element={<ContactUs/>}/>
-                    <Route path="/resumeUpdateForm" element={<ResumeUpdateForm/>}/>
+                    <Route path="/zzupdate" element={<ResumeUpdateForm/>}/>
                     {/*<Route path="/booking/:roomId" element={<BookingPage/>}/>*/}
                     {/*<Route path="/about/:aboutUsId" element={<UpdateAbout/>}/>*/}
                     {/*<Route path="/user/forgot-password" element={<ForgotPassword/>}/>*/}

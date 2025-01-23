@@ -9,24 +9,21 @@ import {
     Input,
     Button
 } from 'reactstrap';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import "../css/contactus.css";
 
 
 const styles = {
-    title: {
-        textAlign: 'center',
-        marginBottom: '40px',
-        fontWeight: 'bold'
+    iconColor: {
+        color: 'black'
     },
-    iconColor :{
-        color:'black'
-    },
-    contactStyle :{
-        backgroundColor: 'rgb(243,243,243)',
+    contactStyle: {
+        // backgroundColor: 'rgb(243,243,243)',
         minHeight: '100vh',
-        padding: '50px 0',
+        marginTop: '4rem',
+        padding: '100px 50px',
     },
 };
 
@@ -62,10 +59,10 @@ export function ContactUs() {
             <div style={styles.contactStyle}>
                 <Container>
                     <Row>
-                        <h1 style={styles.title}>
+                        <h1 className="contact-us-title">
                             CONTACT <span style={{color: '#ff6600'}}>US</span>
                         </h1>
-                        <Col md="6" className='mt-5'>
+                        <Col md="6">
                             <h3 className="mb-4" style={{color: '#ff6600', fontWeight: 'bold'}}>
                                 Get in touch
                             </h3>
@@ -105,11 +102,11 @@ export function ContactUs() {
                             </div>
                         </Col>
 
-                        <Col md="6" >
-                            <Form onSubmit={handleSubmit} style={{ maxWidth: '600px', margin: '0 auto', padding: '20px', background: '#f8f9fa', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+                        <Col md="6">
+                            <Form onSubmit={handleSubmit} className="contact-us-form">
                                 <FormGroup row>
-                                    <Label for="name" >Name:</Label>
-                                    <Col >
+                                    <Label for="name">Name:</Label>
+                                    <Col>
                                         <Input
                                             type="text"
                                             name="name"
@@ -122,7 +119,7 @@ export function ContactUs() {
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="email" >Email:</Label>
+                                    <Label for="email">Email:</Label>
                                     <Col>
                                         <Input
                                             type="email"
@@ -137,7 +134,7 @@ export function ContactUs() {
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="subject">Subject:</Label>
-                                    <Col >
+                                    <Col>
                                         <Input
                                             type="text"
                                             name="subject"
@@ -162,7 +159,8 @@ export function ContactUs() {
                                         />
                                     </Col>
                                 </FormGroup>
-                                <Button className="mb-3" type="submit" style={{backgroundColor: '#ff6600', borderColor: '#ff6600'}} >
+                                <Button className="mb-3" type="submit"
+                                        style={{backgroundColor: '#ff6600', borderColor: '#ff6600'}}>
                                     Send Message
                                 </Button>
                             </Form>
@@ -195,56 +193,109 @@ export function ContactUs() {
 }
 
 
-{/*<Row className="justify-content-center">*/}
-{/*    <Col md="8" className="text-center mb-4">*/}
-{/*        <h1 className="mb-3" style={{fontSize: '2.5rem', fontWeight: 'bold'}}>*/}
-{/*            CONTACT <span style={{color: '#00c96d'}}>US</span>*/}
-{/*        </h1>*/}
-{/*    </Col>*/}
-{/*</Row>*/}
-{/*<Row>*/}
-{/*    <Col md="12">*/}
-{/*        <h3 className="mb-4" style={{ color: '#00c96d', fontWeight: 'bold' }}>*/}
-{/*            Get in touch*/}
-{/*        </h3>*/}
-{/*        <p>*/}
-{/*            Curabitur vitae nunc sed velit dignissim sodales. Urna neque viverra justo nec. In cursus massa tincidunt ut ornare the butter leo integer.*/}
-{/*        </p>*/}
-{/*    </Col>*/}
-{/*</Row>*/}
-{/*<Row>*/}
-{/*    <Col md="12" className="mb-4">*/}
-{/*        <div className="d-flex align-items-start mb-3">*/}
-{/*            <i className="fas fa-map-marker-alt fa-2x me-3 text-success"></i>*/}
-{/*            <div>*/}
-{/*                <p className="mb-0">4080 Berkshire Circle Knoxville,</p>*/}
-{/*                <p>TN 37917, New York</p>*/}
-{/*            </div>*/}
-{/*        </div>*/}
-{/*        <div className="d-flex align-items-start mb-3">*/}
-{/*            <i className="fas fa-envelope fa-2x me-3 text-success"></i>*/}
-{/*            <div>*/}
-{/*                <p className="mb-0">FrancisMBriscoe@jourrapide.com</p>*/}
-{/*                <p>info@jourrapide.com</p>*/}
-{/*            </div>*/}
-{/*        </div>*/}
-{/*        <div className="d-flex align-items-start mb-3">*/}
-{/*            <i className="fas fa-phone fa-2x me-3 text-success"></i>*/}
-{/*            <div>*/}
-{/*                <p className="mb-0">865-564-9052</p>*/}
-{/*                <p>865-884-9658</p>*/}
-{/*            </div>*/}
-{/*        </div>*/}
-{/*    </Col>*/}
-{/*</Row>*/}
-{/*<Row>*/}
-{/*    <Col md="12">*/}
-{/*        <div className="d-flex justify-content-start">*/}
-{/*            <a href="#" className="me-3 text-light"><i className="fab fa-facebook fa-2x"></i></a>*/}
-{/*            <a href="#" className="me-3 text-light"><i className="fab fa-twitter fa-2x"></i></a>*/}
-{/*            <a href="#" className="me-3 text-light"><i className="fab fa-linkedin fa-2x"></i></a>*/}
-{/*            <a href="#" className="me-3 text-light"><i className="fab fa-github fa-2x"></i></a>*/}
-{/*            <a href="#" className="text-light"><i className="fab fa-slack fa-2x"></i></a>*/}
-{/*        </div>*/}
-{/*    </Col>*/}
-{/*</Row>*/}
+{/*<Row className="justify-content-center">*/
+}
+{/*    <Col md="8" className="text-center mb-4">*/
+}
+{/*        <h1 className="mb-3" style={{fontSize: '2.5rem', fontWeight: 'bold'}}>*/
+}
+{/*            CONTACT <span style={{color: '#00c96d'}}>US</span>*/
+}
+{/*        </h1>*/
+}
+{/*    </Col>*/
+}
+{/*</Row>*/
+}
+{/*<Row>*/
+}
+{/*    <Col md="12">*/
+}
+{/*        <h3 className="mb-4" style={{ color: '#00c96d', fontWeight: 'bold' }}>*/
+}
+{/*            Get in touch*/
+}
+{/*        </h3>*/
+}
+{/*        <p>*/
+}
+{/*            Curabitur vitae nunc sed velit dignissim sodales. Urna neque viverra justo nec. In cursus massa tincidunt ut ornare the butter leo integer.*/
+}
+{/*        </p>*/
+}
+{/*    </Col>*/
+}
+{/*</Row>*/
+}
+{/*<Row>*/
+}
+{/*    <Col md="12" className="mb-4">*/
+}
+{/*        <div className="d-flex align-items-start mb-3">*/
+}
+{/*            <i className="fas fa-map-marker-alt fa-2x me-3 text-success"></i>*/
+}
+{/*            <div>*/
+}
+{/*                <p className="mb-0">4080 Berkshire Circle Knoxville,</p>*/
+}
+{/*                <p>TN 37917, New York</p>*/
+}
+{/*            </div>*/
+}
+{/*        </div>*/
+}
+{/*        <div className="d-flex align-items-start mb-3">*/
+}
+{/*            <i className="fas fa-envelope fa-2x me-3 text-success"></i>*/
+}
+{/*            <div>*/
+}
+{/*                <p className="mb-0">FrancisMBriscoe@jourrapide.com</p>*/
+}
+{/*                <p>info@jourrapide.com</p>*/
+}
+{/*            </div>*/
+}
+{/*        </div>*/
+}
+{/*        <div className="d-flex align-items-start mb-3">*/
+}
+{/*            <i className="fas fa-phone fa-2x me-3 text-success"></i>*/
+}
+{/*            <div>*/
+}
+{/*                <p className="mb-0">865-564-9052</p>*/
+}
+{/*                <p>865-884-9658</p>*/
+}
+{/*            </div>*/
+}
+{/*        </div>*/
+}
+{/*    </Col>*/
+}
+{/*</Row>*/
+}
+{/*<Row>*/
+}
+{/*    <Col md="12">*/
+}
+{/*        <div className="d-flex justify-content-start">*/
+}
+{/*            <a href="#" className="me-3 text-light"><i className="fab fa-facebook fa-2x"></i></a>*/
+}
+{/*            <a href="#" className="me-3 text-light"><i className="fab fa-twitter fa-2x"></i></a>*/
+}
+{/*            <a href="#" className="me-3 text-light"><i className="fab fa-linkedin fa-2x"></i></a>*/
+}
+{/*            <a href="#" className="me-3 text-light"><i className="fab fa-github fa-2x"></i></a>*/
+}
+{/*            <a href="#" className="text-light"><i className="fab fa-slack fa-2x"></i></a>*/
+}
+{/*        </div>*/
+}
+{/*    </Col>*/
+}
+{/*</Row>*/
+}
