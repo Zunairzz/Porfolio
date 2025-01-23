@@ -22,7 +22,7 @@ const styles = {
     contactStyle: {
         // backgroundColor: 'rgb(243,243,243)',
         minHeight: '100vh',
-        marginTop: '4rem',
+        marginTop: '5rem',
         padding: '100px 50px',
     },
 };

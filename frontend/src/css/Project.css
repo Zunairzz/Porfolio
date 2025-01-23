@@ -42,3 +42,13 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+.gitLink {
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+}
+
+.gitLink:hover {
+    color: orange;
+}

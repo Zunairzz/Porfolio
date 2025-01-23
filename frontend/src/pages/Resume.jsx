@@ -167,7 +167,9 @@ export const Resume = () => {
     return (
         <Base>
             <Container className="resume-parent">
-                <h1 className="resume-title">Resume</h1>
+                <h1 className="resume-title">
+                    My <span style={{color: '#ff6600'}}>Resume</span>
+                </h1>
                 <ResumeCardOne items={items}/>
                 <ResumeCardTwo items={items}/>
             </Container>
