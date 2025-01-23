@@ -1,0 +1,44 @@
+.portfolio-item {
+    position: relative;
+    width: 100%; /* Adjust the width as needed */
+    margin: 20px auto;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px; /* Optional: Rounded corners */
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+}
+
+.image-container:hover .card-image {
+    transform: scale(1.1); /* Slight zoom-in effect */
+}
+
+.overlay {
+    position: absolute;
+    bottom: -50px; /* Initially hidden below */
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    color: white;
+    height: 50px;
+    text-align: center;
+    transition: bottom 0.5s ease;
+}
+
+.image-container:hover .overlay {
+    bottom: 0; /* Slide up into view on hover */
+}
+
+.overlay-content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
