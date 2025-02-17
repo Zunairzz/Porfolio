@@ -1,167 +1,108 @@
-import {Container} from "reactstrap";
-import {TextField, Typography} from "@mui/material";
+import { Container } from "reactstrap";
+import { TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import {useState} from "react";
+import { useState, useEffect } from "react";
 
 export const ResumeUpdateForm = () => {
+    const initialFormData = {
+        title: '',
+        subTitle: '',
+        mobile: '',
+        email: ''
+    };
 
-    const [zunairFormData, setZunairFormData] = useState({
-        zunairTitle: '',
-        zunairSubTitle: '',
-        zunairMobile: '',
-        zunairEmail: ''
-    });  // Single state object for all form fields
+    const [formData, setFormData] = useState({
+        zunair: { ...initialFormData },
+        zaman: { ...initialFormData },
+        umair: { ...initialFormData }
+    });
 
-    const [zamanFormData, setZamanFormData] = useState({
-        zamanTitle: '',
-        zamanSubTitle: '',
-        zamanMobile: '',
-        zamanEmail: ''
-    });  // Single state object for all form fields
+    const [messages, setMessages] = useState({
+        zunair: '',
+        zaman: '',
+        umair: ''
+    });
 
-    const [message, setMessage] = useState('');
-    const [zamanMessage, setZamanMessage] = useState('');
+    // Load data from localStorage when the component mounts
+    useEffect(() => {
+        const persons = ['zunair', 'zaman', 'umair'];
+        persons.forEach((person) => {
+            const savedData = {
+                title: localStorage.getItem(`${person}Title`) || '',
+                subTitle: localStorage.getItem(`${person}SubTitle`) || '',
+                mobile: localStorage.getItem(`${person}Mobile`) || '',
+                email: localStorage.getItem(`${person}Email`) || ''
+            };
+            setFormData((prevData) => ({
+                ...prevData,
+                [person]: savedData
+            }));
+        });
+    }, []);
 
-    // Handle form data change
-    const handleInputChange = (e) => {
-        // alert(e.target);
-        const {name, value} = e.target;
-        setZunairFormData((prevData) => ({
+    const handleInputChange = (person) => (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
             ...prevData,
-            [name]: value
+            [person]: {
+                ...prevData[person],
+                [name]: value
+            }
         }));
     };
 
-    // Handle form data change
-    const handleZamanInputChange = (e) => {
-        const {name, value} = e.target;
-        setZamanFormData((prevData) => ({
+    const handleSave = (person, defaultData) => {
+        const data = formData[person];
+        if (data.title || data.subTitle || data.mobile || data.email) {
+            Object.keys(data).forEach((key) => {
+                localStorage.setItem(`${person}${key.charAt(0).toUpperCase() + key.slice(1)}`, data[key]);
+            });
+            setMessages((prevMessages) => ({
+                ...prevMessages,
+                [person]: 'Data saved successfully!'
+            }));
+        } else {
+            Object.keys(defaultData).forEach((key) => {
+                localStorage.setItem(`${person}${key.charAt(0).toUpperCase() + key.slice(1)}`, defaultData[key]);
+            });
+            setMessages((prevMessages) => ({
+                ...prevMessages,
+                [person]: 'Fields set to default'
+            }));
+        }
+
+        setFormData((prevData) => ({
             ...prevData,
-            [name]: value
+            [person]: { ...initialFormData }
         }));
     };
 
-    // Save to local storage
-    const handleZunairSave = () => {
-        const {
-            zunairTitle,
-            zunairSubTitle,
-            zunairMobile,
-            zunairEmail
-        } = zunairFormData;
-
-        if (zunairTitle && zunairSubTitle && zunairMobile && zunairEmail) {
-            localStorage.setItem('zunairTitle', zunairSubTitle);
-            localStorage.setItem('zunairSubTitle', zunairSubTitle);
-            localStorage.setItem('zunairMobile', zunairSubTitle);
-            localStorage.setItem('zunairEmail', zunairSubTitle);
-
-            setMessage('Data saved successfully!');
-        } else {
-            setMessage('Fields set to default');
-
-            localStorage.setItem('zunairTitle', 'Zunair Sarwar');
-            localStorage.setItem('zunairSubTitle', 'Java Software Engineer');
-            localStorage.setItem('zunairMobile', '0324 4165642');
-            localStorage.setItem('zunairEmail', 'zunairsarwar1@gmail.com');
-        }
-
-        // Reset the form fields
-        setZunairFormData({
-            zunairTitle: '',
-            zunairSubTitle: '',
-            zunairMobile: '',
-            zunairEmail: ''
-        });
-    };
-
-    const handleZamanSave = () => {
-        const {
-            zamanTitle,
-            zamanSubTitle,
-            zamanMobile,
-            zamanEmail
-        } = zamanFormData;
-
-        if (zamanTitle || zamanSubTitle || zamanMobile || zamanEmail) {
-            localStorage.setItem('zamanTitle', zamanTitle);
-            localStorage.setItem('zamanSubTitle', zamanSubTitle);
-            localStorage.setItem('zamanMobile', zamanMobile);
-            localStorage.setItem('zamanEmail', zamanEmail);
-            setZamanMessage('Data saved successfully!');
-        } else {
-            setZamanMessage('Fields set to default');
-
-            localStorage.setItem('zamanTitle', 'Zaman Tariq');
-            localStorage.setItem('zamanSubTitle', 'Java Software Engineer');
-            localStorage.setItem('zamanMobile', '0324 4165642');
-            localStorage.setItem('zamanEmail', 'zamantariq@gmail.com');
-        }
-
-        // Reset the form fields
-        setZamanFormData({
-            zamanTitle: '',
-            zamanSubTitle: '',
-            zamanMobile: '',
-            zamanEmail: ''
-        });
-    };
+    const persons = [
+        { key: 'zunair', name: 'Zunair Sarwar', subTitle: 'Java Software Engineer', mobile: '0324 4165642', email: 'zunairsarwar1@gmail.com' },
+        { key: 'zaman', name: 'Zaman Tariq', subTitle: 'Java Software Engineer', mobile: '0324 4165642', email: 'zamantariq@gmail.com' },
+        { key: 'umair', name: 'Umair Sarwar', subTitle: 'React Developer', mobile: '0324 1234567', email: 'umairsarwar@gmail.com' }
+    ];
 
     return (
         <Container maxWidth="xs" className="p-5">
-            <Typography variant="h4" gutterBottom>Zunair Details</Typography>
-            <TextField name="zunairTitle" label="Title" variant="outlined" fullWidth value={zunairFormData.zunairTitle}
-                       onChange={handleInputChange} margin="normal"/>
-            <TextField name="zunairSubTitle" label="Sub Title" variant="outlined" fullWidth
-                       value={zunairFormData.zunairSubTitle}
-                       onChange={handleInputChange} margin="normal"/>
-            <TextField name="zunairMobile" label="Phone no" variant="outlined" fullWidth
-                       value={zunairFormData.zunairMobile}
-                       onChange={handleInputChange} margin="normal"/>
-            <TextField name="zunairEmail" label="Email" variant="outlined" fullWidth value={zunairFormData.zunairEmail}
-                       onChange={handleInputChange} margin="normal"/>
-            <Button variant="contained" color="primary" onClick={handleZunairSave} fullWidth sx={{marginTop: 2}}>
-                Save
-            </Button>
-            {message && (
-                <Typography
-                    variant="body1"
-                    color={message.includes('successfully') ? 'green' : 'red'}
-                    sx={{marginTop: 2}}
-                >
-                    {message}
-                </Typography>
-            )}
-
-            <br/>
-            <br/>
-            <hr/>
-            <br/>
-            <br/>
-            <Typography variant="h4" gutterBottom>Zaman Details</Typography>
-            <TextField name="zamanTitle" label="Title" variant="outlined" fullWidth value={zamanFormData.zamanTitle}
-                       onChange={handleZamanInputChange} margin="normal"/>
-            <TextField name="zamanSubTitle" label="Sub Title" variant="outlined" fullWidth
-                       value={zamanFormData.zamanSubTitle}
-                       onChange={handleZamanInputChange} margin="normal"/>
-            <TextField name="zamanMobile" label="Phone no" variant="outlined" fullWidth
-                       value={zamanFormData.zamanMobile}
-                       onChange={handleZamanInputChange} margin="normal"/>
-            <TextField name="zamanEmail" label="Email" variant="outlined" fullWidth value={zamanFormData.zamanEmail}
-                       onChange={handleZamanInputChange} margin="normal"/>
-            <Button variant="contained" color="primary" onClick={handleZamanSave} fullWidth sx={{marginTop: 2}}>
-                Save
-            </Button>
-            {zamanMessage && (
-                <Typography
-                    variant="body1"
-                    color={zamanMessage.includes('successfully') ? 'green' : 'red'}
-                    sx={{marginTop: 2}}
-                >
-                    {zamanMessage}
-                </Typography>
-            )}
-
+            {persons.map((person) => (
+                <div key={person.key}>
+                    <Typography variant="h4" gutterBottom>{person.name} Details</Typography>
+                    <TextField name="title" label="Title" fullWidth value={formData[person.key].title}
+                               onChange={handleInputChange(person.key)} margin="normal"/>
+                    <TextField name="subTitle" label="Sub Title" fullWidth value={formData[person.key].subTitle}
+                               onChange={handleInputChange(person.key)} margin="normal"/>
+                    <TextField name="mobile" label="Mobile" fullWidth value={formData[person.key].mobile}
+                               onChange={handleInputChange(person.key)} margin="normal"/>
+                    <TextField name="email" label="Email" fullWidth value={formData[person.key].email}
+                               onChange={handleInputChange(person.key)} margin="normal"/>
+                    <Button variant="contained" color="primary" onClick={() => handleSave(person.key, person)} fullWidth sx={{ marginTop: 2 }}>
+                        Save
+                    </Button>
+                    {messages[person.key] && <Typography variant="body1" color="textSecondary">{messages[person.key]}</Typography>}
+                    <hr/>
+                </div>
+            ))}
         </Container>
-    )
-}
+    );
+};
