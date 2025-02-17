@@ -4,7 +4,7 @@ import {Card, CardContent, CardMedia, Typography} from "@mui/material";
 import {motion} from "framer-motion";
 import zaman from "../image/zaman_png.png";
 import zunair from "../image/zuni_png.png";
-import umair from "../image/umair_bhai_png.png"
+import umair from "../image/umair_bhai_png.png";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import React from "react";
