@@ -35,37 +35,67 @@ export const Testimonials = () => {
     const items = [
         {
             id: 1,
+            jobTitle: "Java Developer",
             name: "Zunair Sarwar",
-            caption: "We are seeking a highly motivated and detail-oriented Java Developer to join our dynamic software development team. The ideal candidate will be responsible for designing, implementing, and maintaining high-performance, scalable, and reliable applications using Java-based technologies.",
-            src: zunair
+            caption: "Passionate Java Developer with expertise in Spring Boot and microservices.",
+            src: zunair,
+            rating: 4
         },
         {
             id: 2,
-            name: "Zunair Sarwar",
-            caption: "We are seeking a highly motivated and detail-oriented Java Developer to join our dynamic software development team. The ideal candidate will be responsible for designing, implementing, and maintaining high-performance, scalable, and reliable applications using Java-based technologies.",
-            src: zunair
+            jobTitle: "Full-Stack Developer",
+            name: "Hamza Ali",
+            caption: "Full-stack developer skilled in React.js and Node.js, delivering high-quality solutions.",
+            src: "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            rating: 5
         },
         {
             id: 3,
-            name: "Zunair Sarwar",
-            caption: "We are seeking a highly motivated and detail-oriented Java Developer to join our dynamic software development team. The ideal candidate will be responsible for designing, implementing, and maintaining high-performance, scalable, and reliable applications using Java-based technologies.",
-            src: zunair
+            jobTitle: "Software Engineer",
+            name: "Zaman Khan",
+            caption: "Experienced software engineer with a strong background in cloud computing.",
+            src: "https://images.unsplash.com/photo-1577880216142-8549e9488dad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            rating: 3
         },
         {
             id: 4,
-            name: "Zunair Sarwar",
-            caption: "We are seeking a highly motivated and detail-oriented Java Developer to join our dynamic software development team. The ideal candidate will be responsible for designing, implementing, and maintaining high-performance, scalable, and reliable applications using Java-based technologies.",
-            src: zunair
-        }, {
+            jobTitle: "UI/UX Designer",
+            name: "Ayesha Noor",
+            caption: "Creative UI/UX designer passionate about crafting intuitive user experiences.",
+            src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            rating: 5
+        },
+        {
             id: 5,
-            name: "Zunair Sarwar",
-            caption: "We are seeking a highly motivated and detail-oriented Java Developer to join our dynamic software development team. The ideal candidate will be responsible for designing, implementing, and maintaining high-performance, scalable, and reliable applications using Java-based technologies.",
-            src: zunair
-        }, {
+            jobTitle: "Data Analyst",
+            name: "Bilal Ahmed",
+            caption: "Data analyst with a knack for turning raw data into meaningful insights.",
+            src: "https://images.unsplash.com/photo-1566753323558-f4e0952af115?q=80&w=1921&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            rating: 2
+        },
+        {
             id: 6,
-            name: "Zunair Sarwar",
-            caption: "We are seeking a highly motivated and detail-oriented Java Developer to join our dynamic software development team. The ideal candidate will be responsible for designing, implementing, and maintaining high-performance, scalable, and reliable applications using Java-based technologies.",
-            src: zunair
+            jobTitle: "Cybersecurity Expert",
+            name: "Sara Malik",
+            caption: "Cybersecurity expert with a keen eye for vulnerability assessment and risk mitigation.",
+            src: "https://plus.unsplash.com/premium_photo-1688350808212-4e6908a03925?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            rating: 4
+        },
+        {
+            id: 7,
+            jobTitle: "Mobile App Developer",
+            name: "Usman Raza",
+            caption: "Mobile app developer specializing in Android and iOS applications.",
+            src: "https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1923&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            rating: 3
+        },
+        {
+            id: 8,
+            jobTitle: "Cloud Solutions Architect",
+            name: "Fatima Tariq",
+            caption: "Cloud solutions architect with deep expertise in AWS and Azure.",
+            src: "https://plus.unsplash.com/premium_photo-1688350808212-4e6908a03925?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            rating: 5
         }
     ];
 
@@ -78,7 +108,7 @@ export const Testimonials = () => {
                     <Avatar sx={{width: 60, height: 60}} src={item.src}>H</Avatar>
                     <div>
                         <h3 className="testimonials-heading">{item.name}</h3>
-                        <p className="testimonials-paragraph">Java Developer</p>
+                        <p className="testimonials-paragraph">{item.jobTitle}</p>
                     </div>
 
                     <div className="quote">
@@ -90,11 +120,17 @@ export const Testimonials = () => {
                     <Box sx={{'& > legend': {mt: 2}}}>
                         <Rating
                             name="simple-controlled"
-                            value={value}
-                            onChange={(event, newValue) => {
-                                setValue(newValue);
-                            }}
+                            value={item.rating}
+                            readOnly={true}
                         />
+
+                        {/*<Rating*/}
+                        {/*    name="simple-controlled"*/}
+                        {/*    value={item.rating}*/}
+                        {/*    onChange={(event, newValue) => {*/}
+                        {/*        setValue(newValue);*/}
+                        {/*    }}*/}
+                        {/*/>*/}
                     </Box>
                 </div>
                 {/* Description */}

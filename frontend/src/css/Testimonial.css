@@ -1,9 +1,10 @@
 .testimonial-parent {
     position: relative; /* Ensure the container is positioned */
-    background-image: url("../assests/my_services.jpeg");
+    background-image: url("../assests/testimonials.jpg");
+    background-color: #09122C;
     background-size: cover;
     background-position: center;
-    background-color: #6a0dad;
+    /*background-color: #6a0dad;*/
     border-radius: 40px;
     padding: 100px 0;
 }
