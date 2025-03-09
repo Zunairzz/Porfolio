@@ -1,0 +1,64 @@
+.info-card {
+    position: relative;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 20rem;
+    margin: 0 auto;
+    border-radius: 30px;
+    background-color: #F4F6FF;
+}
+
+.info-card .top-right-border {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3rem;
+    height: 3rem;
+    border-top: 4px solid #FF6600;
+    border-right: 4px solid #FF6600;
+    border-top-right-radius: 1.5rem;
+}
+
+.info-card .bottom-left-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3rem;
+    height: 3rem;
+    border-bottom: 4px solid #FF6600;
+    border-left: 4px solid #FF6600;
+    border-bottom-left-radius: 1.5rem;
+}
+
+.info-card img {
+    width: 60px;
+}
+
+.info-card p {
+    color: #4B5563;
+    margin-top: 0.5rem;
+}
+
+.info-card h1 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.info-card-heading {
+    font-size: 48px;
+    margin-bottom: 100px;
+    line-height: inherit;
+}
+
+.info-card-title {
+    font-family: Roboto, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000000;
+}
+
+@media only screen and (max-width: 800px) {
+    .info-card-heading {
+        font-size: 38px;
+    }
+}
