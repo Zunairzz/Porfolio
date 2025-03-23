@@ -1,3 +1,10 @@
+.work-exp-title {
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 .timelineItem {
     display: flex;
     margin-bottom: 40px;

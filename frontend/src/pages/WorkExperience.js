@@ -32,6 +32,7 @@ const WorkExperience = () => {
         title: {
             textAlign: 'center',
             marginBottom: '40px',
+
         },
         timelineItem: {
             display: 'flex',
@@ -71,7 +72,7 @@ const WorkExperience = () => {
 
     return (
         <Container style={styles.timeline}>
-            <h1 style={styles.title}>
+            <h1 className="work-exp-title">
                 My <span style={{color: '#ff6600'}}>Work Experience</span>
             </h1>
             <div className="desktop-view">

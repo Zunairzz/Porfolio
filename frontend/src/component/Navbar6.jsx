@@ -10,7 +10,7 @@ import logo from "../assests/MyPorfolioLogo.png";
 
 const navigation = [
     {name: 'Home', href: '/'},
-    {name: 'About', href: '/about'},
+    {name: 'Our Team', href: '/about'},
     {name: 'Service', href: '/service'},
     {name: 'Resume', href: '/resume'},
     {name: 'Project', href: '/projects'},

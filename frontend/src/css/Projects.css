@@ -1,0 +1,163 @@
+.projects-section {
+    margin-top: 120px;
+    padding: 60px 20px;
+    background-color: #f5f5f5;
+}
+
+.projects-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projects-title {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.projects-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-image:hover {
+    transform: scale(1.1);
+}
+
+.project-content {
+    padding: 20px;
+}
+
+.project-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.project-description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.project-tech {
+    margin-bottom: 15px;
+}
+
+.tech-tag {
+    display: inline-block;
+    background: #e0e0e0;
+    color: #333;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.github-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.github-link:hover {
+    background: #555;
+}
+
+/* Desktop: Page Load Animation */
+@media (min-width: 769px) {
+    .project-card {
+        opacity: 0;
+        transform: translateY(50px);
+        animation: fadeInUp 0.6s ease forwards;
+        animation-delay: calc(0.1s * var(--order));
+    }
+}
+
+/* Mobile: Scroll Animation */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-title {
+        font-size: 2rem;
+    }
+
+    .project-card {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .project-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
