@@ -1,8 +1,5 @@
 import React from "react";
 import "../css/Testimonial.css";
-import {Col, Row} from "reactstrap";
-import s1 from '../assests/s1.png';
-import {Avatar} from "@mui/material";
 import {Testimonials} from "./Testimonials";
 
 const CardStyle = {

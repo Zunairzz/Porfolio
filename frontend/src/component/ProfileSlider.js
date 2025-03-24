@@ -1,14 +1,14 @@
 import "react-slideshow-image/dist/styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import '../css/Testimonials.css'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import {motion} from "framer-motion";
-import {Card, Col, Container, Row} from "reactstrap";
+import {Col, Container, Row} from "reactstrap";
 import zunair from "../image/zuni_png.png";
 import zaman from "../image/zaman_png.png";
 import umairBhai from "../image/umair_bhai_png.png";
+import "../css/Profile.css";
 
 export const ProfileSlider = () => {
     const responsive = {

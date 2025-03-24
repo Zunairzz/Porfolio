@@ -7,7 +7,6 @@ import {TestimonialHome} from "../component/TestimonialHome";
 import PortfolioItemHomePage from "../component/portfolioItemsComponent/PortfolioItemHomePage";
 import {ProfileSlider} from "../component/ProfileSlider";
 import {MyServiceCard} from "../component/InfoCard";
-import ProjectsSection from "../component/ProjectsSection";
 
 export function Home() {
     return (
@@ -20,7 +19,6 @@ export function Home() {
             <WorkExperience/>
             {/*<ParallaxSection/>*/}
             <PortfolioItemHomePage/>
-            <ProjectsSection/>
             <TestimonialHome/>
         </Base>
     )
