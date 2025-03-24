@@ -45,15 +45,11 @@ export function About() {
                 animate={{opacity: 1, y: 0}}
                 transition={{duration: 1}}
             >
-                <motion.h1
-                    className="text-3xl font-bold mb-4"
-                    initial={{opacity: 0, y: -30}}
-                    whileInView={{opacity: 1, y: 0}}
-                    transition={{duration: 1, delay: 0.2}}
-                    viewport={{once: true}}
+                <h1
+                    className="mb-4 about-us-heading"
                 >
                     Meet our team
-                </motion.h1>
+                </h1>
 
                 <motion.p
                     className="text-gray-600 mb-8 max-w-2xl mx-auto"

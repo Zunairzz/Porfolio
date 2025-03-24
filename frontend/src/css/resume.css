@@ -2,12 +2,6 @@
     margin-top: 10rem;
 }
 
-.resume-parent h1 {
-    font-family: "Mulish", sans-serif;
-    font-weight: bold;
-    font-style: normal;
-}
-
 .resume-title {
     padding: 0;
     font-size: 70px;
@@ -35,10 +29,12 @@
 }
 
 .resume-heading {
+    font-size: 2.5rem;
+    color: #333;
+    font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 600;
     text-align: center;
-    margin-bottom: 40px;
-    font-weight: bold;
-    font-size: 42px;
+    margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 900px) {

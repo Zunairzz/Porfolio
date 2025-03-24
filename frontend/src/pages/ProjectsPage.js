@@ -83,7 +83,9 @@ const ProjectsPage = () => {
         <Base>
             <section className="projects-section">
                 <div className="projects-container">
-                    <h1 className="projects-title">My Projects</h1>
+                    <h1 className="projects-title">
+                        My <span style={{color: "#ff6600"}}>Projects</span>
+                    </h1>
                     <p className="projects-subtitle">
                         A collection of my recent work and coding projects
                     </p>
@@ -93,7 +95,7 @@ const ProjectsPage = () => {
                                 key={project.id}
                                 ref={(el) => (cardRefs.current[index] = el)}
                                 className="project-card"
-                                style={{ "--order": index }}
+                                style={{"--order": index}}
                             >
                                 {project.image && (
                                     <div className="image-wrapper">

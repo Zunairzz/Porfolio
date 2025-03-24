@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Base from "../component/Base";
-import { Card, CardBody, CardText, CardTitle, Col, Container, Row } from 'reactstrap';
-import { motion, useAnimation, useInView } from "framer-motion";
+import {Card, CardBody, CardText, CardTitle, Col, Container, Row} from 'reactstrap';
+import {motion, useAnimation, useInView} from "framer-motion";
+import "../css/MyService.css";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import Button from "@mui/material/Button";
 
 // Services data (unchanged)
 const services = [
@@ -11,11 +14,27 @@ const services = [
         description: 'Build robust web and mobile applications.'
     },
     {title: 'Design', icon: require('../assests/web_design.png'), description: 'Create visually stunning designs.'},
-    {title: 'UX Design', icon: require('../assests/ui_ux.png'), description: 'Enhance user experiences with intuitive designs.'},
-    {title: 'Graphic Design', icon: require('../assests/graphic-design.png'), description: 'Design impactful graphics and visuals.'},
-    {title: 'B2B Analysis', icon: require('../assests/analytics.png'), description: 'Analyze and optimize business processes.'},
+    {
+        title: 'UX Design',
+        icon: require('../assests/ui_ux.png'),
+        description: 'Enhance user experiences with intuitive designs.'
+    },
+    {
+        title: 'Graphic Design',
+        icon: require('../assests/graphic-design.png'),
+        description: 'Design impactful graphics and visuals.'
+    },
+    {
+        title: 'B2B Analysis',
+        icon: require('../assests/analytics.png'),
+        description: 'Analyze and optimize business processes.'
+    },
     {title: 'SEO', icon: require('../assests/seo.png'), description: 'Improve search engine rankings.'},
-    {title: 'Copy Writing', icon: require('../assests/copy-writting.png'), description: 'Craft compelling and effective content.'},
+    {
+        title: 'Copy Writing',
+        icon: require('../assests/copy-writting.png'),
+        description: 'Craft compelling and effective content.'
+    },
     {title: 'Support', icon: require('../assests/support.png'), description: 'Provide reliable and efficient support.'},
 ];
 
@@ -43,9 +62,12 @@ const testimonials = [
 
 const styles = {
     title: {
+        fontSize: '2.3rem',
+        color: '#333',
+        fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+        fontWeight: 'bold',
         textAlign: 'center',
-        marginBottom: '40px',
-        fontWeight: 'bold'
+        marginBottom: '20px'
     },
     cardStyle: {
         backgroundColor: 'rgb(243,243,243)',
@@ -91,7 +113,7 @@ const styles = {
 };
 
 const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: {opacity: 0, y: 50},
     visible: (i) => ({
         opacity: 1,
         y: 0,
@@ -104,7 +126,7 @@ const cardVariants = {
 };
 
 const testimonialVariants = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: {opacity: 0, x: -50},
     visible: (i) => ({
         opacity: 1,
         x: 0,
@@ -116,10 +138,10 @@ const testimonialVariants = {
     })
 };
 
-const ServiceCard = ({ service, index }) => {
+const ServiceCard = ({service, index}) => {
     const ref = useRef(null);
     const controls = useAnimation();
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const isInView = useInView(ref, {once: true, margin: "-100px"});
 
     useEffect(() => {
         if (isInView) {
@@ -146,10 +168,10 @@ const ServiceCard = ({ service, index }) => {
     );
 };
 
-const TestimonialCard = ({ testimonial, index }) => {
+const TestimonialCard = ({testimonial, index}) => {
     const ref = useRef(null);
     const controls = useAnimation();
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const isInView = useInView(ref, {once: true, margin: "-100px"});
 
     useEffect(() => {
         if (isInView) {
@@ -162,16 +184,16 @@ const TestimonialCard = ({ testimonial, index }) => {
             <motion.div ref={ref} variants={testimonialVariants} initial="hidden" animate={controls} custom={index}>
                 <Card style={styles.testimonialCard}>
                     <CardBody>
-                        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
-                            <img src={testimonial.avatar} alt={testimonial.name} style={styles.avatar} />
+                        <div style={{display: 'flex', alignItems: 'center', marginBottom: '15px'}}>
+                            <img src={testimonial.avatar} alt={testimonial.name} style={styles.avatar}/>
                             <div>
-                                <CardTitle tag="h6" style={{ margin: 0, color: '#ff6600', fontWeight: '600' }}>
+                                <CardTitle tag="h6" style={{margin: 0, color: '#ff6600', fontWeight: '600'}}>
                                     {testimonial.name}
                                 </CardTitle>
-                                <small style={{ color: '#666' }}>{testimonial.role}</small>
+                                <small style={{color: '#666'}}>{testimonial.role}</small>
                             </div>
                         </div>
-                        <CardText style={{ color: '#333', fontStyle: 'italic' }}>
+                        <CardText style={{color: '#333', fontStyle: 'italic'}}>
                             "{testimonial.quote}"
                         </CardText>
                     </CardBody>
@@ -185,7 +207,7 @@ const Service = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
     useEffect(() => {
@@ -199,37 +221,46 @@ const Service = () => {
     return (
         <Base>
             {/* Services Section */}
-            <Container className="text-center py-5" style={{backgroundColor: '#ffffff', marginTop: '6rem'}}>
-                <h1 style={styles.title}>
+            <Container className="text-center" style={{backgroundColor: '#ffffff', marginTop: '10rem'}}>
+                <h1 className="service-heading">
                     My <span style={{color: '#ff6600'}}>SERVICES</span>
                 </h1>
                 <Row>
                     {services.map((service, index) => (
-                        <ServiceCard key={index} service={service} index={index} />
+                        <ServiceCard key={index} service={service} index={index}/>
                     ))}
                 </Row>
             </Container>
 
             {/* Testimonials Section */}
-            <Container className="py-5" style={{ backgroundColor: '#f8f9fa' }}>
-                <h1 style={{ ...styles.title, marginTop: '2rem' }}>
+            <Container className="py-5" style={{backgroundColor: '#ffffff'}}>
+                <h1 style={{...styles.title, marginTop: '2rem', marginBottom: '2rem'}}>
                     What <span style={{color: '#ff6600'}}>Clients Say</span>
                 </h1>
                 <Row>
                     {testimonials.map((testimonial, index) => (
-                        <TestimonialCard key={index} testimonial={testimonial} index={index} />
+                        <TestimonialCard key={index} testimonial={testimonial} index={index}/>
                     ))}
                 </Row>
             </Container>
 
             {/* Scroll to Top Button */}
             {isVisible && (
-                <motion.button style={styles.scrollButton} onClick={scrollToTop}
-                               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                               exit={{ opacity: 0, y: 20 }} transition={{ duration: 0.3 }}
-                               whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                    ↑
-                </motion.button>
+                <Button
+                    onClick={scrollToTop}
+                    sx={{
+                        position: "fixed",
+                        bottom: "20px",
+                        right: "20px",
+                        borderRadius: "50%",
+                        minWidth: "50px",
+                        height: "50px",
+                        backgroundColor: "#ff6600",
+                        "&:hover": {backgroundColor: "#e65c00"},
+                    }}
+                >
+                    <ArrowUpwardIcon sx={{color: "white"}}/>
+                </Button>
             )}
         </Base>
     );
