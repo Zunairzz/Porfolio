@@ -3,6 +3,8 @@ import "../css/Projects.css";
 import project1 from "../image/project.png";
 import project2 from "../image/project 2.png";
 import Base from "../component/Base";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import Button from "@mui/material/Button";
 
 const ProjectsPage = () => {
     const projects = [
@@ -127,9 +129,21 @@ const ProjectsPage = () => {
                 </div>
             </section>
             {showTopButton && (
-                <button className="back-to-top" onClick={scrollToTop}>
-                    ↑
-                </button>
+                <Button
+                    onClick={scrollToTop}
+                    sx={{
+                        position: "fixed",
+                        bottom: "20px",
+                        right: "20px",
+                        borderRadius: "50%",
+                        minWidth: "50px",
+                        height: "50px",
+                        backgroundColor: "#ff6600",
+                        "&:hover": { backgroundColor: "#e65c00" },
+                    }}
+                >
+                    <ArrowUpwardIcon sx={{ color: "white" }} />
+                </Button>
             )}
         </Base>
     );
