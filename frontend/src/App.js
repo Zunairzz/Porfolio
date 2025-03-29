@@ -8,6 +8,7 @@ import {Resume} from "./pages/Resume";
 import {ContactUs} from "./pages/ContactUs";
 import {ResumeUpdateForm} from "./pages/ResumeUpdateForm";
 import ProjectsPage from "./pages/ProjectsPage";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
     return (
@@ -23,6 +24,8 @@ function App() {
                     <Route path="/resume" element={<Resume/>}/>
                     <Route path="/projects" element={<ProjectsPage/>}/>
                     <Route path="/contact" element={<ContactUs/>}/>
+                    {/*<Route path="/user" element={<UserProfile/>}/>*/}
+                    <Route path="/profile/:id" element={<UserProfile />} />
                     <Route path="/zzupdate" element={<ResumeUpdateForm/>}/>
                     {/*<Route path="/booking/:roomId" element={<BookingPage/>}/>*/}
                     {/*<Route path="/about/:aboutUsId" element={<UpdateAbout/>}/>*/}

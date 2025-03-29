@@ -1,0 +1,163 @@
+.portfolio-section {
+    background: #ffffff; /* White background */
+    color: #333333; /* Dark gray text for contrast */
+}
+
+.portfolio-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.highlight {
+    color: #ff6200; /* Orange highlight */
+}
+
+.see-all-btn {
+    background-color: #ff6200;
+    border: none;
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.see-all-btn:hover {
+    background-color: #e65b00;
+    transform: translateY(-2px);
+}
+
+.portfolio-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #f8f9fa; /* Light gray card background */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-5px);
+}
+
+.image-wrapper {
+    position: relative;
+}
+
+.portfolio-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 98, 0, 0.7); /* Orange overlay */
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.portfolio-card:hover .image-overlay {
+    background: rgba(255, 98, 0, 0.9);
+}
+
+.overlay-title {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.tags-container {
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-badge {
+    background: #ff6200;
+    color: #ffffff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.tags-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filter-btn {
+    background: #e9ecef; /* Light gray buttons */
+    color: #333333;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background: #ff6200;
+    color: #ffffff;
+}
+
+.featured-project {
+    background: #f8f9fa; /* Light gray background */
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.featured-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.launch-btn {
+    background: #ff6200;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.launch-btn:hover {
+    background: #e65b00;
+    transform: rotate(45deg);
+}
+
+.featured-description {
+    color: #666666; /* Medium gray text */
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .portfolio-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .see-all-btn {
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .featured-title {
+        flex-direction: column;
+    }
+}

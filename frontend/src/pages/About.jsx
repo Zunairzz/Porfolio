@@ -1,3 +1,4 @@
+// About.js
 import Base from "../component/Base";
 import "../css/about.css";
 import {Card, CardContent, CardMedia, Typography} from "@mui/material";
@@ -7,9 +8,12 @@ import zunair from "../image/zuni_png.png";
 import umair from "../image/umair_bhai_png.png";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import PersonIcon from "@mui/icons-material/Person";
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 export function About() {
+    const navigate = useNavigate();
     const items = [
         {
             id: 1,
@@ -45,9 +49,7 @@ export function About() {
                 animate={{opacity: 1, y: 0}}
                 transition={{duration: 1}}
             >
-                <h1
-                    className="mb-4 about-us-heading"
-                >
+                <h1 className="mb-4 about-us-heading">
                     Meet our team
                 </h1>
 
@@ -63,19 +65,17 @@ export function About() {
                 </motion.p>
 
                 <motion.div
-                    initial={{opacity: 0, y: 50}}  // Start lower with opacity 0
-                    whileInView={{opacity: 1, y: 0}}  // Move up to normal position
+                    initial={{opacity: 0, y: 50}}
+                    whileInView={{opacity: 1, y: 0}}
                     transition={{duration: 1}}
                     viewport={{once: true}}
-                    className="flex flex-wrap justify-center gap-6">
-                    {items.map((item, index) => (
+                    className="flex flex-wrap justify-center gap-6"
+                >
+                    {items.map((item) => (
                         <AboutUsCard
                             key={item.id}
-                            image={item.src}
-                            name={item.name}
-                            jobDescription={item.jobDescription}
-                            linkedIn={item.linkedIn}
-                            instagram={item.instagram}
+                            item={item}  // Pass the entire item object
+                            onClick={() => navigate(`/profile/${item.id}`)}
                         />
                     ))}
                 </motion.div>
@@ -84,27 +84,38 @@ export function About() {
     );
 }
 
-const AboutUsCard = ({image, name, jobDescription, linkedIn, instagram}) => {
+const AboutUsCard = ({item, onClick}) => {
     return (
-        <div>
-            <Card className="w-80 bg-gray-100 text-center shadow-none p-4 rounded-lg">
+        <div className="cursor-pointer">
+            <Card
+                className="w-80 bg-gray-100 text-center shadow-none p-4 rounded-lg relative hover:shadow-lg transition-shadow">
+                {/*<div className="absolute top-2 right-2">*/}
+                {/*    <PersonIcon*/}
+                {/*        className="text-gray-400 hover:text-orange-500 transition-colors"*/}
+                {/*        sx={{fontSize: 28}}*/}
+                {/*    />*/}
+                {/*</div>*/}
                 <CardMedia
                     className="w-52 h-52 mx-auto rounded-full object-cover"
-                    image={image}
-                    title={name}
+                    image={item.src}
+                    title={item.name}
                 />
                 <CardContent>
-                    <Typography className="text-lg font-semibold">{name}</Typography>
-                    <Typography className="text-gray-600 text-sm">{jobDescription}</Typography>
+                    <Typography className="text-lg font-semibold">{item.name}</Typography>
+                    <Typography className="text-gray-600 text-sm">{item.jobDescription}</Typography>
                 </CardContent>
                 <div className="flex justify-center gap-4 pb-4">
-                    <a href={instagram} target="_blank" rel="noopener noreferrer"
+                    <a href={item.instagram} target="_blank" rel="noopener noreferrer"
                        className="text-gray-500 hover:text-black transition-colors">
                         <InstagramIcon/>
                     </a>
-                    <a href={linkedIn} target="_blank" rel="noopener noreferrer"
+                    <a href={item.linkedIn} target="_blank" rel="noopener noreferrer"
                        className="text-gray-500 hover:text-black transition-colors">
                         <LinkedInIcon/>
+                    </a>
+                    <a onClick={onClick} target="_blank" rel="noopener noreferrer"
+                       className="text-gray-500 hover:text-black transition-colors">
+                        <PersonIcon/>
                     </a>
                 </div>
             </Card>

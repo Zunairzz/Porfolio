@@ -1,221 +1,107 @@
 import React from "react";
-import {Container, Row, Col, Button, CardBody, CardTitle, CardText, Card, Badge,} from "reactstrap";
-
+import { Container, Row, Col, Button } from "reactstrap";
 import service_img_1 from "../../assests/s1.png";
 import service_img_2 from "../../assests/s2.png";
+import "../../css/PortfolioItemHomePage.css"; // New CSS file for better organization
 
 const PortfolioItemHomePage = () => {
+    const portfolioItems = [
+        {
+            id: 1,
+            image: service_img_1,
+            title: "Lirante",
+            tags: ["Landing Page", "Product Design"],
+        },
+        {
+            id: 2,
+            image: service_img_2,
+            title: "Project X",
+            tags: ["Animation", "Glassmorphism"],
+        },
+    ];
 
-const styles = {
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '20px',
-    },
-    title: {
-        fontSize: '2em',
-    },
-    highlight: {
-        color: '#ff6f3f',
-    },
-    seeAllButton: {
-        backgroundColor: '#ff6f3f',
-        color: '#fff',
-        border: 'none',
-    },
-    portfolioItem: {
-        textAlign: 'center',
-        padding: '20px',
-        backgroundColor: '#f9f9f9',
-        borderRadius: '10px',
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-        margin: '10px',
-    },
-    wordStyle:{
-        position: 'absolute',
-        bottom: '10px',
-        left: '10px',
-        color: '#fff',
-        padding: '5px 10px',
-        borderRadius: '5px',
-        fontSize:'50px',
-        fontWeight:'bold'
-    },
-    buttonStyle:{
-        borderRadius: '20px',
-        backgroundColor: '#f2f4f7',
-        color: 'black',
-        border: 'none',
-        margin: '0.25rem'
-    }
-};
+    const allTags = [
+        "Landing Page",
+        "Product Design",
+        "Animation",
+        "Glassmorphism",
+        "Cards",
+    ];
 
-return (
-    <Container className="portfolio-section">
-        <Row style={styles.header}>
-            <Col>
-                <h1 style={styles.title}>
-                    Let's have a look at my <span style={styles.highlight}>Portfolio</span>
-                </h1>
-            </Col>
-            <Col className="text-end">
-                <Button style={styles.seeAllButton}>See All</Button>
-            </Col>
-        </Row>
-        <Row>
-            <Col md={6} style={{ position: 'relative' }}>
-                <img
-                    src={service_img_1}
-                    alt="Portfolio item 1"
-                    style={{ width: '100%', borderRadius: '10px' }}
-                />
-                <div style={styles.wordStyle}>Lirante</div>
-            </Col>
+    return (
+        <section className="portfolio-section py-5">
+            <Container>
+                {/* Header */}
+                <Row className="align-items-center mb-5">
+                    <Col md={8}>
+                        <h1 className="portfolio-title">
+                            My <span className="highlight">Portfolio</span> Showcase
+                        </h1>
+                    </Col>
+                    <Col md={4} className="text-md-end">
+                        <Button className="see-all-btn">See All Projects</Button>
+                    </Col>
+                </Row>
 
-            <Col md={6} style={{position: 'relative'}}>
-                <img
-                    src={service_img_1}
-                    alt="Portfolio item 1"
-                    style={{width: '100%', borderRadius: '10px'}}
-                />
-                <div style={styles.wordStyle}>Lirante</div>
-            </Col>
-        </Row>
-        <Row className="mt-4 text-center">
-                <Col md="12">
-                    <div className="tags">
-                        <Button style={styles.buttonStyle}>
-                            Landing Page
-                        </Button>
-                        <Button style={styles.buttonStyle}>
-                            Product Design
-                        </Button>
-                        <Button style={styles.buttonStyle}>
-                            Animation
-                        </Button>
-                        <Button style={styles.buttonStyle}>
-                            Glassmorphism
-                        </Button>
-                        <Button style={styles.buttonStyle}>
-                            Cards
-                        </Button>
-                    </div>
-                </Col>
-            </Row>
-        {/* Progress Indicator */}
-        {/*<Row className="justify-content-center mb-3">*/}
-        {/*    {[...Array(4)].map((_, i) => (*/}
-        {/*        <span*/}
-        {/*            key={i}*/}
-        {/*            className={`mx-1 rounded-circle ${i === 0 ? 'bg-orange' : 'bg-light'}`}*/}
-        {/*            style={{ width: '10px', height: '10px', display: 'inline-block' }}*/}
-        {/*        ></span>*/}
-        {/*    ))}*/}
-        {/*</Row>*/}
+                {/* Portfolio Items */}
+                <Row className="g-4 mb-5">
+                    {portfolioItems.map((item) => (
+                        <Col md={6} key={item.id}>
+                            <div className="portfolio-card">
+                                <div className="image-wrapper">
+                                    <img
+                                        src={item.image}
+                                        alt={`${item.title} preview`}
+                                        className="portfolio-image"
+                                    />
+                                    <div className="image-overlay">
+                                        <h3 className="overlay-title">{item.title}</h3>
+                                    </div>
+                                </div>
+                                <div className="tags-container">
+                                    {item.tags.map((tag, index) => (
+                                        <span key={index} className="tag-badge">
+                      {tag}
+                    </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </Col>
+                    ))}
+                </Row>
 
-        {/* Title and Description */}
-        <Row className="mt-3 justify-content-center text-center">
-            <Col md={6}>
-                <h2 className="mb-3" style={{ fontWeight: '600', color: '#1c1e21' }}>
-                    Lirante - Food Delivery Solution{' '}
-                    <Button
-                        color="warning"
-                        className="rounded-circle p-2 ms-2"
-                        style={{ fontSize: '14px' }}
-                    >
-                        &#8599;
-                    </Button>
-                </h2>
-                <p className="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue
-                    interdum ligula a dignissim. Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit. Sed lobortis orci elementum egestas
-                    lobortis.
-                </p>
-            </Col>
-        </Row>
-    </Container>
-);
+                {/* Tags Filter */}
+                <Row className="justify-content-center mb-5">
+                    <Col md={8} className="text-center">
+                        <div className="tags-filter">
+                            {allTags.map((tag, index) => (
+                                <Button key={index} className="filter-btn">
+                                    {tag}
+                                </Button>
+                            ))}
+                        </div>
+                    </Col>
+                </Row>
 
-            {/* Additional Content Section */}
-
-        {/*</Container>*/}
-
+                {/* Featured Project */}
+                <Row className="justify-content-center text-center">
+                    <Col md={8}>
+                        <div className="featured-project">
+                            <h2 className="featured-title">
+                                Lirante - Food Delivery Solution
+                                <Button className="launch-btn">↗</Button>
+                            </h2>
+                            <p className="featured-description">
+                                A comprehensive food delivery solution featuring intuitive UI/UX design and seamless
+                                functionality. Built with modern technologies to enhance user experience and operational
+                                efficiency.
+                            </p>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+    );
 };
 
 export default PortfolioItemHomePage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const styles = {
-//     header: {
-//         display: 'flex',
-//         justifyContent: 'space-between',
-//         alignItems: 'center',
-//         marginBottom: '20px',
-//     },
-//     title: {
-//         fontSize: '2em',
-//     },
-//     highlight: {
-//         color: '#ff6f3f',
-//     },
-//     seeAllButton: {
-//         backgroundColor: '#ff6f3f',
-//         color: '#fff',
-//         border: 'none',
-//     },
-//     portfolioItem: {
-//         textAlign: 'center',
-//         padding: '20px',
-//         backgroundColor: '#f9f9f9',
-//         borderRadius: '10px',
-//         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-//         margin: '10px',
-//     },
-// };
-//
-// return (
-//     <Container className="portfolio-section">
-//         <Row style={styles.header}>
-//             <Col>
-//                 <h1 style={styles.title}>
-//                     Let's have a look at my <span style={styles.highlight}>Portfolio</span>
-//                 </h1>
-//             </Col>
-//             <Col className="text-end">
-//                 <Button style={styles.seeAllButton}>See All</Button>
-//             </Col>
-//         </Row>
-//         <Row>
-//             <Col md={6} >
-//                 <img
-//                     src={service_img_1}
-//                     alt="Portfolio item 1"
-//                     style={{ width: '100%', borderRadius: '10px' }}
-//                 />
-//             </Col>
-//             <Col md={6}>
-//                 <img
-//                     src={service_img_2}
-//                     alt="Portfolio item 2"
-//                     style={{ width: '100%', borderRadius: '10px' }}
-//                 />
-//             </Col>
-//         </Row>
-//     </Container>
-// );
