@@ -21,7 +21,7 @@ export const ProfileSlider = () => {
     const items = [
         {id: 1, name: "Zunair", jobDescription: "Full Stack Developer", src: zunair, experience: "3 Years"},
         {id: 2, name: "Zaman", jobDescription: "Full Stack Developer", src: zaman, experience: "2 Years"},
-        {id: 3, name: "Umair Sarwar", jobDescription: "Graphic Designer", src: umairBhai, experience: "10 Years"}
+        {id: 3, name: "Umair", jobDescription: "Graphic Designer", src: umairBhai, experience: "10 Years"}
     ];
 
     const slides = items.map((item) => {
