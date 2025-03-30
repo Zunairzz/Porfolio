@@ -43,7 +43,7 @@ const Footer = () => {
 
             {/* Copyright */}
             <div className="footer-bottom">
-                <p>&copy; {new Date().getFullYear()} My Resume. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Pixel Drift. All rights reserved.</p>
             </div>
         </footer>
     );

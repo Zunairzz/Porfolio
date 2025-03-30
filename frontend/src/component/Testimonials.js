@@ -36,7 +36,7 @@ export const Testimonials = () => {
         {
             id: 1,
             jobTitle: "Java Developer",
-            name: "Zunair Sarwar",
+            name: "Naseer Iqbal",
             caption: "Passionate Java Developer with expertise in Spring Boot and microservices.",
             src: zunair,
             rating: 4

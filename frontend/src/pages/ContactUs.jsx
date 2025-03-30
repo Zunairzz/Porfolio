@@ -1,26 +1,18 @@
 import Base from "../component/Base";
-import {
-    Container,
-    Row,
-    Col,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Button
-} from 'reactstrap';
-import React, {useState} from 'react';
+import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
+import React, {useRef, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "../css/contactus.css";
+import emailjs from "@emailjs/browser";
 
+// init('i98BWSy5DSlqZoFNY'); // Replace with your User ID
 
 const styles = {
     iconColor: {
         color: 'black'
     },
     contactStyle: {
-        // backgroundColor: 'rgb(243,243,243)',
         minHeight: '100vh',
         marginTop: '5rem',
         padding: '100px 50px',
@@ -28,12 +20,17 @@ const styles = {
 };
 
 export function ContactUs() {
+
+    const form = useRef();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         subject: '',
         message: '',
+        time: 'zero'
     });
+    const [status, setStatus] = useState('');
 
     const handleChange = (e) => {
         setFormData({
@@ -44,25 +41,36 @@ export function ContactUs() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form Data Submitted:', formData);
-        alert('Your message has been sent successfully!');
-        // Reset form after submission
-        setFormData({
-            name: '',
-            email: '',
-            subject: '',
-            message: '',
-        });
+
+        // EmailJS send function
+        emailjs.send(
+            'service_md9i43i', // Replace with your Service ID
+            'template_1kbxn06', // Replace with your Template ID
+            formData
+        )
+            .then((result) => {
+                setStatus('Your message has been sent successfully!');
+                setFormData({
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: '',
+                });
+            }, (error) => {
+                console.error('EmailJS Error:', error.text);
+                setStatus('Failed to send message. Please try again.');
+            });
     };
+
     return (
         <Base>
             <div style={styles.contactStyle}>
                 <Container>
                     <Row>
-                        <h1 className="contact-us-title">
+                        <h1 className="contact-us-title animate-title">
                             CONTACT <span style={{color: '#ff6600'}}>US</span>
                         </h1>
-                        <Col md="6">
+                        <Col md="6" className="animate-left">
                             <h3 className="mb-4" style={{color: '#ff6600', fontWeight: 'bold'}}>
                                 Get in touch
                             </h3>
@@ -102,7 +110,7 @@ export function ContactUs() {
                             </div>
                         </Col>
 
-                        <Col md="6">
+                        <Col md="6" className="animate-right">
                             <Form onSubmit={handleSubmit} className="contact-us-form">
                                 <FormGroup row>
                                     <Label for="name">Name:</Label>
@@ -163,139 +171,12 @@ export function ContactUs() {
                                         style={{backgroundColor: '#ff6600', borderColor: '#ff6600'}}>
                                     Send Message
                                 </Button>
+                                {status && <p className="mt-2">{status}</p>}
                             </Form>
-                            {/*<Form >*/}
-                            {/*    <FormGroup>*/}
-                            {/*        <Label for="name">Name:</Label>*/}
-                            {/*        <Input type="text" id="name" placeholder="Enter Your Name ..."/>*/}
-                            {/*    </FormGroup>*/}
-                            {/*    <FormGroup>*/}
-                            {/*        <Label for="email">Email:</Label>*/}
-                            {/*        <Input type="email" id="email" placeholder="Enter Your Email ..."/>*/}
-                            {/*    </FormGroup>*/}
-                            {/*    <FormGroup>*/}
-                            {/*        <Label for="subject">Subject:</Label>*/}
-                            {/*        <Input type="text" id="subject" placeholder="Enter Your Subject ..."/>*/}
-                            {/*    </FormGroup>*/}
-                            {/*    <FormGroup>*/}
-                            {/*        <Label for="message">Message:</Label>*/}
-                            {/*        <Input type="textarea" id="message" placeholder="Enter Your Message ..."/>*/}
-                            {/*    </FormGroup>*/}
-                            {/*    <Button className="mb-3" style={{backgroundColor: '#ff6600', borderColor: '#ff6600'}}>Send*/}
-                            {/*        Message</Button>*/}
-                            {/*</Form>*/}
                         </Col>
                     </Row>
                 </Container>
             </div>
         </Base>
-    )
-}
-
-
-{/*<Row className="justify-content-center">*/
-}
-{/*    <Col md="8" className="text-center mb-4">*/
-}
-{/*        <h1 className="mb-3" style={{fontSize: '2.5rem', fontWeight: 'bold'}}>*/
-}
-{/*            CONTACT <span style={{color: '#00c96d'}}>US</span>*/
-}
-{/*        </h1>*/
-}
-{/*    </Col>*/
-}
-{/*</Row>*/
-}
-{/*<Row>*/
-}
-{/*    <Col md="12">*/
-}
-{/*        <h3 className="mb-4" style={{ color: '#00c96d', fontWeight: 'bold' }}>*/
-}
-{/*            Get in touch*/
-}
-{/*        </h3>*/
-}
-{/*        <p>*/
-}
-{/*            Curabitur vitae nunc sed velit dignissim sodales. Urna neque viverra justo nec. In cursus massa tincidunt ut ornare the butter leo integer.*/
-}
-{/*        </p>*/
-}
-{/*    </Col>*/
-}
-{/*</Row>*/
-}
-{/*<Row>*/
-}
-{/*    <Col md="12" className="mb-4">*/
-}
-{/*        <div className="d-flex align-items-start mb-3">*/
-}
-{/*            <i className="fas fa-map-marker-alt fa-2x me-3 text-success"></i>*/
-}
-{/*            <div>*/
-}
-{/*                <p className="mb-0">4080 Berkshire Circle Knoxville,</p>*/
-}
-{/*                <p>TN 37917, New York</p>*/
-}
-{/*            </div>*/
-}
-{/*        </div>*/
-}
-{/*        <div className="d-flex align-items-start mb-3">*/
-}
-{/*            <i className="fas fa-envelope fa-2x me-3 text-success"></i>*/
-}
-{/*            <div>*/
-}
-{/*                <p className="mb-0">FrancisMBriscoe@jourrapide.com</p>*/
-}
-{/*                <p>info@jourrapide.com</p>*/
-}
-{/*            </div>*/
-}
-{/*        </div>*/
-}
-{/*        <div className="d-flex align-items-start mb-3">*/
-}
-{/*            <i className="fas fa-phone fa-2x me-3 text-success"></i>*/
-}
-{/*            <div>*/
-}
-{/*                <p className="mb-0">865-564-9052</p>*/
-}
-{/*                <p>865-884-9658</p>*/
-}
-{/*            </div>*/
-}
-{/*        </div>*/
-}
-{/*    </Col>*/
-}
-{/*</Row>*/
-}
-{/*<Row>*/
-}
-{/*    <Col md="12">*/
-}
-{/*        <div className="d-flex justify-content-start">*/
-}
-{/*            <a href="#" className="me-3 text-light"><i className="fab fa-facebook fa-2x"></i></a>*/
-}
-{/*            <a href="#" className="me-3 text-light"><i className="fab fa-twitter fa-2x"></i></a>*/
-}
-{/*            <a href="#" className="me-3 text-light"><i className="fab fa-linkedin fa-2x"></i></a>*/
-}
-{/*            <a href="#" className="me-3 text-light"><i className="fab fa-github fa-2x"></i></a>*/
-}
-{/*            <a href="#" className="text-light"><i className="fab fa-slack fa-2x"></i></a>*/
-}
-{/*        </div>*/
-}
-{/*    </Col>*/
-}
-{/*</Row>*/
+    );
 }

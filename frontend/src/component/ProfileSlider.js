@@ -19,9 +19,30 @@ export const ProfileSlider = () => {
     };
 
     const items = [
-        {id: 1, name: "Zunair", jobDescription: "Full Stack Developer", src: zunair, experience: "3 Years"},
-        {id: 2, name: "Zaman", jobDescription: "Full Stack Developer", src: zaman, experience: "2 Years"},
-        {id: 3, name: "Umair", jobDescription: "Graphic Designer", src: umairBhai, experience: "10 Years"}
+        {
+            id: 1,
+            name: "Zunair",
+            jobDescription: "Full Stack Developer",
+            src: zunair,
+            experience: "6 Years",
+            heading: "I simplify complex user experience challenges to design integrity-driven solutions that reach billions of people."
+        },
+        {
+            id: 2,
+            name: "Zaman",
+            jobDescription: "Full Stack Developer",
+            src: zaman,
+            experience: "5 Years",
+            heading: "I break down complex user experience problems to create integrity-focused solutions that connect billions of people."
+        },
+        {
+            id: 3,
+            name: "Umair",
+            jobDescription: "Graphic Designer",
+            src: umairBhai,
+            experience: "10 Years",
+            heading: "I transform complex ideas into visually compelling designs that engage audiences and create meaningful connections."
+        }
     ];
 
     const slides = items.map((item) => {
@@ -66,8 +87,7 @@ export const ProfileSlider = () => {
                             transition={{duration: 0.8}}
                         >
                             <blockquote>
-                                I break down complex user experience problems to create integrity-focused solutions
-                                that connect billions of people.
+                                {item.heading}
                             </blockquote>
                         </motion.div>
                     </Col>

@@ -6,22 +6,22 @@ import '../css/WorkExperience.css';
 const WorkExperience = () => {
     const experiences = [
         {
-            company: "Cognizant",
-            duration: "Sep 2016 - July 2020",
-            position: "Experience Designer",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacus nunc, posuere in justo vulputate, bibendum sodales.",
+            company: "Upgenics International",
+            duration: "May 2023 - Present",
+            position: "Java Software Engineer",
+            description: "Developed a sophisticated JavaFX desktop application for diagnosing iPhones, Android devices, and iPads. Implemented multi-threading for handling multiple device connections on MacBooks. Integrated APIs for seamless data exchange and precise diagnostics. Collaborated using Git for version control and repository management. Provided remote technical support, troubleshooting client system issues to ensure optimal performance.",
         },
         {
-            company: "Sugee Pvt Limited",
-            duration: "Sep 2020 - July 2023",
-            position: "UI/UX Designer",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacus nunc, posuere in justo vulputate, bibendum sodales.",
+            company: "Allied Bank Limited",
+            duration: "Sep 2022 - Apr 2023",
+            position: "Java Software Engineer",
+            description: "Worked with Java frameworks like Spring Boot, JSF, and JavaFX for application development. Utilized Oracle PL/SQL for backend data management. Managed projects like ABL-SOFT (JSF-based reporting and user rights management) and developed AmsEmailSender for scheduled email delivery. Collaborated on version control using Git Server.",
         },
         {
-            company: "Cineststox",
-            duration: "Sep 2023 - Present",
-            position: "Lead UX Designer",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacus nunc, posuere in justo vulputate, bibendum sodales.",
+            company: "XStak",
+            duration: "Sep 2021 - Aug 2022",
+            position: "Java Software Engineer",
+            description: "Worked as a Back-End Software Engineer on an omnichannel ERP middleware, integrating order management and inventory systems with platforms like Magento and Shopify. Contributed to Pakistan’s leading cloud-based POS software. Designed and optimized backend solutions for seamless order processing and inventory synchronization. Collaborated on version control using Git.",
         },
     ];
 
@@ -61,7 +61,7 @@ const WorkExperience = () => {
         },
         verticalLine: {
             position: 'absolute',
-            top: '20px',
+            top: '40px',
             left: '50%',
             transform: 'translateX(-50%)', // Center-aligns the line horizontally
             borderLeft: '2px dashed #333',

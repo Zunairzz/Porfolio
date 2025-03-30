@@ -6,7 +6,7 @@ import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import {NavItem, NavLink} from "reactstrap";
 import {NavLink as ReactLink, useLocation} from "react-router-dom";
 import '../css/Navbar6.css'
-import logo from "../assests/MyPorfolioLogo.png";
+import logo from "../assests/logo.jpg";
 
 const navigation = [
     {name: 'Home', href: '/'},

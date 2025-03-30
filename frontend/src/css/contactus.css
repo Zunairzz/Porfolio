@@ -13,8 +13,56 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.animate-left {
+    animation: slideInFromLeft 1s ease-out;
+}
+
+.animate-right {
+    animation: slideInFromRight 1s ease-out;
+}
+
+/* Optional: Add media query to disable animations on smaller screens if desired */
+@media only screen and (max-width: 768px) {
+    .animate-left, .animate-right {
+        animation: none;
+    }
+}
+
 @media only screen and (max-width: 900px) {
     .contact-us-form {
         margin-top: 50px;
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUpFade {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
