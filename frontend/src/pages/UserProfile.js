@@ -15,7 +15,7 @@ const UserProfile = () => {
             id: "1",
             name: "Zunair Sarwar",
             title: "Senior Java Developer",
-            email: "zunair@example.com",
+            email: "zunairsarwar1@gmail.com",
             phone: "+92 324 4165 642",
             location: "Lahore, Pakistan",
             bio: "As a full stack developer, I have a proven\n" +
@@ -33,19 +33,25 @@ const UserProfile = () => {
                 "my skills and experience to help\n" +
                 "organizations achieve their goals.",
             avatar: zunair,
-            skills: ["Java", "Spring", "Hibernate", "SQL", "React"],
+            skills: ["Java", "JSF", "Spring boot", "PHP", "HTML/CSS", "Node.js", "Hibernate", "SQL", "React.js"],
             experience: [
                 {
-                    company: "TechCorp",
-                    role: "Senior Java Developer",
-                    period: "2019 - Present",
-                    description: "Lead backend development for enterprise applications"
+                    company: "Upgenics International",
+                    role: "Java Software Engineer",
+                    period: "2023 - Present",
+                    description: "Developed a sophisticated JavaFX desktop application for diagnosing iPhones, Android devices, and iPads. Implemented multi-threading for handling multiple device connections on MacBooks. Integrated APIs for seamless data exchange and precise diagnostics. Collaborated using Git for version control and repository management. Provided remote technical support, troubleshooting client system issues to ensure optimal performance."
                 },
                 {
-                    company: "WebSolutions",
+                    company: "ABL Asset Management",
                     role: "Java Developer",
-                    period: "2016 - 2019",
-                    description: "Developed robust backend systems"
+                    period: "2022 - 2023",
+                    description: "Worked with Java frameworks like Spring Boot, JSF, and JavaFX for application development. Utilized Oracle PL/SQL for backend data management. Managed projects like ABL-SOFT (JSF-based reporting and user rights management) and developed AmsEmailSender for scheduled email delivery. Collaborated on version control using Git Server."
+                },
+                {
+                    company: "XStak",
+                    role: "Java Software Engineer",
+                    period: "2020 - 2022",
+                    description: "Worked as a Back-End Software Engineer on an omnichannel ERP middleware, integrating order management and inventory systems with platforms like Magento and Shopify. Contributed to Pakistan’s leading cloud-based POS software. Designed and optimized backend solutions for seamless order processing and inventory synchronization. Collaborated on version control using Git."
                 }
             ],
             social: {
