@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
 import UserService from "../services/UserService";
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
-    const history = useHistory();
 
     const handleLogin = async (e) => {
         e.preventDefault();
