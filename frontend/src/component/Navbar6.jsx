@@ -1,12 +1,13 @@
 'use client'
 
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Dialog, DialogPanel} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
-import {NavItem, NavLink} from "reactstrap";
-import {NavLink as ReactLink, useLocation} from "react-router-dom";
+import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavItem, NavLink} from 'reactstrap'
+import {NavLink as ReactLink, useLocation} from 'react-router-dom'
 import '../css/Navbar6.css'
-import logo from "../assests/logo.jpg";
+import logo from '../assests/logo.jpg'
+import UserService from "../services/UserService";
 
 const navigation = [
     {name: 'Home', href: '/'},
@@ -19,14 +20,27 @@ const navigation = [
 
 export default function Navbar6() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const location = useLocation();
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [dropdownOpen, setDropdownOpen] = useState(false)
+    const location = useLocation()
+
+    const handleLogout = () => {
+        UserService.logoutUser();
+        setIsAuthenticated(false); // Set auth state to false
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        setIsAuthenticated(!!token)
+    }, [])
+
+    const toggleDropdown = () => setDropdownOpen((prevState) => !prevState)
 
     return (
         <div className="bg-white">
             <header className="absolute inset-x-0 top-0 z-50">
                 <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
                     <div className="flex items-center">
-                        {/* Logo Section */}
                         <NavItem className="nav-link">
                             <NavLink tag={ReactLink} to="/"
                                      className="flex items-center d-lg-none d-md-none d-sm-block">
@@ -47,15 +61,48 @@ export default function Navbar6() {
                     <div className="hidden lg:flex lg:gap-x-12 custom-navbar">
                         {navigation.map((item) => (
                             <NavItem key={item.name} className="nav-link">
-                                <NavLink tag={ReactLink} to={item.href}
-                                         className={`text-sm font-semibold leading-6 text-white rounded-md px-1 py-3 transition-colors duration-300 custom-item ${
-                                             location.pathname === item.href ? 'custom-active-bg' : 'hover:bg-gray-50 hover:bg-opacity-20'
-                                         }`}
+                                <NavLink
+                                    tag={ReactLink}
+                                    to={item.href}
+                                    className={`text-sm font-semibold leading-6 text-white rounded-md px-1 py-3 transition-colors duration-300 custom-item ${
+                                        location.pathname === item.href ? 'custom-active-bg' : 'hover:bg-gray-50 hover:bg-opacity-20'
+                                    }`}
                                 >
                                     {item.name}
                                 </NavLink>
                             </NavItem>
                         ))}
+                        {isAuthenticated && (
+                            <NavItem className="nav-link">
+                                <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+                                    <DropdownToggle
+                                        tag="div"
+                                        className={`text-sm font-semibold leading-6 text-white rounded-md px-1 py-3 transition-colors duration-300 custom-item ${
+                                            location.pathname.startsWith('/add-project') || location.pathname.startsWith('/add-user')
+                                                ? 'custom-active-bg'
+                                                : 'hover:bg-gray-50 hover:bg-opacity-20'
+                                        } cursor-pointer`}
+                                    >
+                                        Admin
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem>
+                                            <NavLink tag={ReactLink} to="/add-project" className="text-gray-900">
+                                                Add Project
+                                            </NavLink>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <NavLink tag={ReactLink} to="/add-user" className="text-gray-900">
+                                                Add User
+                                            </NavLink>
+                                        </DropdownItem>
+                                        <DropdownItem onClick={handleLogout} className="text-gray-900 cursor-pointer">
+                                            Logout
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </NavItem>
+                        )}
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                         {/* Add content for large screens */}
@@ -67,8 +114,7 @@ export default function Navbar6() {
                         className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                         <div className="flex items-center justify-between">
                             <NavItem className="nav-link">
-                                <NavLink tag={ReactLink} to="/"
-                                         className="-m-1.5 p-1.5">
+                                <NavLink tag={ReactLink} to="/" className="-m-1.5 p-1.5">
                                     <span className="sr-only">Your Company</span>
                                     <img src={logo} alt="Logo here" className="h-10 w-auto"/>
                                 </NavLink>
@@ -86,14 +132,34 @@ export default function Navbar6() {
                             <div className="-my-6 divide-y divide-gray-500/10">
                                 <div className="space-y-2 py-6">
                                     {navigation.map((item) => (
-                                        <NavItem key={item.name} href={item.href}
-                                                 className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                        <NavItem
+                                            key={item.name}
+                                            className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                        >
                                             <NavLink tag={ReactLink} to={item.href}
                                                      className="text-sm font-semibold leading-6 text-gray-900">
                                                 {item.name}
                                             </NavLink>
                                         </NavItem>
                                     ))}
+                                    {isAuthenticated && (
+                                        <>
+                                            <NavItem
+                                                className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                                <NavLink tag={ReactLink} to="/add-project"
+                                                         className="text-sm font-semibold leading-6 text-gray-900">
+                                                    Add Project
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem
+                                                className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                                <NavLink tag={ReactLink} to="/add-user"
+                                                         className="text-sm font-semibold leading-6 text-gray-900">
+                                                    Add User
+                                                </NavLink>
+                                            </NavItem>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -101,5 +167,5 @@ export default function Navbar6() {
                 </Dialog>
             </header>
         </div>
-    );
+    )
 }

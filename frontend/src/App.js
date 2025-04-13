@@ -9,6 +9,9 @@ import {ContactUs} from "./pages/ContactUs";
 import {ResumeUpdateForm} from "./pages/ResumeUpdateForm";
 import ProjectsPage from "./pages/ProjectsPage";
 import UserProfile from "./pages/UserProfile";
+import LoginPage from "./pages/LoginPage";
+import Register from "./pages/Register";
+import AddProjectForm from "./pages/AddProjectForm";
 
 function App() {
     return (
@@ -25,8 +28,11 @@ function App() {
                     <Route path="/projects" element={<ProjectsPage/>}/>
                     <Route path="/contact" element={<ContactUs/>}/>
                     {/*<Route path="/user" element={<UserProfile/>}/>*/}
-                    <Route path="/profile/:id" element={<UserProfile />} />
+                    <Route path="/profile/:id" element={<UserProfile/>}/>
                     <Route path="/zzupdate" element={<ResumeUpdateForm/>}/>
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                    <Route path="/add-project" element={<AddProjectForm/>}/>
                     {/*<Route path="/booking/:roomId" element={<BookingPage/>}/>*/}
                     {/*<Route path="/about/:aboutUsId" element={<UpdateAbout/>}/>*/}
                     {/*<Route path="/user/forgot-password" element={<ForgotPassword/>}/>*/}
