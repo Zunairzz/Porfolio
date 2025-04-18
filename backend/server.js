@@ -10,13 +10,15 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+if (process.env.NODE_ENV !== 'PRODUCTION') {
+    app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-app.get('*', (req, res) =>
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
-);
+    app.get('*', (req, res) =>
+        res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
+    );
+}
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 module.exports = app;

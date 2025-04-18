@@ -8,6 +8,7 @@ const LoginPage = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        console.log("Login event");
         try {
             await UserService.loginUser(email, password);
             setMsg('Login successful!');
