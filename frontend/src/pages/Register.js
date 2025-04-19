@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import {EyeIcon, EyeSlashIcon} from '@heroicons/react/24/outline';
+
+// const API_URL = "http://localhost:3002/api/users"; // Base URL for API
+
+const API_URL = "https://porfolio-62t2judtq-zunairzzs-projects.vercel.app/api/users"; // Base URL for Prod API
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -12,7 +16,7 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3002/api/user/register', {
+            await axios.post(`${API_URL}/register`, {
                 name,
                 email,
                 password
@@ -32,7 +36,8 @@ const Register = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-white to-orange-100">
-            <div className="bg-white/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-md border border-orange-400 transition-all duration-300 hover:shadow-orange-400/20">
+            <div
+                className="bg-white/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-md border border-orange-400 transition-all duration-300 hover:shadow-orange-400/20">
                 <h2 className="text-3xl font-bold text-center text-orange-400 mb-6">Create Account</h2>
                 <form onSubmit={handleRegister} className="space-y-5">
                     <div>
@@ -70,9 +75,9 @@ const Register = () => {
                             className="absolute inset-y-0 right-3 flex items-center text-orange-400 hover:text-orange-300"
                         >
                             {showPassword ? (
-                                <EyeSlashIcon className="h-5 w-5" />
+                                <EyeSlashIcon className="h-5 w-5"/>
                             ) : (
-                                <EyeIcon className="h-5 w-5" />
+                                <EyeIcon className="h-5 w-5"/>
                             )}
                         </button>
                     </div>
