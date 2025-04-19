@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(err => console.log('MongoDB Connection Error:', err));
 
 // Serve static files in non-production
-if (process.env.NODE_ENV !== 'PRODUCTION') {
+if (process.env.NODE_ENV === 'PRODUCTION') {
     app.use(express.static(path.join(__dirname, '../frontend/build')));
     app.get('*', (req, res) =>
         res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
