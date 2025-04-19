@@ -8,6 +8,7 @@ import {NavLink as ReactLink, useLocation} from 'react-router-dom'
 import '../css/Navbar6.css'
 import logo from '../assests/logo.jpg'
 import UserService from "../services/UserService";
+import {FaUser} from "react-icons/fa";
 
 const navigation = [
     {name: 'Home', href: '/'},
@@ -24,9 +25,17 @@ export default function Navbar6() {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const location = useLocation()
 
-    const handleLogout = () => {
-        UserService.logoutUser();
-        setIsAuthenticated(false); // Set auth state to false
+    const handleLogout = async () => {
+
+        try {
+            // Attempt to login and store token
+            await UserService.logoutUser();
+            window.location.reload();
+            setIsAuthenticated(false); // Set auth state to false
+            // Redirect to dashboard or home page, or set state to show user is logged in
+        } catch (err) {
+            console.error('Logout failed:', err);
+        }
     };
 
     useEffect(() => {
@@ -78,16 +87,16 @@ export default function Navbar6() {
                                     <DropdownToggle
                                         tag="div"
                                         className={`text-sm font-semibold leading-6 text-white rounded-md px-1 py-3 transition-colors duration-300 custom-item ${
-                                            location.pathname.startsWith('/add-project') || location.pathname.startsWith('/add-user')
+                                            location.pathname.startsWith('/user/add-project') || location.pathname.startsWith('/add-user')
                                                 ? 'custom-active-bg'
                                                 : 'hover:bg-gray-50 hover:bg-opacity-20'
                                         } cursor-pointer`}
                                     >
-                                        Admin
+                                        <FaUser className="mx-11 my-1 mr-2"/>
                                     </DropdownToggle>
                                     <DropdownMenu>
                                         <DropdownItem>
-                                            <NavLink tag={ReactLink} to="/add-project" className="text-gray-900">
+                                            <NavLink tag={ReactLink} to="/user/add-project" className="text-gray-900">
                                                 Add Project
                                             </NavLink>
                                         </DropdownItem>
@@ -146,7 +155,7 @@ export default function Navbar6() {
                                         <>
                                             <NavItem
                                                 className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                                                <NavLink tag={ReactLink} to="/add-project"
+                                                <NavLink tag={ReactLink} to="/user/add-project"
                                                          className="text-sm font-semibold leading-6 text-gray-900">
                                                     Add Project
                                                 </NavLink>

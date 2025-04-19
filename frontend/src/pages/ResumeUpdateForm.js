@@ -23,7 +23,7 @@ export const ResumeUpdateForm = () => {
         umair: ''
     });
 
-    // Load data from localStorage when the component mounts
+    // Load data from localStorage when the components mounts
     useEffect(() => {
         const persons = ['zunair', 'zaman', 'umair'];
         persons.forEach((person) => {

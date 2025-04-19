@@ -1,5 +1,5 @@
 import React from "react";
-import Base from "../component/Base";
+import Base from "../components/Base";
 import "../css/resume.css";
 import { Col, Container, Row } from "reactstrap";
 import Button from "@mui/material/Button";

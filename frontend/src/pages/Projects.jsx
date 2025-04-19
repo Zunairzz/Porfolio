@@ -1,4 +1,4 @@
-import Base from "../component/Base";
+import Base from "../components/Base";
 import "../css/Project.css";
 import {
     Container,

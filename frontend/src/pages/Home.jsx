@@ -1,12 +1,12 @@
-import Base from "../component/Base";
+import Base from "../components/Base";
 import React from "react";
 import '../css/HomePageMyService.css'
-import {WhyHireMyHomePage} from "../component/whyHireMeComponent/WhyHireMyHomePage";
+import {WhyHireMyHomePage} from "../components/whyHireMeComponent/WhyHireMyHomePage";
 import WorkExperience from "./WorkExperience";
-import {TestimonialHome} from "../component/TestimonialHome";
-import PortfolioItemHomePage from "../component/portfolioItemsComponent/PortfolioItemHomePage";
-import {ProfileSlider} from "../component/ProfileSlider";
-import {MyServiceCard} from "../component/InfoCard";
+import {TestimonialHome} from "../components/TestimonialHome";
+import PortfolioItemHomePage from "../components/portfolioItemsComponent/PortfolioItemHomePage";
+import {ProfileSlider} from "../components/ProfileSlider";
+import {MyServiceCard} from "../components/InfoCard";
 
 export function Home() {
     return (

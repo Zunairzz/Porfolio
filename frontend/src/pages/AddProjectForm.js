@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Alert, Box, Button, Chip, CircularProgress, Snackbar, TextField, Typography} from "@mui/material";
 import CloudinaryUpload from "../CloudinaryUpload"; // For image upload
 import ProjectService from "../services/ProjectService";
-import Base from "../component/Base";
+import Base from "../components/Base";
 
 const AddProjectForm = ({onProjectAdded}) => {
     const [formData, setFormData] = useState({
@@ -11,6 +11,7 @@ const AddProjectForm = ({onProjectAdded}) => {
         technologies: [],
         githubUrl: "",
         image: "",
+        publicId: ""
     });
     const [techInput, setTechInput] = useState("");
     const [loading, setLoading] = useState(false);
@@ -55,8 +56,10 @@ const AddProjectForm = ({onProjectAdded}) => {
     };
 
     // Handle image upload success
-    const handleImageUpload = (url) => {
-        setFormData({...formData, image: url});
+    const handleImageUpload = (url, publicId) => {
+        console.log("url:", url);
+        console.log("publicId:", publicId);
+        setFormData({...formData, image: url, publicId: publicId});
     };
 
     // Handle form submission
@@ -79,6 +82,7 @@ const AddProjectForm = ({onProjectAdded}) => {
         try {
             // Wait for API response
             const response = await ProjectService.addProject(formData);
+            console.log("response", response);
 
             // Set response in snackbar
             setSnackbar({
@@ -87,6 +91,7 @@ const AddProjectForm = ({onProjectAdded}) => {
                 severity: response.success ? "success" : "error",
             });
 
+            console.log("hehehehehe")
             // If successful, reset form and refresh project list
             if (response.success) {
                 setFormData({
@@ -96,7 +101,7 @@ const AddProjectForm = ({onProjectAdded}) => {
                     githubUrl: "",
                     image: "",
                 });
-                onProjectAdded(); // Call to refresh projects
+                // onProjectAdded(); // Call to refresh projects
             }
         } catch (err) {
             // Unexpected error (e.g., network issue)
@@ -201,11 +206,11 @@ const AddProjectForm = ({onProjectAdded}) => {
                         {loading ? <CircularProgress size={24}/> : "Add Project"}
                     </Button>
                 </form>
-                <Snackbar
+            <Snackbar
                     open={snackbar.open}
                     autoHideDuration={6000}
                     onClose={handleCloseSnackbar}
-                    anchorOrigin={{vertical: "bottom", horizontal: "center"}}
+                    anchorOrigin={{vertical: "top", horizontal: "center"}}
                 >
                     <Alert
                         onClose={handleCloseSnackbar}

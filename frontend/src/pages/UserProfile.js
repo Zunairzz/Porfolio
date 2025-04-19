@@ -3,7 +3,7 @@ import '../css/UserProfile.css';
 import zunair from "../image/ZunairResumeImage.jpg";
 import zaman from "../image/ZamanResumeImage.jpg";
 import umair from "../image/UmairResumeImage.jpg";
-import Base from "../component/Base";
+import Base from "../components/Base";
 import {useParams} from 'react-router-dom';
 
 const UserProfile = () => {

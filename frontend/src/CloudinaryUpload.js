@@ -29,7 +29,8 @@ const CloudinaryUpload = ({onUpload}) => {
                 "https://api.cloudinary.com/v1_1/dyo1h8cbk/image/upload", // Replace with your Cloudinary cloud name
                 formData
             );
-            onUpload(response.data.secure_url); // Pass the URL to the parent
+            console.log("Cloudinary upload successfully: ", response);
+            onUpload(response.data.secure_url, response.data.public_id); // Pass the URL to the parent
         } catch (err) {
             setError("Image upload failed. Please try again.");
             console.error("Cloudinary error:", err);

@@ -1,5 +1,5 @@
 // About.js
-import Base from "../component/Base";
+import Base from "../components/Base";
 import "../css/about.css";
 import {Card, CardContent, CardMedia, Typography} from "@mui/material";
 import {motion} from "framer-motion";

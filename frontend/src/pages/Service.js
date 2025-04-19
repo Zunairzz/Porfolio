@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Base from "../component/Base";
+import Base from "../components/Base";
 import {Card, CardBody, CardText, CardTitle, Col, Container, Row} from 'reactstrap';
 import {motion, useAnimation, useInView} from "framer-motion";
 import "../css/MyService.css";

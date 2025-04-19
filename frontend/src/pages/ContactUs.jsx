@@ -1,4 +1,4 @@
-import Base from "../component/Base";
+import Base from "../components/Base";
 import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import React, {useRef, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
