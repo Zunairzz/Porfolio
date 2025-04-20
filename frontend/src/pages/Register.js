@@ -4,7 +4,7 @@ import {EyeIcon, EyeSlashIcon} from '@heroicons/react/24/outline';
 
 // const API_URL = "http://localhost:3002/api/users"; // Base URL for API
 
-const API_URL = "https://porfolio-62t2judtq-zunairzzs-projects.vercel.app/api/users"; // Base URL for Prod API
+const API_URL = "https://simplenodeapp-production.up.railway.app/api/users"; // Base URL for Prod API
 
 const Register = () => {
     const [name, setName] = useState('');
