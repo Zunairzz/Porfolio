@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const API_URL = "http://localhost:3002/api/users"; // Base URL for API
 
-const API_URL = "https://porfolio-62t2judtq-zunairzzs-projects.vercel.app/api/users"; // Base URL for Prod API
+const API_URL = "https://simplenodeapp-production.up.railway.app/api/users"; // Base URL for Prod API
 
 // UserService handles login and logout functionality
 export const UserService = {

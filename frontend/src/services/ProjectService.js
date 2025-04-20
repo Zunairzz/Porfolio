@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const API_URL = "http://localhost:3002/api/project"; // Base URL for API
 
-const API_URL = "https://porfolio-62t2judtq-zunairzzs-projects.vercel.app/api/project"; // Base URL for Prod API
+const API_URL = "https://simplenodeapp-production.up.railway.app/api/project"; // Base URL for Prod API
 
 const ProjectService = {
     addProject: async (projectData) => {
