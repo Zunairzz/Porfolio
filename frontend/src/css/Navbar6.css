@@ -27,3 +27,13 @@
 .custom-active-bg {
     background-color: #FD853A !important;
 }
+
+/* Add in your Navbar6.css if needed */
+.menu-enter-active, .menu-leave-active {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.menu-enter, .menu-leave-to {
+    opacity: 0;
+    transform: scale(0.95);
+}
+

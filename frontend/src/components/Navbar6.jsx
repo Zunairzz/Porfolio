@@ -16,6 +16,7 @@ const navigation = [
     {name: 'Service', href: '/service'},
     {name: 'Resume', href: '/resume'},
     {name: 'Project', href: '/projects'},
+    {name: 'Find Solution', href: '/problems'},
     {name: 'Contact', href: '/contact'},
 ]
 
@@ -67,7 +68,7 @@ export default function Navbar6() {
                             <Bars3Icon aria-hidden="true" className="h-6 w-6"/>
                         </button>
                     </div>
-                    <div className="hidden lg:flex lg:gap-x-12 custom-navbar">
+                    <div className="hidden lg:flex lg:gap-x-6 custom-navbar">
                         {navigation.map((item) => (
                             <NavItem key={item.name} className="nav-link">
                                 <NavLink
@@ -81,6 +82,7 @@ export default function Navbar6() {
                                 </NavLink>
                             </NavItem>
                         ))}
+
                         {isAuthenticated && (
                             <NavItem className="nav-link">
                                 <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
@@ -101,7 +103,7 @@ export default function Navbar6() {
                                             </NavLink>
                                         </DropdownItem>
                                         <DropdownItem>
-                                            <NavLink tag={ReactLink} to="/add-user" className="text-gray-900">
+                                            <NavLink tag={ReactLink} to="/register" className="text-gray-900">
                                                 Add User
                                             </NavLink>
                                         </DropdownItem>
@@ -162,9 +164,16 @@ export default function Navbar6() {
                                             </NavItem>
                                             <NavItem
                                                 className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                                                <NavLink tag={ReactLink} to="/add-user"
+                                                <NavLink tag={ReactLink} to="/register"
                                                          className="text-sm font-semibold leading-6 text-gray-900">
                                                     Add User
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem
+                                                className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                                <NavLink onClick={handleLogout}
+                                                         className="text-sm font-semibold leading-6 text-gray-900">
+                                                    Logout
                                                 </NavLink>
                                             </NavItem>
                                         </>

@@ -19,6 +19,7 @@ import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
 import AddProjectForm from './pages/AddProjectForm';
 import PrivateRoutes from './components/ProtectedRoute';
+import SolutionsPage from "./pages/SolutionsPage";
 
 function App() {
     return (
@@ -49,6 +50,7 @@ function App() {
                             <Route path="/update" element={<ResumeUpdateForm/>}/>
                             <Route path="/login" element={<LoginPage/>}/>
                             <Route path="/register" element={<Register/>}/>
+                            <Route path="/problems" element={<SolutionsPage/>}/>
                             <Route path="/user" element={<PrivateRoutes/>}>
                                 <Route path="add-project" element={<AddProjectForm/>}/>
                             </Route>
