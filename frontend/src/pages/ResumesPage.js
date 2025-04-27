@@ -11,8 +11,6 @@ import Dialog from '@mui/material/Dialog';
 import EditItemForm from '../pages/EditResumeForm'; // Replace with your edit form component
 import EditIcon from '@mui/icons-material/Edit';
 
-console.log('EditItemForm:', EditItemForm);
-
 const ResumesPage = () => {
     const [items, setItems] = useState([]); // Replace 'items' with your data type
     const [loading, setLoading] = useState(false);

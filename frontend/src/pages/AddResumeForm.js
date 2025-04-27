@@ -1,20 +1,26 @@
-import React, {useState} from "react";
-import {Alert, Box, Button, CircularProgress, Snackbar, TextField, Typography} from "@mui/material";
-import CloudinaryUpload from "../components/CloudinaryUpload"; // For resume file upload
-import ResumeService from "../services/ResumeService"; // Hypothetical service for API calls
+import React, { useState } from "react";
+import {
+    Alert,
+    Box,
+    Button,
+    CircularProgress,
+    Snackbar,
+    TextField,
+    Typography,
+} from "@mui/material";
+import CloudinaryUpload from "../components/CloudinaryUpload"; // Updated component
+import ResumeService from "../services/ResumeService"; // Hypothetical service
 import Base from "../components/Base";
 
-const AddResumeForm = ({onResumeAdded}) => {
+const AddResumeForm = ({ onResumeAdded }) => {
     const [formData, setFormData] = useState({
         name: "",
         title: "",
         phoneNo: "",
         email: "",
         experience: "",
-        resume: {
-            url: "",
-            publicId: "",
-        },
+        resume: { url: "", publicId: "" }, // For PDF
+        image: { url: "", publicId: "" }, // For image
     });
     const [loading, setLoading] = useState(false);
     const [snackbar, setSnackbar] = useState({
@@ -25,23 +31,25 @@ const AddResumeForm = ({onResumeAdded}) => {
 
     // Handle input changes
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData({...formData, [name]: value});
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
-    // Handle resume file upload success
+    // Handle resume (PDF) upload success
     const handleResumeUpload = (url, publicId) => {
-        setFormData({
-            ...formData,
-            resume: {url, publicId},
-        });
+        setFormData({ ...formData, resume: { url, publicId } });
+    };
+
+    // Handle image upload success
+    const handleImageUpload = (url, publicId) => {
+        setFormData({ ...formData, image: { url, publicId } });
     };
 
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setSnackbar({open: false, message: "", severity: "info"});
+        setSnackbar({ open: false, message: "", severity: "info" });
 
         // Basic validation
         if (
@@ -55,7 +63,18 @@ const AddResumeForm = ({onResumeAdded}) => {
         ) {
             setSnackbar({
                 open: true,
-                message: "Please fill in all required fields.",
+                message: "Please complete all required fields and upload a resume (PDF).",
+                severity: "error",
+            });
+            setLoading(false);
+            return;
+        }
+
+        // Image is optional, but if provided, ensure it has a publicId
+        if (formData.image.url && !formData.image.publicId) {
+            setSnackbar({
+                open: true,
+                message: "Invalid image upload. Please try again.",
                 severity: "error",
             });
             setLoading(false);
@@ -63,18 +82,13 @@ const AddResumeForm = ({onResumeAdded}) => {
         }
 
         try {
-            // Wait for API response
             const response = await ResumeService.createResume(formData);
-            console.log("response", response);
-
-            // Set response in snackbar
             setSnackbar({
                 open: true,
                 message: response.message,
                 severity: response.success ? "success" : "error",
             });
 
-            // If successful, reset form and refresh resume list
             if (response.success) {
                 setFormData({
                     name: "",
@@ -82,12 +96,12 @@ const AddResumeForm = ({onResumeAdded}) => {
                     phoneNo: "",
                     email: "",
                     experience: "",
-                    resume: {url: "", publicId: ""},
+                    resume: { url: "", publicId: "" },
+                    image: { url: "", publicId: "" },
                 });
-                if (onResumeAdded) onResumeAdded(); // Call to refresh resumes
+                if (onResumeAdded) onResumeAdded();
             }
         } catch (err) {
-            // Unexpected error (e.g., network issue)
             setSnackbar({
                 open: true,
                 message: "An unexpected error occurred. Please try again.",
@@ -100,93 +114,167 @@ const AddResumeForm = ({onResumeAdded}) => {
 
     // Close snackbar
     const handleCloseSnackbar = () => {
-        setSnackbar({...snackbar, open: false});
+        setSnackbar({ ...snackbar, open: false });
     };
 
     return (
         <Base>
-            <Box style={{marginTop: "150px"}} sx={{maxWidth: 600, mx: "auto", p: 3}}>
-                <Typography variant="h4" gutterBottom>
+            <Box
+                sx={{
+                    maxWidth: 800,
+                    mx: "auto",
+                    p: 2,
+                    mt: 20,
+                    bgcolor: "background.paper",
+                    borderRadius: 2,
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                }}
+            >
+                <Typography
+                    variant="h5"
+                    sx={{ mb: 2, fontWeight: 600, color: "primary.main" }}
+                >
                     Add New Resume
                 </Typography>
                 <form onSubmit={handleSubmit}>
-                    <TextField
-                        fullWidth
-                        label="Name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        margin="normal"
-                        required
-                        disabled={loading}
-                    />
-                    <TextField
-                        fullWidth
-                        label="Title"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        margin="normal"
-                        required
-                        disabled={loading}
-                    />
-                    <TextField
-                        fullWidth
-                        label="Phone Number"
-                        name="phoneNo"
-                        value={formData.phoneNo}
-                        onChange={handleChange}
-                        margin="normal"
-                        required
-                        disabled={loading}
-                    />
-                    <TextField
-                        fullWidth
-                        label="Email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        margin="normal"
-                        type="email"
-                        required
-                        disabled={loading}
-                    />
-                    <TextField
-                        fullWidth
-                        label="Experience"
-                        name="experience"
-                        value={formData.experience}
-                        onChange={handleChange}
-                        margin="normal"
-                        rows={4}
-                        required
-                        disabled={loading}
-                    />
-                    <CloudinaryUpload
-                        onUpload={handleResumeUpload}
-                        disabled={loading}
-                        accept="application/pdf"
-                    />
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+                            gap: 1.5,
+                        }}
+                    >
+                        <TextField
+                            fullWidth
+                            label="Name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            size="small"
+                            required
+                            disabled={loading}
+                            variant="outlined"
+                            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
+                        />
+                        <TextField
+                            fullWidth
+                            label="Title"
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                            size="small"
+                            required
+                            disabled={loading}
+                            variant="outlined"
+                            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
+                        />
+                        <TextField
+                            fullWidth
+                            label="Phone Number"
+                            name="phoneNo"
+                            value={formData.phoneNo}
+                            onChange={handleChange}
+                            size="small"
+                            required
+                            disabled={loading}
+                            variant="outlined"
+                            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
+                        />
+                        <TextField
+                            fullWidth
+                            label="Email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            size="small"
+                            type="email"
+                            required
+                            disabled={loading}
+                            variant="outlined"
+                            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
+                        />
+                        <TextField
+                            fullWidth
+                            label="Experience"
+                            name="experience"
+                            value={formData.experience}
+                            onChange={handleChange}
+                            size="small"
+                            multiline
+                            rows={2}
+                            required
+                            disabled={loading}
+                            variant="outlined"
+                            sx={{
+                                gridColumn: { xs: "1", md: "1 / -1" },
+                                "& .MuiOutlinedInput-root": { borderRadius: 1 },
+                            }}
+                        />
+                    </Box>
+                    <Box
+                        sx={{
+                            mt: 1.5,
+                            display: "grid",
+                            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+                            gap: 1.5,
+                        }}
+                    >
+                        <Box>
+                            <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 500 }}>
+                                Resume (PDF, Required)
+                            </Typography>
+                            <CloudinaryUpload
+                                onUpload={handleResumeUpload}
+                                disabled={loading}
+                                accept="application/pdf"
+                                label="Upload Resume (PDF)"
+                            />
+                        </Box>
+                        <Box>
+                            <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 500 }}>
+                                Image (Optional)
+                            </Typography>
+                            <CloudinaryUpload
+                                onUpload={handleImageUpload}
+                                disabled={loading}
+                                accept="image/jpeg,image/png"
+                                label="Upload Image (JPEG/PNG)"
+                            />
+                        </Box>
+                    </Box>
                     <Button
                         type="submit"
                         variant="contained"
                         color="primary"
                         disabled={loading}
-                        sx={{mt: 2}}
+                        sx={{
+                            mt: 2,
+                            width: "100%",
+                            py: 1,
+                            borderRadius: 1,
+                            textTransform: "none",
+                            fontWeight: 500,
+                            boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                            "&:hover": { boxShadow: "0 4px 12px rgba(0,0,0,0.2)" },
+                        }}
                     >
-                        {loading ? <CircularProgress size={24}/> : "Add Resume"}
+                        {loading ? <CircularProgress size={24} /> : "Add Resume"}
                     </Button>
                 </form>
                 <Snackbar
                     open={snackbar.open}
-                    autoHideDuration={6000}
+                    autoHideDuration={4000}
                     onClose={handleCloseSnackbar}
-                    anchorOrigin={{vertical: "top", horizontal: "center"}}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 >
                     <Alert
                         onClose={handleCloseSnackbar}
                         severity={snackbar.severity}
-                        sx={{width: "100%"}}
+                        sx={{
+                            borderRadius: 1,
+                            boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                            fontWeight: 500,
+                        }}
                     >
                         {snackbar.message}
                     </Alert>
