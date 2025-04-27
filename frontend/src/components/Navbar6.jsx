@@ -88,27 +88,32 @@ export default function Navbar6() {
                                 <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
                                     <DropdownToggle
                                         tag="div"
-                                        className={`text-sm font-semibold leading-6 text-white rounded-md px-1 py-3 transition-colors duration-300 custom-item ${
-                                            location.pathname.startsWith('/user/add-project') || location.pathname.startsWith('/add-user')
-                                                ? 'custom-active-bg'
-                                                : 'hover:bg-gray-50 hover:bg-opacity-20'
+                                        className={`flex items-center text-sm font-semibold rounded-full px-4 py-2 transition-all duration-300 gradient-toggle ${
+                                            location.pathname.startsWith('/user/add-project') ||
+                                            location.pathname.startsWith('/add-user') ||
+                                            location.pathname.startsWith('/user/add-resume')
+                                                ? 'gradient-active'
+                                                : 'hover:opacity-90'
                                         } cursor-pointer`}
                                     >
-                                        <FaUser className="mx-11 my-1 mr-2"/>
+                                        <div className="avatar-circle">
+                                            <FaUser className="h-4 w-4 text-white" />
+                                        </div>
+                                        <span className="ml-2 text-white">My Account</span>
                                     </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem>
-                                            <NavLink tag={ReactLink} to="/user/add-project" className="text-gray-900">
-                                                Add Project
-                                            </NavLink>
+                                    <DropdownMenu className="glass-dropdown-menu">
+                                        <DropdownItem tag={ReactLink} to="/user/add-resume" className="glass-dropdown-item">
+                                            <span>Add Resume</span>
                                         </DropdownItem>
-                                        <DropdownItem>
-                                            <NavLink tag={ReactLink} to="/register" className="text-gray-900">
-                                                Add User
-                                            </NavLink>
+                                        <DropdownItem tag={ReactLink} to="/user/add-project" className="glass-dropdown-item">
+                                            <span>Add Project</span>
                                         </DropdownItem>
-                                        <DropdownItem onClick={handleLogout} className="text-gray-900 cursor-pointer">
-                                            Logout
+                                        <DropdownItem tag={ReactLink} to="/register" className="glass-dropdown-item">
+                                            <span>Add User</span>
+                                        </DropdownItem>
+                                        <DropdownItem divider className="glass-divider" />
+                                        <DropdownItem onClick={handleLogout} className="glass-dropdown-item logout-item">
+                                            <span>Logout</span>
                                         </DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>

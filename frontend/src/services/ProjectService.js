@@ -1,13 +1,10 @@
 import axios from "axios";
-
-// const API_URL = "http://localhost:3002/api/project"; // Base URL for API
-
-const API_URL = "https://simplenodeapp-production.up.railway.app/api/project"; // Base URL for Prod API
+import {API_URLS} from "../utils/UrlConstants";
 
 const ProjectService = {
     addProject: async (projectData) => {
         try {
-            const response = await axios.post(`${API_URL}/add-project`, projectData);
+            const response = await axios.post(API_URLS.ADD_PROJECT, projectData);
             console.log("response: ", response);
             return {
                 success: true,
@@ -27,7 +24,7 @@ const ProjectService = {
 
     getProjects: async () => {
         try {
-            const response = await axios.get(`${API_URL}/get-all-project`);
+            const response = await axios.get(API_URLS.GET_ALL_PROJECTS);
             return {
                 success: true,
                 data: response.data,
@@ -46,7 +43,7 @@ const ProjectService = {
 
     deleteProject: async (projectId) => {
         try {
-            const response = await axios.delete(`${API_URL}/${projectId}`);
+            const response = await axios.delete(API_URLS.DELETE_PROJECT(projectId));
             return {
                 success: true,
                 data: response.data,
@@ -66,7 +63,7 @@ const ProjectService = {
 
     updateProject: async (projectId, projectData) => {
         try {
-            const response = await axios.put(`${API_URL}/update-project/${projectId}`, projectData);
+            const response = await axios.put(API_URLS.UPDATE_PROJECT(projectId), projectData);
             return {
                 success: true,
                 data: response.data,

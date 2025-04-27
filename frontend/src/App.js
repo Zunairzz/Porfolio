@@ -20,6 +20,8 @@ import Register from './pages/Register';
 import AddProjectForm from './pages/AddProjectForm';
 import PrivateRoutes from './components/ProtectedRoute';
 import SolutionsPage from "./pages/SolutionsPage";
+import ResumesPage from "./pages/ResumesPage";
+import AddResumeForm from "./pages/AddResumeForm";
 
 function App() {
     return (
@@ -51,8 +53,10 @@ function App() {
                             <Route path="/login" element={<LoginPage/>}/>
                             <Route path="/register" element={<Register/>}/>
                             <Route path="/problems" element={<SolutionsPage/>}/>
+                            <Route path="/resumepage" element={<ResumesPage/>}/>
                             <Route path="/user" element={<PrivateRoutes/>}>
                                 <Route path="add-project" element={<AddProjectForm/>}/>
+                                <Route path="add-resume" element={<AddResumeForm/>}/>
                             </Route>
                             <Route path="*" element={<NotFound/>}/>
                         </Routes>

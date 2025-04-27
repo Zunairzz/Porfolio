@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {EyeIcon, EyeSlashIcon} from '@heroicons/react/24/outline';
-
-// const API_URL = "http://localhost:3002/api/users"; // Base URL for API
-
-const API_URL = "https://simplenodeapp-production.up.railway.app/api/users"; // Base URL for Prod API
+import {API_URLS} from "../utils/UrlConstants";
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -16,7 +13,7 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${API_URL}/register`, {
+            await axios.post(API_URLS.REGISTER_USER, {
                 name,
                 email,
                 password

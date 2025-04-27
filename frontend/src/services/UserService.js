@@ -1,8 +1,5 @@
 import axios from "axios";
-
-// const API_URL = "http://localhost:3002/api/users"; // Base URL for API
-
-const API_URL = "https://simplenodeapp-production.up.railway.app/api/users"; // Base URL for Prod API
+import {API_URLS} from "../utils/UrlConstants";
 
 // UserService handles login and logout functionality
 export const UserService = {
@@ -10,7 +7,7 @@ export const UserService = {
     // Login function: sends email and password, stores token on success
     async loginUser(email, password) {
         try {
-            const response = await axios.post(`${API_URL}/login`, {
+            const response = await axios.post(API_URLS.LOGIN, {
                 email,
                 password
             });

@@ -37,3 +37,87 @@
     transform: scale(0.95);
 }
 
+/* Gradient Toggle */
+/* Gradient Toggle */
+.gradient-toggle {
+    background: linear-gradient(135deg, #f97316 0%, #7c2d12 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.gradient-toggle:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.gradient-active {
+    background: linear-gradient(135deg, #ea580c 0%, #6b21a8 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Avatar Circle */
+.avatar-circle {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Glassmorphism Dropdown Menu */
+.glass-dropdown-menu {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    margin-top: 12px;
+    padding: 12px 0;
+    min-width: 200px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Dropdown Item */
+.glass-dropdown-item {
+    color: #0b0b0b !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s ease, padding-left 0.2s ease;
+}
+
+.glass-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    padding-left: 24px;
+}
+
+/* Logout Item */
+.logout-item {
+    color: #ff6b6b !important; /* Soft red for logout */
+}
+
+.logout-item:hover {
+    background: rgba(255, 66, 66, 0.2);
+    color: #ff4c4c !important;
+}
+
+/* Divider */
+.glass-divider {
+    background: rgba(255, 255, 255, 0.2);
+    height: 1px;
+    margin: 8px 0;
+}
+
+/* Ensure navbar items align */
+.custom-navbar {
+    align-items: center;
+}
+
