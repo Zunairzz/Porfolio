@@ -1,8 +1,8 @@
 // Base API URL (use environment variables for flexibility)
 
-const BASE_API_URL_PROD = "https://simplenodeapp-production.up.railway.app/api"; // Base URL for Prod API
+const BASE_API_URL = "https://simplenodeapp-production.up.railway.app/api"; // Base URL for Prod API
 
-const BASE_API_URL = "http://localhost:3022/api";
+// const BASE_API_URL = "http://localhost:3022/api";
 
 // Specific API endpoints
 const API_URLS = {
