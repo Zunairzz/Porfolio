@@ -31,6 +31,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
     const [fileType, setFileType] = useState("");
     const [error, setError] = useState("");
     const [previousPublicId, setPreviousPublicId] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null); // Store selected file
     const fileInputRef = useRef(null);
 
     const uploadToCloudinary = async (file) => {
@@ -44,7 +45,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
 
         try {
             const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+                `https://api.cloudinary.com/v1_1/${cloudName}/upload`, // Changed to /upload to support both image and PDF
                 formData
             );
 
@@ -62,6 +63,11 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
             throw new Error("Failed to upload to Cloudinary: " + error.message);
         }
     };
+
+    // const uploadToCloudinary = async (file) => {
+    //     console.log('HI Zunair')
+    //     return { url: "", publicId: "" };
+    // };
 
     const deleteFromCloudinary = async (publicId) => {
         try {
@@ -84,8 +90,6 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                     signature: signature,
                 }
             );
-
-            console.log("After delete", response);
 
             if (response.data.result === "ok") {
                 console.log(`Successfully deleted file with publicId: ${publicId}`);
@@ -118,58 +122,23 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
         });
     };
 
-    const handleFileChange = async (event) => {
+    const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (!file || !accept.split(",").includes(file.type)) {
             setError(`Please upload a valid ${label.includes("PDF") ? "PDF" : "image (JPEG/PNG)"} file.`);
             return;
         }
 
-        if (file.type.includes("image")) {
-            try {
-                await validateImageDimensions(file);
-            } catch (err) {
-                setError(err);
-                return;
-            }
-        }
-
         setError("");
-        setUploading(true);
+        setSelectedFile(file);
+        setFileType(file.type);
 
-        try {
-            if (previousPublicId) {
-                let deleteSuccess = false;
-                for (let attempt = 1; attempt <= 3; attempt++) {
-                    try {
-                        await deleteFromCloudinary(previousPublicId);
-                        deleteSuccess = true;
-                        break;
-                    } catch (deleteError) {
-                        console.warn(`Deletion attempt ${attempt} failed:`, deleteError);
-                        if (attempt === 3) {
-                            setError("Failed to delete previous file. Proceeding with upload.");
-                        }
-                    }
-                }
-                if (!deleteSuccess) {
-                    console.warn("Proceeding with upload despite deletion failure.");
-                }
-            }
-
-            const {url, publicId} = await uploadToCloudinary(file);
-            setPreviewUrl(url);
-            setFileType(file.type);
-            setPreviousPublicId(publicId);
-            onUpload(url, publicId);
-        } catch (error) {
-            setError("Failed to upload file. Please try again.");
-        } finally {
-            setUploading(false);
-        }
+        // Generate local preview
+        const url = URL.createObjectURL(file);
+        setPreviewUrl(url);
     };
 
-    const handleDrop = async (event) => {
+    const handleDrop = (event) => {
         event.preventDefault();
         if (disabled || uploading) return;
 
@@ -179,9 +148,34 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
             return;
         }
 
-        if (file.type.includes("image")) {
+        setError("");
+        setSelectedFile(file);
+        setFileType(file.type);
+
+        // Generate local preview
+        const url = URL.createObjectURL(file);
+        setPreviewUrl(url);
+    };
+
+    const handleDragOver = (event) => {
+        event.preventDefault();
+    };
+
+    const handleButtonClick = () => {
+        if (!disabled && !uploading) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleUploadClick = async () => {
+        if (!selectedFile) {
+            setError("Please select a file to upload.");
+            return;
+        }
+
+        if (selectedFile.type.includes("image")) {
             try {
-                await validateImageDimensions(file);
+                await validateImageDimensions(selectedFile);
             } catch (err) {
                 setError(err);
                 return;
@@ -211,25 +205,13 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                 }
             }
 
-            const {url, publicId} = await uploadToCloudinary(file);
-            setPreviewUrl(url);
-            setFileType(file.type);
+            const {url, publicId} = await uploadToCloudinary(selectedFile);
             setPreviousPublicId(publicId);
             onUpload(url, publicId);
         } catch (error) {
             setError("Failed to upload file. Please try again.");
         } finally {
             setUploading(false);
-        }
-    };
-
-    const handleDragOver = (event) => {
-        event.preventDefault();
-    };
-
-    const handleButtonClick = () => {
-        if (!disabled && !uploading) {
-            fileInputRef.current.click();
         }
     };
 
@@ -286,7 +268,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                 <Button
                     variant="contained"
                     size="medium"
-                    startIcon={uploading ? <LoadingSpinner/> : <CloudUploadIcon/>}
+                    startIcon={<CloudUploadIcon/>}
                     onClick={handleButtonClick}
                     disabled={disabled || uploading}
                     sx={{
@@ -301,8 +283,31 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                     }}
                     aria-label="Choose file to upload"
                 >
-                    {uploading ? "Uploading..." : "Select File"}
+                    Select File
                 </Button>
+                {selectedFile && (
+                    <Button
+                        variant="contained"
+                        size="medium"
+                        startIcon={uploading ? <LoadingSpinner/> : <CloudUploadIcon/>}
+                        onClick={handleUploadClick}
+                        disabled={disabled || uploading}
+                        sx={{
+                            mt: 1,
+                            borderRadius: 10,
+                            textTransform: "none",
+                            px: 3,
+                            py: 1,
+                            bgcolor: "secondary.main",
+                            "&:hover": {bgcolor: "secondary.dark", transform: "translateY(-2px)"},
+                            transition: "all 0.2s ease",
+                            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                        }}
+                        aria-label="Upload file to Cloudinary"
+                    >
+                        {uploading ? "Uploading..." : "Upload File"}
+                    </Button>
+                )}
                 {error && (
                     <Fade in={!!error}>
                         <Typography variant="caption" color="error.main" sx={{mt: 2, display: "block"}}>
@@ -329,16 +334,31 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                             Preview
                         </Typography>
                         {fileType === "application/pdf" ? (
-                            <Box sx={{display: "flex", alignItems: "center", gap: 1}}>
-                                <PictureAsPdfIcon fontSize="small" color="error"/>
-                                <a
-                                    href={previewUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{textDecoration: "none", color: "primary.main", fontSize: "0.875rem"}}
-                                >
-                                    View PDF
-                                </a>
+                            <Box sx={{mt: 2, p: 2, border: "1px solid", borderColor: "grey.300", borderRadius: 2}}>
+                                <Typography variant="subtitle1" gutterBottom>
+                                    Uploaded Resume Preview:
+                                </Typography>
+                                <Box sx={{display: "flex", alignItems: "center", gap: 1}}>
+                                    <PictureAsPdfIcon color="error"/>
+                                    <a
+                                        href={previewUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{textDecoration: "none", color: "primary.main"}}
+                                    >
+                                        View PDF
+                                    </a>
+                                </Box>
+                                {/* Optional: Embedded PDF Preview (requires additional setup) */}
+                                <Box sx={{mt: 2, height: 400, border: "1px solid", borderColor: "grey.300"}}>
+                                    <iframe
+                                        src={previewUrl}
+                                        width="100%"
+                                        height="100%"
+                                        title="PDF Preview"
+                                        style={{border: "none"}}
+                                    />
+                                </Box>
                             </Box>
                         ) : (
                             <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", gap: 1}}>
@@ -353,14 +373,9 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                                         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                                     }}
                                 />
-                                <a
-                                    href={previewUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{textDecoration: "none", color: "primary.main", fontSize: "0.875rem"}}
-                                >
-                                    View Full Image
-                                </a>
+                                <Typography sx={{fontSize: "0.875rem", color: "primary.main"}}>
+                                    {selectedFile.name}
+                                </Typography>
                             </Box>
                         )}
                     </Box>
