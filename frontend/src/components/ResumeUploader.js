@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import Base from "./Base";
 
-const CLOUD_NAME = 'dyo1h8cbk'; // Replace with your Cloudinary cloud name
-const UPLOAD_PRESET = 'resume_uploads'; // Replace with your unsigned upload preset
+const CLOUD_NAME = 'dyo1h8cbk'; // Replace it with your Cloudinary cloud name
+const UPLOAD_PRESET = 'resume_uploads'; // Replace it with your unsigned upload preset
 
 const ResumeUploader = () => {
     const [file, setFile] = useState(null);
@@ -32,7 +32,7 @@ const ResumeUploader = () => {
                 formData
             );
             console.log(response);
-            const { secure_url, public_id } = response.data;
+            const {secure_url, public_id} = response.data;
             setFileUrl(secure_url);
             setPublicId(public_id);
         } catch (error) {
@@ -58,9 +58,9 @@ const ResumeUploader = () => {
 
     return (
         <Base>
-            <div className="p-4 border rounded max-w-md mx-auto" style={{ marginTop: '140px' }}>
+            <div className="p-4 border rounded max-w-md mx-auto" style={{marginTop: '140px'}}>
                 <h2 className="text-lg font-semibold mb-2">Upload Resume (PDF)</h2>
-                <input type="file" accept="application/pdf" onChange={handleFileChange} className="mb-2" />
+                <input type="file" accept="application/pdf" onChange={handleFileChange} className="mb-2"/>
                 <button
                     onClick={uploadToCloudinary}
                     disabled={uploading}
