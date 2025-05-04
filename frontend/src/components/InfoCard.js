@@ -36,7 +36,7 @@ export const MyServiceCard = () => {
     return (
         <motion.div
             className="mx-auto py-12 px-4"
-            style={{backgroundColor: '#F4F6FF', padding: '100px'}}
+            style={{backgroundColor: '#e9ecef', padding: '100px'}}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}

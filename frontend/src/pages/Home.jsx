@@ -7,19 +7,35 @@ import {TestimonialHome} from "../components/TestimonialHome";
 import PortfolioItemHomePage from "../components/portfolioItemsComponent/PortfolioItemHomePage";
 import {ProfileSlider} from "../components/ProfileSlider";
 import {MyServiceCard} from "../components/InfoCard";
+import BrandSlider from "../components/BrandSlider";
+import TechStackSection from "../components/TechStackSection";
 
 export function Home() {
     return (
         <Base>
-            {/*<Profile/>*/}
+            {/* Hero / Introduction */}
             <ProfileSlider/>
-            {/*<MyServiceHomePage/>*/}
+
+            {/* Services */}
             <MyServiceCard/>
+
+            {/* Why Hire Me */}
             <WhyHireMyHomePage/>
+
+            {/* Work Experience */}
             <WorkExperience/>
-            {/*<ParallaxSection/>*/}
+
+            {/* Portfolio */}
             <PortfolioItemHomePage/>
+
+            {/* Testimonials */}
             <TestimonialHome/>
+
+            {/* Tech Stack */}
+            <TechStackSection/>
+
+            {/* Brands */}
+            <BrandSlider/>
         </Base>
-    )
+    );
 }

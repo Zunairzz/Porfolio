@@ -222,8 +222,8 @@ const Service = () => {
         <Base>
             {/* Services Section */}
             <Container className="text-center" style={{backgroundColor: '#ffffff', marginTop: '10rem'}}>
-                <h1 className="service-heading">
-                    My <span style={{color: '#ff6600'}}>SERVICES</span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-black mb-12 bg-clip-text text-transparent">
+                    My Service
                 </h1>
                 <Row>
                     {services.map((service, index) => (
