@@ -108,6 +108,9 @@ export default function Navbar6() {
                                         <DropdownItem tag={ReactLink} to="/user/resume-table" className="glass-dropdown-item">
                                             <span>Show all resumes</span>
                                         </DropdownItem>
+                                        <DropdownItem tag={ReactLink} to="/user/resume-uploader" className="glass-dropdown-item">
+                                            <span>Upload resume</span>
+                                        </DropdownItem>
                                         <DropdownItem tag={ReactLink} to="/user/add-project" className="glass-dropdown-item">
                                             <span>Add Project</span>
                                         </DropdownItem>
