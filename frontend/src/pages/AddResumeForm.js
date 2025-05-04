@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
     Alert,
     Box,
@@ -8,19 +8,19 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import CloudinaryUpload from "../components/CloudinaryUpload"; // Updated component
-import ResumeService from "../services/ResumeService"; // Hypothetical service
+import CloudinaryUpload from "../components/CloudinaryUpload";
 import Base from "../components/Base";
+import ResumeService from "../services/ResumeService";
 
-const AddResumeForm = ({onResumeAdded}) => {
+const AddResumeForm = ({ onResumeAdded }) => {
     const [formData, setFormData] = useState({
         name: "",
         title: "",
         phoneNo: "",
         email: "",
         experience: "",
-        resume: {url: "", publicId: ""}, // For PDF
-        image: {url: "", publicId: ""}, // For image
+        document: null, // Initialize as null to indicate optional
+        image: null, // Initialize as null to indicate optional
     });
     const [loading, setLoading] = useState(false);
     const [snackbar, setSnackbar] = useState({
@@ -31,78 +31,68 @@ const AddResumeForm = ({onResumeAdded}) => {
 
     // Handle input changes
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData({...formData, [name]: value});
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
     // Handle resume (PDF) upload success
     const handleResumeUpload = (url, publicId) => {
-        setFormData({...formData, resume: {url, publicId}});
+        console.log("url:", url);
+        console.log("publicId:", publicId);
+        setFormData({ ...formData, document: { url, publicId } });
     };
 
     // Handle image upload success
     const handleImageUpload = (url, publicId) => {
-        setFormData({...formData, image: {url, publicId}});
+        console.log("url:", url);
+        console.log("publicId:", publicId);
+        setFormData({ ...formData, image: { url, publicId } });
     };
 
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setSnackbar({open: false, message: "", severity: "info"});
+        setSnackbar({ open: false, message: "", severity: "info" });
 
-        // Basic validation
-        // if (
-        //     !formData.name ||
-        //     !formData.title ||
-        //     !formData.phoneNo ||
-        //     !formData.email ||
-        //     !formData.experience ||
-        //     !formData.resume.url ||
-        //     !formData.resume.publicId
-        // ) {
-        //     setSnackbar({
-        //         open: true,
-        //         message: "Please complete all required fields and upload a resume (PDF).",
-        //         severity: "error",
-        //     });
-        //     setLoading(false);
-        //     return;
-        // }
-
-        // Image is optional, but if provided, ensure it has a publicId
-        // if (formData.image.url && !formData.image.publicId) {
-        //     setSnackbar({
-        //         open: true,
-        //         message: "Invalid image upload. Please try again.",
-        //         severity: "error",
-        //     });
-        //     setLoading(false);
-        //     return;
-        // }
+        // Basic validation (only text fields are required)
+        if (
+            !formData.name ||
+            !formData.title ||
+            !formData.phoneNo ||
+            !formData.email ||
+            !formData.experience
+        ) {
+            setSnackbar({
+                open: true,
+                message: "Please complete all required text fields.",
+                severity: "error",
+            });
+            setLoading(false);
+            return;
+        }
 
         try {
-            console.log("Hi Zuni");
-            console.log(formData);
-            // const response = await ResumeService.createResume(formData);
-            // setSnackbar({
-            //     open: true,
-            //     message: response.message,
-            //     severity: response.success ? "success" : "error",
-            // });
-            //
-            // if (response.success) {
-            //     setFormData({
-            //         name: "",
-            //         title: "",
-            //         phoneNo: "",
-            //         email: "",
-            //         experience: "",
-            //         resume: { url: "", publicId: "" },
-            //         image: { url: "", publicId: "" },
-            //     });
-            //     if (onResumeAdded) onResumeAdded();
-            // }
+            console.log("Submitting formData:", formData);
+            const response = await ResumeService.createResume(formData);
+            setSnackbar({
+                open: true,
+                message: response.message,
+                severity: response.success ? "success" : "error",
+            });
+
+            if (response.success) {
+                setFormData({
+                    name: "",
+                    title: "",
+                    phoneNo: "",
+                    email: "",
+                    experience: "",
+                    document: null,
+                    image: null,
+                });
+                if (onResumeAdded) onResumeAdded();
+            }
         } catch (err) {
             setSnackbar({
                 open: true,
@@ -116,7 +106,7 @@ const AddResumeForm = ({onResumeAdded}) => {
 
     // Close snackbar
     const handleCloseSnackbar = () => {
-        setSnackbar({...snackbar, open: false});
+        setSnackbar({ ...snackbar, open: false });
     };
 
     return (
@@ -134,7 +124,7 @@ const AddResumeForm = ({onResumeAdded}) => {
             >
                 <Typography
                     variant="h5"
-                    sx={{mb: 2, fontWeight: 600, color: "primary.main"}}
+                    sx={{ mb: 2, fontWeight: 600, color: "primary.main" }}
                 >
                     Add New Resume
                 </Typography>
@@ -142,7 +132,7 @@ const AddResumeForm = ({onResumeAdded}) => {
                     <Box
                         sx={{
                             display: "grid",
-                            gridTemplateColumns: {xs: "1fr", md: "1fr 1fr"},
+                            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
                             gap: 1.5,
                         }}
                     >
@@ -156,7 +146,7 @@ const AddResumeForm = ({onResumeAdded}) => {
                             required
                             disabled={loading}
                             variant="outlined"
-                            sx={{"& .MuiOutlinedInput-root": {borderRadius: 1}}}
+                            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
                         />
                         <TextField
                             fullWidth
@@ -168,7 +158,7 @@ const AddResumeForm = ({onResumeAdded}) => {
                             required
                             disabled={loading}
                             variant="outlined"
-                            sx={{"& .MuiOutlinedInput-root": {borderRadius: 1}}}
+                            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
                         />
                         <TextField
                             fullWidth
@@ -180,7 +170,7 @@ const AddResumeForm = ({onResumeAdded}) => {
                             required
                             disabled={loading}
                             variant="outlined"
-                            sx={{"& .MuiOutlinedInput-root": {borderRadius: 1}}}
+                            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
                         />
                         <TextField
                             fullWidth
@@ -193,7 +183,7 @@ const AddResumeForm = ({onResumeAdded}) => {
                             required
                             disabled={loading}
                             variant="outlined"
-                            sx={{"& .MuiOutlinedInput-root": {borderRadius: 1}}}
+                            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
                         />
                         <TextField
                             fullWidth
@@ -208,8 +198,8 @@ const AddResumeForm = ({onResumeAdded}) => {
                             disabled={loading}
                             variant="outlined"
                             sx={{
-                                gridColumn: {xs: "1", md: "1 / -1"},
-                                "& .MuiOutlinedInput-root": {borderRadius: 1},
+                                gridColumn: { xs: "1", md: "1 / -1" },
+                                "& .MuiOutlinedInput-root": { borderRadius: 1 },
                             }}
                         />
                     </Box>
@@ -217,13 +207,13 @@ const AddResumeForm = ({onResumeAdded}) => {
                         sx={{
                             mt: 1.5,
                             display: "grid",
-                            gridTemplateColumns: {xs: "1fr", md: "1fr 1fr"},
+                            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
                             gap: 1.5,
                         }}
                     >
                         <Box>
-                            <Typography variant="subtitle2" sx={{mb: 0.5, fontWeight: 500}}>
-                                Resume (PDF, Required)
+                            <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 500 }}>
+                                Resume (PDF, Optional)
                             </Typography>
                             <CloudinaryUpload
                                 onUpload={handleResumeUpload}
@@ -233,7 +223,7 @@ const AddResumeForm = ({onResumeAdded}) => {
                             />
                         </Box>
                         <Box>
-                            <Typography variant="subtitle2" sx={{mb: 0.5, fontWeight: 500}}>
+                            <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 500 }}>
                                 Image (Optional)
                             </Typography>
                             <CloudinaryUpload
@@ -257,17 +247,17 @@ const AddResumeForm = ({onResumeAdded}) => {
                             textTransform: "none",
                             fontWeight: 500,
                             boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                            "&:hover": {boxShadow: "0 4px 12px rgba(0,0,0,0.2)"},
+                            "&:hover": { boxShadow: "0 4px 12px rgba(0,0,0,0.2)" },
                         }}
                     >
-                        {loading ? <CircularProgress size={24}/> : "Add Resume"}
+                        {loading ? <CircularProgress size={24} /> : "Add Resume"}
                     </Button>
                 </form>
                 <Snackbar
                     open={snackbar.open}
                     autoHideDuration={4000}
                     onClose={handleCloseSnackbar}
-                    anchorOrigin={{vertical: "top", horizontal: "center"}}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 >
                     <Alert
                         onClose={handleCloseSnackbar}

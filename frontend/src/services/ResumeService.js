@@ -26,7 +26,7 @@ const resumeService = {
     createResume: async (resumeData) => {
         try {
             const response = await axios.post(API_URLS.CREATE_RESUME, resumeData);
-            return {success: true, data: response.data, message: 'Resume created successfully'};
+            return {success: true, data: response.data, message: 'ResumePage created successfully'};
         } catch (error) {
             return {success: false, message: error.response?.data?.message || 'Failed to create resume'};
         }
@@ -35,7 +35,7 @@ const resumeService = {
     updateResume: async (id, resumeData) => {
         try {
             const response = await axios.put(API_URLS.UPDATE_RESUME(id), resumeData);
-            return {success: true, data: response.data, message: 'Resume updated successfully'};
+            return {success: true, data: response.data, message: 'ResumePage updated successfully'};
         } catch (error) {
             return {success: false, message: error.response?.data?.message || 'Failed to update resume'};
         }

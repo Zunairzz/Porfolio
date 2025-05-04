@@ -1,12 +1,13 @@
 import React, {useRef, useState} from "react";
 import {Box, Button, Fade, Paper, Typography} from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import {styled} from "@mui/material/styles";
 import {keyframes} from "@emotion/react";
 import axios from "axios";
 
-// Custom loading animation
+// Define keyframes for a spinning loading animation
 const spin = keyframes`
     0% {
         transform: rotate(0deg);
@@ -16,6 +17,7 @@ const spin = keyframes`
     }
 `;
 
+// Styled component for a loading spinner
 const LoadingSpinner = styled("div")({
     border: "3px solid #f3f3f3",
     borderTop: "3px solid #0288d1",
@@ -25,62 +27,76 @@ const LoadingSpinner = styled("div")({
     animation: `${spin} 1s linear infinite`,
 });
 
+// CloudinaryUpload component for handling file uploads to Cloudinary
 const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
+    // State to track uploading status
     const [uploading, setUploading] = useState(false);
+    // State to store preview URL for the selected file
     const [previewUrl, setPreviewUrl] = useState("");
+    // State to store the file type of the selected file
     const [fileType, setFileType] = useState("");
+    // State to store the selected file
+    const [selectedFile, setSelectedFile] = useState(null);
+    // State to store error messages
     const [error, setError] = useState("");
+    // State to store the public ID of the previously uploaded file
     const [previousPublicId, setPreviousPublicId] = useState("");
-    const [selectedFile, setSelectedFile] = useState(null); // Store selected file
+    // Reference to the hidden file input element
     const fileInputRef = useRef(null);
 
+    // Function to upload a file to Cloudinary
     const uploadToCloudinary = async (file) => {
+        // Retrieve Cloudinary configuration
         const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME || "dyo1h8cbk";
         const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || "resume_uploads";
 
+        // Prepare form data for the upload
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", uploadPreset);
         formData.append("folder", "resume");
 
         try {
+            // Send POST request to Cloudinary API
             const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/${cloudName}/upload`, // Changed to /upload to support both image and PDF
+                `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
                 formData
             );
 
+            // Check if the response is successful
             if (response.status !== 200) {
                 throw new Error("Upload failed");
             }
 
             const data = response.data;
+            // Validate response data
             if (!data.secure_url || !data.public_id) {
                 throw new Error("Invalid response from Cloudinary");
             }
 
+            // Return the secure URL and public ID
             return {url: data.secure_url, publicId: data.public_id};
         } catch (error) {
             throw new Error("Failed to upload to Cloudinary: " + error.message);
         }
     };
 
-    // const uploadToCloudinary = async (file) => {
-    //     console.log('HI Zunair')
-    //     return { url: "", publicId: "" };
-    // };
-
+    // Function to delete a file from Cloudinary
     const deleteFromCloudinary = async (publicId) => {
         try {
+            // Cloudinary credentials
             const cloudName = "dyo1h8cbk";
             const apiKey = "396215775646691";
             const apiSecret = "ANB5Pm57jjsbvF8MA2b_rBtVBjs";
 
+            // Generate timestamp and signature for authentication
             const timestamp = Math.round(new Date().getTime() / 1000);
             const signature = require("crypto")
                 .createHash("sha1")
                 .update(`public_id=${publicId}&timestamp=${timestamp}${apiSecret}`)
                 .digest("hex");
 
+            // Send POST request to delete the file
             const response = await axios.post(
                 `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`,
                 {
@@ -91,6 +107,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                 }
             );
 
+            // Check if deletion was successful
             if (response.data.result === "ok") {
                 console.log(`Successfully deleted file with publicId: ${publicId}`);
                 return {result: "ok"};
@@ -102,6 +119,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
         }
     };
 
+    // Function to validate image dimensions
     const validateImageDimensions = (file) => {
         return new Promise((resolve, reject) => {
             const img = new Image();
@@ -109,6 +127,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
             img.onload = () => {
                 const {width, height} = img;
                 URL.revokeObjectURL(img.src);
+                // Check if image dimensions are within limits
                 if (width <= 1200 && height <= 1800) {
                     resolve(true);
                 } else {
@@ -122,57 +141,85 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
         });
     };
 
-    const handleFileChange = (event) => {
+    // Handle file selection from input
+    const handleFileChange = async (event) => {
         const file = event.target.files[0];
+        // Validate file type
         if (!file || !accept.split(",").includes(file.type)) {
             setError(`Please upload a valid ${label.includes("PDF") ? "PDF" : "image (JPEG/PNG)"} file.`);
             return;
         }
 
-        setError("");
-        setSelectedFile(file);
-        setFileType(file.type);
-
-        // Generate local preview
-        const url = URL.createObjectURL(file);
-        setPreviewUrl(url);
-    };
-
-    const handleDrop = (event) => {
-        event.preventDefault();
-        if (disabled || uploading) return;
-
-        const file = event.dataTransfer.files[0];
-        if (!file || !accept.split(",").includes(file.type)) {
-            setError(`Please drop a valid ${label.includes("PDF") ? "PDF" : "image (JPEG/PNG)"} file.`);
-            return;
+        // Validate image dimensions if the file is an image
+        if (file.type.includes("image")) {
+            try {
+                await validateImageDimensions(file);
+            } catch (err) {
+                setError(err);
+                return;
+            }
         }
 
         setError("");
         setSelectedFile(file);
         setFileType(file.type);
 
-        // Generate local preview
+        // Generate local preview URL
         const url = URL.createObjectURL(file);
         setPreviewUrl(url);
     };
 
+    // Handle file drop event
+    const handleDrop = async (event) => {
+        event.preventDefault();
+        if (disabled || uploading) return;
+
+        const file = event.dataTransfer.files[0];
+        // Validate dropped file type
+        if (!file || !accept.split(",").includes(file.type)) {
+            setError(`Please drop a valid ${label.includes("PDF") ? "PDF" : "image (JPEG/PNG)"} file.`);
+            return;
+        }
+
+        // Validate image dimensions if the file is an image
+        if (file.type.includes("image")) {
+            try {
+                await validateImageDimensions(file);
+            } catch (err) {
+                setError(err);
+                return;
+            }
+        }
+
+        setError("");
+        setSelectedFile(file);
+        setFileType(file.type);
+
+        // Generate local preview URL
+        const url = URL.createObjectURL(file);
+        setPreviewUrl(url);
+    };
+
+    // Prevent default drag-over behavior
     const handleDragOver = (event) => {
         event.preventDefault();
     };
 
+    // Trigger file input click
     const handleButtonClick = () => {
         if (!disabled && !uploading) {
             fileInputRef.current.click();
         }
     };
 
+    // Handle file upload to Cloudinary
     const handleUploadClick = async () => {
         if (!selectedFile) {
             setError("Please select a file to upload.");
             return;
         }
 
+        // Validate image dimensions if the file is an image
         if (selectedFile.type.includes("image")) {
             try {
                 await validateImageDimensions(selectedFile);
@@ -186,6 +233,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
         setUploading(true);
 
         try {
+            // Delete a previous file if it exists
             if (previousPublicId) {
                 let deleteSuccess = false;
                 for (let attempt = 1; attempt <= 3; attempt++) {
@@ -205,6 +253,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                 }
             }
 
+            // Upload the new file
             const {url, publicId} = await uploadToCloudinary(selectedFile);
             setPreviousPublicId(publicId);
             onUpload(url, publicId);
@@ -215,8 +264,10 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
         }
     };
 
+    // Render the component
     return (
         <Box sx={{my: 2, maxWidth: 500, mx: "auto"}}>
+            {/* File upload area */}
             <Paper
                 elevation={2}
                 sx={{
@@ -228,8 +279,8 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                     bgcolor: "background.default",
                     transition: "all 0.3s ease",
                     "&:hover": {
-                        bgcolor: !disabled && !uploading ? "primary.light" : "grey.100",
-                        borderColor: !disabled && !uploading ? "primary.main" : "grey.400",
+                        bgcolor: !disabled && !uploading ? "grey.200" : "grey.100",
+                        borderColor: error ? "red.500" : !disabled && !uploading ? "primary.main" : "grey.400",
                         transform: !disabled && !uploading ? "scale(1.02)" : "none",
                     },
                 }}
@@ -238,6 +289,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                 role="region"
                 aria-label="File upload area"
             >
+                {/* Hidden file input */}
                 <input
                     type="file"
                     accept={accept}
@@ -247,6 +299,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                     disabled={disabled || uploading}
                     aria-hidden="true"
                 />
+                {/* Upload icon */}
                 <CloudUploadIcon
                     sx={{
                         fontSize: 40,
@@ -254,60 +307,68 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                         transition: "color 0.3s ease",
                     }}
                 />
+                {/* Upload label */}
                 <Typography
                     variant="h6"
                     sx={{mt: 1, mb: 0.5, fontWeight: 500, color: "text.primary"}}
                 >
                     {uploading ? "Uploading..." : label}
                 </Typography>
+                {/* Image size hint */}
                 {label.includes("Image") && (
                     <Typography variant="caption" color="text.secondary" sx={{mb: 2, display: "block"}}>
                         Max size: 1200 × 1800 pixels
                     </Typography>
                 )}
-                <Button
-                    variant="contained"
-                    size="medium"
-                    startIcon={<CloudUploadIcon/>}
-                    onClick={handleButtonClick}
-                    disabled={disabled || uploading}
-                    sx={{
-                        borderRadius: 10,
-                        textTransform: "none",
-                        px: 3,
-                        py: 1,
-                        bgcolor: "primary.main",
-                        "&:hover": {bgcolor: "primary.dark", transform: "translateY(-2px)"},
-                        transition: "all 0.2s ease",
-                        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-                    }}
-                    aria-label="Choose file to upload"
-                >
-                    Select File
-                </Button>
-                {selectedFile && (
+                {/* Your component code */}
+                <Box sx={{display: 'flex', justifyContent: 'center', gap: 2, alignItems: 'center'}}>
+                    {/* Select file button */}
                     <Button
                         variant="contained"
                         size="medium"
-                        startIcon={uploading ? <LoadingSpinner/> : <CloudUploadIcon/>}
-                        onClick={handleUploadClick}
+                        startIcon={<FileUploadIcon/>}
+                        onClick={handleButtonClick}
                         disabled={disabled || uploading}
                         sx={{
-                            mt: 1,
                             borderRadius: 10,
-                            textTransform: "none",
+                            textTransform: 'none',
                             px: 3,
                             py: 1,
-                            bgcolor: "secondary.main",
-                            "&:hover": {bgcolor: "secondary.dark", transform: "translateY(-2px)"},
-                            transition: "all 0.2s ease",
-                            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                            bgcolor: 'primary.main',
+                            '&:hover': {bgcolor: 'primary.dark', transform: 'translateY(-2px)'},
+                            transition: 'all 0.2s ease',
+                            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
                         }}
-                        aria-label="Upload file to Cloudinary"
+                        aria-label="Choose file to upload"
                     >
-                        {uploading ? "Uploading..." : "Upload File"}
+                        Select File
                     </Button>
-                )}
+
+                    {/* Upload file button */}
+                    {selectedFile && (
+                        <Button
+                            variant="contained"
+                            size="medium"
+                            startIcon={uploading ? <LoadingSpinner/> : <CloudUploadIcon/>}
+                            onClick={handleUploadClick}
+                            disabled={disabled || uploading}
+                            sx={{
+                                borderRadius: 10,
+                                textTransform: 'none',
+                                px: 3,
+                                py: 1,
+                                bgcolor: 'secondary.main',
+                                '&:hover': {bgcolor: 'secondary.dark', transform: 'translateY(-2px)'},
+                                transition: 'all 0.2s ease',
+                                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                            }}
+                            aria-label="Upload file to Cloudinary"
+                        >
+                            {uploading ? 'Uploading...' : 'Upload File'}
+                        </Button>
+                    )}
+                </Box>
+                {/* Error message */}
                 {error && (
                     <Fade in={!!error}>
                         <Typography variant="caption" color="error.main" sx={{mt: 2, display: "block"}}>
@@ -317,6 +378,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                 )}
             </Paper>
 
+            {/* Preview section */}
             {previewUrl && !error && (
                 <Fade in={!!previewUrl}>
                     <Box
@@ -333,6 +395,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                         <Typography variant="caption" color="text.secondary" gutterBottom>
                             Preview
                         </Typography>
+                        {/* PDF preview */}
                         {fileType === "application/pdf" ? (
                             <Box sx={{mt: 2, p: 2, border: "1px solid", borderColor: "grey.300", borderRadius: 2}}>
                                 <Typography variant="subtitle1" gutterBottom>
@@ -349,7 +412,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                                         View PDF
                                     </a>
                                 </Box>
-                                {/* Optional: Embedded PDF Preview (requires additional setup) */}
+                                {/* Embedded PDF preview */}
                                 <Box sx={{mt: 2, height: 400, border: "1px solid", borderColor: "grey.300"}}>
                                     <iframe
                                         src={previewUrl}
@@ -361,6 +424,7 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
                                 </Box>
                             </Box>
                         ) : (
+                            /* Image preview */
                             <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", gap: 1}}>
                                 <img
                                     src={previewUrl}
@@ -385,4 +449,5 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
     );
 };
 
+// Export the component
 export default CloudinaryUpload;

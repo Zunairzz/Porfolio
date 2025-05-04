@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Base from "../components/Base";
 import "../css/resume.css";
-import { Col, Container, Row } from "reactstrap";
+import {Col, Container, Row} from "reactstrap";
 import Button from "@mui/material/Button";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -15,46 +15,49 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import EditResumeForm from "./EditResumeForm"; // Import the EditResumeForm
+import EditResumeForm from "./EditResumeForm";
 import resumeService from "../services/ResumeService";
-import { AuthContext } from "../context/AuthContext";
+import {AuthContext} from "../context/AuthContext";
 
-// Placeholder images (replace with dynamic images if available)
-import zunair from "../image/ZunairResumeImage.jpg";
-import zaman from "../image/ZamanResumeImage.jpg";
-import umair from "../image/UmairResumeImage.jpg";
+// Default placeholder image for missing image.url
+import defaultImage from "../assests/default_image.jpeg";
+import {CircularProgress} from "@mui/material";
 
-// Map images to resume IDs (temporary solution until images are stored in the backend)
-const imageMap = {
-    1: zunair,
-    2: zaman,
-    3: umair,
-};
-
-const ResumeCard = ({ item, reverse, isAdmin, onDelete, onEdit }) => {
-    const [openDialog, setOpenDialog] = useState(false); // For delete confirmation dialog
-    const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" });
+const ResumeCard = ({item, reverse, isAdmin, onDelete, onEdit}) => {
+    const [openDialog, setOpenDialog] = useState(false);
+    const [snackbar, setSnackbar] = useState({open: false, message: "", severity: "success"});
+    const [loading, setLoading] = useState(false);
 
     const handleDownload = () => {
+        if (!item.document?.url) {
+            console.log("No document URL provided:", item.document);
+            setSnackbar({open: true, message: "No resume document available for download.", severity: "warning"});
+            return;
+        }
+        console.log("Attempting to download document from URL:", item.document.url);
         const link = document.createElement("a");
-        link.href = item.resume.url;
+        link.href = item.document.url;
         link.download = `${item.name}_resume.pdf`;
+        link.target = "_blank"; // Open in a new tab to check if URL is accessible
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        console.log("Download triggered for:", item.name);
     };
 
     const handleEdit = () => {
-        onEdit(item); // Trigger edit dialog with the resume item
+        onEdit(item);
     };
 
     const handleDelete = async () => {
+        setLoading(true);
         try {
             await resumeService.deleteResume(item._id);
-            setSnackbar({ open: true, message: "Resume deleted successfully!", severity: "success" });
+            setSnackbar({open: true, message: "ResumePage deleted successfully!", severity: "success"});
+            setLoading(false);
             onDelete(item._id);
         } catch (err) {
-            setSnackbar({ open: true, message: "Failed to delete resume.", severity: "error" });
+            setSnackbar({open: true, message: "Failed to delete resume.", severity: "error"});
         } finally {
             setOpenDialog(false);
         }
@@ -69,17 +72,17 @@ const ResumeCard = ({ item, reverse, isAdmin, onDelete, onEdit }) => {
     };
 
     const handleCloseSnackbar = () => {
-        setSnackbar({ ...snackbar, open: false });
+        setSnackbar({...snackbar, open: false});
     };
 
     return (
         <>
-            <Row style={{ height: "600px" }}>
+            <Row style={{height: "600px"}}>
                 <Col
-                    style={{ backgroundColor: reverse ? "#f1f1f1" : "#ffb680" }}
+                    style={{backgroundColor: reverse ? "#f1f1f1" : "#ffb680"}}
                     className="d-flex justify-content-center align-items-center"
                 >
-                    <div style={{ textAlign: "left" }}>
+                    <div style={{textAlign: "left"}}>
                         <p className="resume-title">{item.name}</p>
                         <p className="resume-sub-title">{item.title}</p>
                         <div className="resume-details">
@@ -92,31 +95,43 @@ const ResumeCard = ({ item, reverse, isAdmin, onDelete, onEdit }) => {
                             <p>
                                 <b>Experience:</b> {item.experience}
                             </p>
-                            <Tooltip title="Download Resume">
-                                <Button
-                                    variant="outlined"
-                                    endIcon={<FileDownloadIcon />}
-                                    onClick={handleDownload}
-                                    sx={{
+                            {item.document?.url ? (
+                                <Tooltip title="Download Resume">
+                                    <Button
+                                        variant="outlined"
+                                        endIcon={<FileDownloadIcon/>}
+                                        onClick={handleDownload}
+                                        sx={{
+                                            marginTop: "60px",
+                                            border: "2px solid black",
+                                            color: "black",
+                                            "&:hover": {
+                                                border: "2px solid #AB4459",
+                                                backgroundColor: "#AB4459",
+                                                color: "white",
+                                            },
+                                        }}
+                                    >
+                                        Download Resume
+                                    </Button>
+                                </Tooltip>
+                            ) : (
+                                <p
+                                    style={{
                                         marginTop: "60px",
-                                        border: "2px solid black",
-                                        color: "black",
-                                        "&:hover": {
-                                            border: "2px solid #AB4459",
-                                            backgroundColor: "#AB4459",
-                                            color: "white",
-                                        },
+                                        color: "#d32f2f",
+                                        fontWeight: "bold",
                                     }}
                                 >
-                                    Download Resume
-                                </Button>
-                            </Tooltip>
+                                    No document available
+                                </p>
+                            )}
                             {isAdmin && (
-                                <div style={{ marginTop: "20px" }}>
-                                    <Tooltip title="Edit Resume">
+                                <div style={{marginTop: "20px"}}>
+                                    <Tooltip title="Edit ResumePage">
                                         <Button
                                             variant="outlined"
-                                            startIcon={<EditIcon />}
+                                            startIcon={<EditIcon/>}
                                             onClick={handleEdit}
                                             sx={{
                                                 marginRight: "10px",
@@ -132,10 +147,10 @@ const ResumeCard = ({ item, reverse, isAdmin, onDelete, onEdit }) => {
                                             Edit
                                         </Button>
                                     </Tooltip>
-                                    <Tooltip title="Delete Resume">
+                                    <Tooltip title="Delete ResumePage">
                                         <Button
                                             variant="outlined"
-                                            startIcon={<DeleteIcon />}
+                                            startIcon={<DeleteIcon/>}
                                             onClick={handleOpenDialog}
                                             sx={{
                                                 border: "2px solid black",
@@ -156,7 +171,7 @@ const ResumeCard = ({ item, reverse, isAdmin, onDelete, onEdit }) => {
                     </div>
                 </Col>
                 <Col
-                    style={{ backgroundColor: reverse ? "#ffb680" : "#f1f1f1" }}
+                    style={{backgroundColor: reverse ? "#ffb680" : "#f1f1f1"}}
                     className="imageCol"
                 >
                     <div
@@ -172,9 +187,9 @@ const ResumeCard = ({ item, reverse, isAdmin, onDelete, onEdit }) => {
                         }}
                     >
                         <img
-                            src={item.imageSrc}
-                            alt="Resume"
-                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                            src={item.image?.url || defaultImage} // The default image is already used here
+                            alt={`${item.name}'s ResumePage`}
+                            style={{width: "100%", height: "100%", objectFit: "cover"}}
                         />
                     </div>
                 </Col>
@@ -197,7 +212,7 @@ const ResumeCard = ({ item, reverse, isAdmin, onDelete, onEdit }) => {
                         Cancel
                     </Button>
                     <Button onClick={handleDelete} color="error" autoFocus>
-                        Delete
+                        {loading ? <CircularProgress size={24}/> : "Delete"}
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -211,7 +226,7 @@ const ResumeCard = ({ item, reverse, isAdmin, onDelete, onEdit }) => {
                 <Alert
                     onClose={handleCloseSnackbar}
                     severity={snackbar.severity}
-                    sx={{ width: "100%" }}
+                    sx={{width: "100%"}}
                 >
                     {snackbar.message}
                 </Alert>
@@ -220,15 +235,15 @@ const ResumeCard = ({ item, reverse, isAdmin, onDelete, onEdit }) => {
     );
 };
 
-export const Resume = () => {
+export const ResumePage = () => {
     const [resumes, setResumes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showScroll, setShowScroll] = useState(false);
-    const { user } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     const [isAdmin, setIsAdmin] = useState(false);
-    const [editDialogOpen, setEditDialogOpen] = useState(false); // State for edit dialog
-    const [selectedResume, setSelectedResume] = useState(null); // State for selected resume
+    const [editDialogOpen, setEditDialogOpen] = useState(false);
+    const [selectedResume, setSelectedResume] = useState(null);
 
     // Fetch resumes from the API
     useEffect(() => {
@@ -239,11 +254,7 @@ export const Resume = () => {
             setLoading(true);
             try {
                 const response = await resumeService.getAllResumes();
-                const mappedResumes = response.data.map((resume, index) => ({
-                    ...resume,
-                    imageSrc: imageMap[resume._id] || imageMap[(index % 3) + 1],
-                }));
-                setResumes(mappedResumes);
+                setResumes(response.data);
                 setLoading(false);
             } catch (err) {
                 setError("Failed to load resumes. Please try again later.");
@@ -275,9 +286,7 @@ export const Resume = () => {
     const handleUpdateResume = (updatedResume) => {
         setResumes(
             resumes.map((resume) =>
-                resume._id === updatedResume._id
-                    ? { ...updatedResume, imageSrc: resume.imageSrc } // Preserve imageSrc
-                    : resume
+                resume._id === updatedResume._id ? updatedResume : resume
             )
         );
     };
@@ -292,18 +301,45 @@ export const Resume = () => {
     }, []);
 
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({top: 0, behavior: "smooth"});
     };
 
     return (
         <Base>
             <Container className="resume-parent">
                 <h1 className="resume-heading">
-                    My <span style={{ color: "#ff6600" }}>Resume</span>
+                    My <span style={{color: "#ff6600"}}>ResumePage</span>
                 </h1>
-                {loading && <p>Loading resumes...</p>}
-                {error && <p style={{ color: "red" }}>{error}</p>}
-                {!loading && !error && resumes.length === 0 && <p>No resumes found.</p>}
+                {loading &&
+                    <div style={{textAlign: "center", padding: "20px"}}>
+                        <CircularProgress/>
+                    </div>}
+                {error && <p style={{color: "red"}}>{error}</p>}
+                {!loading && !error && resumes.length === 0 && (
+                    <div
+                        className="flex flex-col items-center justify-center py-16 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg shadow-sm">
+                        <svg
+                            className="w-20 h-20 mb-4 text-teal-500 dark:text-teal-400 animate-pulse"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                            ></path>
+                        </svg>
+                        <p className="text-xl font-bold text-gray-800 dark:text-gray-200 tracking-tight">
+                            No Resumes Here!
+                        </p>
+                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 max-w-xs text-center">
+                            Let's spice things up—add a resume or tweak your search to find what you need!
+                        </p>
+                    </div>
+                )}
                 {!loading &&
                     !error &&
                     resumes.map((item, index) => (
@@ -313,12 +349,12 @@ export const Resume = () => {
                             reverse={index % 2 === 1}
                             isAdmin={isAdmin}
                             onDelete={handleDeleteResume}
-                            onEdit={handleEditResume} // Pass edit handler
+                            onEdit={handleEditResume}
                         />
                     ))}
             </Container>
 
-            {/* Edit Resume Dialog */}
+            {/* Edit ResumePage Dialog */}
             <Dialog
                 open={editDialogOpen}
                 onClose={handleCloseEditDialog}
@@ -326,7 +362,7 @@ export const Resume = () => {
                 fullWidth
                 aria-labelledby="edit-resume-dialog-title"
             >
-                <DialogTitle id="edit-resume-dialog-title">Edit Resume</DialogTitle>
+                <DialogTitle id="edit-resume-dialog-title">Edit ResumePage</DialogTitle>
                 <DialogContent>
                     {selectedResume && (
                         <EditResumeForm
@@ -354,10 +390,10 @@ export const Resume = () => {
                         minWidth: "50px",
                         height: "50px",
                         backgroundColor: "#ff6600",
-                        "&:hover": { backgroundColor: "#e65c00" },
+                        "&:hover": {backgroundColor: "#e65c00"},
                     }}
                 >
-                    <ArrowUpwardIcon sx={{ color: "white" }} />
+                    <ArrowUpwardIcon sx={{color: "white"}}/>
                 </Button>
             )}
         </Base>
