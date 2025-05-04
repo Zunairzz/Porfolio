@@ -340,6 +340,7 @@ export const ResumePage = () => {
                         </p>
                     </div>
                 )}
+                {/*{JSON.stringify(resumes)}*/}
                 {!loading &&
                     !error &&
                     resumes.map((item, index) => (

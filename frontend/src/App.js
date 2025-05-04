@@ -21,6 +21,7 @@ import AddProjectForm from './pages/AddProjectForm';
 import PrivateRoutes from './components/ProtectedRoute';
 import SolutionsPage from "./pages/SolutionsPage";
 import AddResumeForm from "./pages/AddResumeForm";
+import ResumeListsComponent from "./components/ResumeListsComponent";
 
 function App() {
     return (
@@ -55,6 +56,7 @@ function App() {
                             <Route path="/user" element={<PrivateRoutes/>}>
                                 <Route path="add-project" element={<AddProjectForm/>}/>
                                 <Route path="add-resume" element={<AddResumeForm/>}/>
+                                <Route path="resume-table" element={<ResumeListsComponent/>}/>
                             </Route>
                             <Route path="*" element={<NotFound/>}/>
                         </Routes>
