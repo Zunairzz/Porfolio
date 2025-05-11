@@ -23,6 +23,7 @@ import SolutionsPage from "./pages/SolutionsPage";
 import AddResumeForm from "./pages/AddResumeForm";
 import ResumeListsComponent from "./components/ResumeListsComponent";
 import ResumeUploader from "./components/ResumeUploader";
+import AddProblemForm from "./pages/AddProblemForm";
 
 function App() {
     return (
@@ -59,6 +60,7 @@ function App() {
                                 <Route path="add-resume" element={<AddResumeForm/>}/>
                                 <Route path="resume-table" element={<ResumeListsComponent/>}/>
                                 <Route path="resume-uploader" element={<ResumeUploader/>}/>
+                                <Route path="add-problem" element={<AddProblemForm/>}/>
                             </Route>
                             <Route path="*" element={<NotFound/>}/>
                         </Routes>

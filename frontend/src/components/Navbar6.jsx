@@ -114,6 +114,9 @@ export default function Navbar6() {
                                         <DropdownItem tag={ReactLink} to="/user/add-project" className="glass-dropdown-item">
                                             <span>Add Project</span>
                                         </DropdownItem>
+                                        <DropdownItem tag={ReactLink} to="/user/add-problem" className="glass-dropdown-item">
+                                            <span>Add Problem</span>
+                                        </DropdownItem>
                                         <DropdownItem tag={ReactLink} to="/register" className="glass-dropdown-item">
                                             <span>Add User</span>
                                         </DropdownItem>
@@ -171,6 +174,13 @@ export default function Navbar6() {
                                                 <NavLink tag={ReactLink} to="/user/add-project"
                                                          className="text-sm font-semibold leading-6 text-gray-900">
                                                     Add Project
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem
+                                                className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                                                <NavLink tag={ReactLink} to="/user/add-problem"
+                                                         className="text-sm font-semibold leading-6 text-gray-900">
+                                                    Add Problem
                                                 </NavLink>
                                             </NavItem>
                                             <NavItem

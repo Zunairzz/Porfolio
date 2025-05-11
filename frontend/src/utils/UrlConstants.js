@@ -29,6 +29,13 @@ const API_URLS = {
         UPDATE: (id) => `${BASE_API_URL}/project/update-project/${id}`,
         DELETE: (id) => `${BASE_API_URL}/project/delete-project/${id}`,
     },
+    PROBLEM: {
+        GET_BY_ID: (id) => `${BASE_API_URL}/problem/get-by-id/${id}`,
+        GET_ALL: `${BASE_API_URL}/problem/get-all-problems`,
+        ADD: `${BASE_API_URL}/problem/add-problem`,
+        UPDATE: (id) => `${BASE_API_URL}/problem/update-problem/${id}`,
+        DELETE: (id) => `${BASE_API_URL}/problem/delete-problem/${id}`,
+    }
 };
 
 // Export the API_URLS configuration for use in other modules

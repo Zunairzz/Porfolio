@@ -1,19 +1,58 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SolutionCard from '../components/SolutionCard';
-import Base from "../components/Base";
+import EditProblemForm from '../components/EditProblemForm';
+import Base from '../components/Base';
+import ProblemService from '../services/ProblemService';
+import {
+    Alert,
+    Button,
+    CircularProgress,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    Snackbar,
+    Typography,
+} from '@mui/material';
+import {ArrowUpward} from '@mui/icons-material';
 
 const SolutionsPage = () => {
+    const [isAdmin, setIsAdmin] = useState(false);
     const [showTopButton, setShowTopButton] = useState(false);
+    const [problems, setProblems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [editProblem, setEditProblem] = useState(null);
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [problemToDelete, setProblemToDelete] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null);
 
+    // Fetch problems
     useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 100) {
-                setShowTopButton(true);
-            } else {
-                setShowTopButton(false);
+        const token = localStorage.getItem('token');
+        setIsAdmin(!!token);
+
+        const fetchProblems = async () => {
+            try {
+                setLoading(true);
+                const data = await ProblemService.getAllProblems();
+                setProblems(data?.data || data);
+                setLoading(false);
+            } catch (err) {
+                setError('Failed to load solutions. Please try again later.');
+                setLoading(false);
+                console.error('Error fetching problems:', err);
             }
         };
+        fetchProblems();
+    }, []);
 
+    // Handle scroll for "Back to Top" button
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowTopButton(window.scrollY > 100);
+        };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -22,61 +61,153 @@ const SolutionsPage = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
-    const solutions = [
-        {
-            problem: "React state updates not reflecting immediately in UI.",
-            solution: "Use useEffect to handle side effects after state updates or leverage useCallback for memoized functions. This ensures your UI stays in sync with state changes seamlessly.",
-            githubUrl: "https://github.com/example/react-state-solution"
-        },
-        {
-            problem: "CORS error when fetching data from an external API.",
-            solution: "Set up a proxy server or fetch data server-side to bypass CORS restrictions. Libraries like `http-proxy-middleware` can simplify this process.",
-            githubUrl: null
-        },
-        {
-            problem: "Slow rendering of large lists in React.",
-            solution: "Implement virtualization with `react-window` or `react-virtualized` to render only visible items, boosting performance for large datasets.",
-            githubUrl: "https://github.com/example/react-virtualization"
-        },
-        {
-            problem: "Managing complex state in large React applications.",
-            solution: "Use state management libraries like Redux or Zustand to centralize state and improve scalability. Context API with useReducer is also a lightweight alternative.",
-            githubUrl: "https://github.com/example/react-state-management"
+    // Handle edit
+    const handleEdit = (problem) => {
+        setEditProblem(problem);
+    };
+
+    const handleEditSuccess = (updatedData) => {
+        setProblems((prev) =>
+            prev.map((p) =>
+                p.id === editProblem.id ? {...p, ...updatedData} : p
+            )
+        );
+        setSuccessMessage('Solution updated successfullyFacets successfully saved to localStorage.');
+        setEditProblem(null);
+    };
+
+    // Handle delete
+    const handleDeleteClick = (problem) => {
+        setProblemToDelete(problem);
+        setDeleteDialogOpen(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        try {
+            await ProblemService.deleteProblem(problemToDelete._id);
+            // Fetch the latest problems after deletion
+            try {
+                setLoading(true);
+                const data = await ProblemService.getAllProblems();
+                setProblems(data?.data || data);
+                setSuccessMessage('Solution deleted successfully!');
+                setDeleteDialogOpen(false);
+                setProblemToDelete(null);
+                setLoading(false);
+            } catch (err) {
+                setError('Failed to refresh solutions. Please try again.');
+                setLoading(false);
+                console.error('Error fetching problems after deletion:', err);
+            }
+        } catch (err) {
+            setError('Failed to delete solution. Please try again.');
+            console.error('Error deleting problem:', err);
+            setDeleteDialogOpen(false);
+            setProblemToDelete(null);
         }
-    ];
+    };
+
+    // Close snackbar
+    const handleSnackbarClose = () => {
+        setSuccessMessage(null);
+        setError(null);
+    };
 
     return (
         <Base>
-            <div style={{marginTop: '120px'}}
-                 className="min-h-screen bg-white py-12 px-4 relative">
+            <div className="min-h-screen bg-white py-12 px-4 relative" style={{marginTop: '120px'}}>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-black mb-12 bg-clip-text text-transparent">
                     Awesome <span style={{color: "#ff6200"}}>Developer</span> Solutions
                 </h1>
-                <div className="space-y-8">
-                    {solutions.map((item, index) => (
-                        <div key={index}>
+                {loading && (
+                    <div className="flex justify-center items-center py-8 mx-5">
+                        <CircularProgress color="primary"/>
+                    </div>
+                )}
+                {error && (
+                    <Alert severity="error" sx={{mb: 2}}>{error}</Alert>
+                )}
+                {!loading && !error && problems.length === 0 && (
+                    <Typography className="text-center text-gray-600">
+                        No solutions found. Check back later!
+                    </Typography>
+                )}
+                {!loading && !error && problems.length > 0 && (
+                    <div className="space-y-8">
+                        {problems.map((item) => (
                             <SolutionCard
-                                problem={item.problem}
-                                solution={item.solution}
+                                key={item.id}
+                                problem={item.question}
+                                solution={item.answer}
                                 githubUrl={item.githubUrl}
+                                onEdit={() => handleEdit(item)}
+                                onDelete={() => handleDeleteClick(item)}
+                                isAdmin={isAdmin}
                             />
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
                 {showTopButton && (
-                    <button
+                    <IconButton
                         onClick={scrollToTop}
-                        className="fixed bottom-8 right-8 bg-gradient-to-r from-orange-500 to-orange-300 text-white p-4 rounded-full shadow-lg hover:from-orange-600 hover:to-orange-400"
+                        sx={{
+                            position: 'fixed',
+                            bottom: 32,
+                            right: 32,
+                            bgcolor: 'orange',
+                            color: 'white',
+                            '&:hover': {bgcolor: 'darkorange'},
+                            boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+                        }}
                         aria-label="Back to Top"
                     >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                  d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                        </svg>
-                    </button>
+                        <ArrowUpward/>
+                    </IconButton>
                 )}
             </div>
+            {/* Edit Problem Dialog */}
+            {editProblem && (
+                <EditProblemForm
+                    open={!!editProblem}
+                    onClose={() => setEditProblem(null)}
+                    problem={editProblem}
+                    onSuccess={handleEditSuccess}
+                />
+            )}
+            {/* Delete Confirmation Dialog */}
+            <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
+                <DialogTitle>Confirm Delete</DialogTitle>
+                <DialogContent>
+                    <Typography>
+                        Are you sure you want to delete the solution: "{problemToDelete?.question}"?
+                    </Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+                    <Button
+                        onClick={handleDeleteConfirm}
+                        color="error"
+                        variant="contained"
+                    >
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            {/* Success/Error Snackbar */}
+            <Snackbar
+                open={!!successMessage || !!error}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+            >
+                <Alert
+                    onClose={handleSnackbarClose}
+                    severity={successMessage ? 'success' : 'error'}
+                    sx={{width: '100%'}}
+                >
+                    {successMessage || error}
+                </Alert>
+            </Snackbar>
         </Base>
     );
 };
