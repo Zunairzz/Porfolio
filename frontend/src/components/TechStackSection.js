@@ -22,9 +22,10 @@ const techStack = [
 
 const TechStackSection = () => {
     return (
-        <section id="techstack" className="bg-white py-16 px-6 md:px-12">
+        <section id="techstack" className="bg-white py-20 px-6 md:px-12">
             <div className="max-w-6xl mx-auto text-center mb-12">
-                <h2 className="text-4xl font-bold text-gray-800">Tech Stack & Tools</h2>
+                <h2 className="text-4xl font-bold text-gray-800">Tech Stack <span
+                    style={{color: "#ff6200"}}>&</span> Tools</h2>
                 <p className="text-gray-500 mt-2">Technologies I work with regularly</p>
             </div>
 

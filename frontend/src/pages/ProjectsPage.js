@@ -152,8 +152,8 @@ const ProjectsPage = () => {
         <Base>
             <section className="projects-section">
                 <div className="projects-container">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-black mb-12 bg-clip-text text-transparent">
-                        Projects
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-black mb-12 bg-clip-text text-transparent">
+                        My <span style={{color: "#ff6200"}}>Projects</span>
                     </h1>
                     <p className="projects-subtitle">
                         A collection of my recent work and coding projects

@@ -49,8 +49,8 @@ const SolutionsPage = () => {
         <Base>
             <div style={{marginTop: '120px'}}
                  className="min-h-screen bg-white py-12 px-4 relative">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-black mb-12 bg-clip-text text-transparent">
-                    Awesome Developer Solutions
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-black mb-12 bg-clip-text text-transparent">
+                    Awesome <span style={{color: "#ff6200"}}>Developer</span> Solutions
                 </h1>
                 <div className="space-y-8">
                     {solutions.map((item, index) => (

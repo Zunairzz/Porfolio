@@ -49,8 +49,8 @@ export function About() {
                 animate={{opacity: 1, y: 0}}
                 transition={{duration: 1}}
             >
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-black mb-12 bg-clip-text text-transparent">
-                    Meet our team
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-black mb-12 bg-clip-text text-transparent">
+                    Meet <span style={{color:"#ff6200"}}>our</span> team
                 </h1>
 
                 <motion.p

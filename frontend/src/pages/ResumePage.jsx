@@ -307,8 +307,8 @@ export const ResumePage = () => {
     return (
         <Base>
             <Container className="resume-parent">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-black mb-12 bg-clip-text text-transparent">
-                    Resumes
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-black mb-12 bg-clip-text text-transparent">
+                    My <span style={{color:"#ff6200"}}>Resumes</span>
                 </h1>
                 {loading &&
                     <div style={{textAlign: "center", padding: "20px"}}>

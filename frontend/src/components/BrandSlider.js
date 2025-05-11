@@ -19,10 +19,10 @@ const brands = [
 const SliderContainer = styled(Box)(({theme}) => ({
     display: 'flex',
     marginTop: '80px',
-    marginBottom: '70px',
+    marginBottom: '80px',
     overflow: 'hidden',
     width: '100vw', // Full viewport width
-    backgroundColor: '#e9ecef',
+    backgroundColor: 'rgba(233,236,239,0.34)',
     padding: '50px 0',
     position: 'relative',
     left: '50%',

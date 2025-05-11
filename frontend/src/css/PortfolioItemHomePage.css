@@ -1,24 +1,27 @@
+/* General Styles */
 .portfolio-section {
-    background: #ffffff; /* White background */
-    color: #333333; /* Dark gray text for contrast */
+    background: #ffffff;
+    color: #333333;
+    padding: 3rem 0;
 }
 
+/* Typography */
 .portfolio-title {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     font-weight: 700;
-    margin-bottom: 0;
 }
 
 .highlight {
-    color: #ff6200; /* Orange highlight */
+    color: #ff6200;
 }
 
+/* Buttons */
 .see-all-btn {
     background-color: #ff6200;
     border: none;
-    padding: 10px 25px;
+    padding: 0.625rem 1.5rem;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .see-all-btn:hover {
@@ -26,11 +29,43 @@
     transform: translateY(-2px);
 }
 
+.filter-btn {
+    background: #e9ecef;
+    color: #333333;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    margin: 0.25rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn[aria-pressed="true"] {
+    background: #ff6200;
+    color: #ffffff;
+}
+
+.launch-btn {
+    background: #ff6200;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.launch-btn:hover {
+    background: #e65b00;
+    transform: rotate(45deg);
+}
+
+/* Portfolio Card */
 .portfolio-card {
-    position: relative;
     border-radius: 15px;
     overflow: hidden;
-    background: #f8f9fa; /* Light gray card background */
+    background: #f8f9fa;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
@@ -41,11 +76,12 @@
 
 .image-wrapper {
     position: relative;
+    aspect-ratio: 16 / 9; /* Maintain consistent image proportions */
 }
 
 .portfolio-image {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -54,9 +90,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 98, 0, 0.7); /* Orange overlay */
-    padding: 15px;
-    transition: all 0.3s ease;
+    background: rgba(255, 98, 0, 0.7);
+    padding: 1rem;
+    transition: background 0.3s ease;
 }
 
 .portfolio-card:hover .image-overlay {
@@ -65,99 +101,93 @@
 
 .overlay-title {
     color: #ffffff;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     font-weight: 600;
     margin: 0;
 }
 
 .tags-container {
-    padding: 15px;
+    padding: 1rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .tag-badge {
     background: #ff6200;
     color: #ffffff;
-    padding: 5px 12px;
+    padding: 0.3rem 0.75rem;
     border-radius: 20px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
+/* Tags Filter */
 .tags-filter {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 0.5rem;
 }
 
-.filter-btn {
-    background: #e9ecef; /* Light gray buttons */
-    color: #333333;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.filter-btn:hover {
-    background: #ff6200;
-    color: #ffffff;
-}
-
+/* Featured Project */
 .featured-project {
-    background: #f8f9fa; /* Light gray background */
-    padding: 25px;
+    background: #f8f9fa;
+    padding: 1.5rem;
     border-radius: 10px;
 }
 
 .featured-title {
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
     font-weight: 600;
     color: #333333;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-}
-
-.launch-btn {
-    background: #ff6200;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-}
-
-.launch-btn:hover {
-    background: #e65b00;
-    transform: rotate(45deg);
+    gap: 0.5rem;
 }
 
 .featured-description {
-    color: #666666; /* Medium gray text */
-    font-size: 1.1rem;
+    color: #666666;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
     line-height: 1.6;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .portfolio-section {
+        padding: 2rem 0;
+    }
+
     .portfolio-title {
-        font-size: 2rem;
         text-align: center;
     }
 
     .see-all-btn {
-        margin-top: 15px;
         width: 100%;
+    }
+
+    .portfolio-card {
+        margin-bottom: 1rem;
     }
 
     .featured-title {
         flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .image-wrapper {
+        aspect-ratio: 4 / 3; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .filter-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .tag-badge {
+        font-size: 0.75rem;
     }
 }
