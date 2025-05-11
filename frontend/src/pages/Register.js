@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {EyeIcon, EyeSlashIcon} from '@heroicons/react/24/outline';
-import {API_URLS} from "../utils/UrlConstants";
+import API_URLS from "../utils/UrlConstants";
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -13,7 +13,7 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(API_URLS.REGISTER_USER, {
+            await axios.post(API_URLS.USER.REGISTER, {
                 name,
                 email,
                 password

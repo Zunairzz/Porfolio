@@ -1,23 +1,35 @@
-// Base API URL (use environment variables for flexibility)
+const BASE_API_URL = 'https://simplenodeapp-production.up.railway.app/api';
+// const BASE_API_URL = 'http://localhost:3022/api';
 
-const BASE_API_URL = "https://simplenodeapp-production.up.railway.app/api"; // Base URL for Prod API
-
-// const BASE_API_URL = "http://localhost:3022/api";
-
-// Specific API endpoints
+/**
+ * API endpoint configurations for the application.
+ * All endpoints are constructed relative to the BASE_API_URL.
+ * @constant {Object} API_URLS
+ */
 const API_URLS = {
-    GET_ALL_RESUMES: `${BASE_API_URL}/resumes`,
-    GET_RESUME_BY_ID: (id) => `${BASE_API_URL}/resumes/${id}`,
-    CREATE_RESUME: `${BASE_API_URL}/resume`,
-    UPDATE_RESUME: (id) => `${BASE_API_URL}/update-resume/${id}`,
-    DELETE_RESUME: (id) => `${BASE_API_URL}/delete-resume/${id}`,
-    LOGIN: `${BASE_API_URL}/users/login`,
-    REGISTER_USER: `${BASE_API_URL}/register`,
-    ADD_PROJECT: `${BASE_API_URL}/project/add-project`,
-    GET_ALL_PROJECTS: `${BASE_API_URL}/project/get-all-project`,
-    DELETE_PROJECT: (id) => `${BASE_API_URL}/project/${id}`,
-    UPDATE_PROJECT: (id) => `${BASE_API_URL}/update-project/${id}`,
+    // User-related endpoints
+    USER: {
+        LOGIN: `${BASE_API_URL}/users/login`,
+        REGISTER: `${BASE_API_URL}/users/register`,
+    },
+
+    // Resume-related endpoints
+    RESUME: {
+        GET_ALL: `${BASE_API_URL}/resume/get-all-resumes`,
+        GET_BY_ID: (id) => `${BASE_API_URL}/resume/${id}`,
+        CREATE: `${BASE_API_URL}/resume/add-resume`,
+        UPDATE: (id) => `${BASE_API_URL}/update-resume/${id}`,
+        DELETE: (id) => `${BASE_API_URL}/delete-resume/${id}`,
+    },
+
+    // Project-related endpoints
+    PROJECT: {
+        GET_ALL: `${BASE_API_URL}/project/get-all-project`,
+        ADD: `${BASE_API_URL}/project/add-project`,
+        UPDATE: (id) => `${BASE_API_URL}/project/update-project/${id}`,
+        DELETE: (id) => `${BASE_API_URL}/project/delete-project/${id}`,
+    },
 };
 
-// Named exports for individual access
-export {API_URLS};
+// Export the API_URLS configuration for use in other modules
+export default API_URLS;

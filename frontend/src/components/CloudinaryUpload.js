@@ -81,44 +81,6 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
         }
     };
 
-    // Function to delete a file from Cloudinary
-    const deleteFromCloudinary = async (publicId) => {
-        try {
-            // Cloudinary credentials
-            const cloudName = "dyo1h8cbk";
-            const apiKey = "396215775646691";
-            const apiSecret = "ANB5Pm57jjsbvF8MA2b_rBtVBjs";
-
-            // Generate timestamp and signature for authentication
-            const timestamp = Math.round(new Date().getTime() / 1000);
-            const signature = require("crypto")
-                .createHash("sha1")
-                .update(`public_id=${publicId}&timestamp=${timestamp}${apiSecret}`)
-                .digest("hex");
-
-            // Send POST request to delete the file
-            const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`,
-                {
-                    public_id: publicId,
-                    api_key: apiKey,
-                    timestamp: timestamp,
-                    signature: signature,
-                }
-            );
-
-            // Check if deletion was successful
-            if (response.data.result === "ok") {
-                console.log(`Successfully deleted file with publicId: ${publicId}`);
-                return {result: "ok"};
-            } else {
-                throw new Error("Failed to delete file from Cloudinary");
-            }
-        } catch (error) {
-            throw new Error(`Failed to delete file: ${error.message}`);
-        }
-    };
-
     // Function to validate image dimensions
     const validateImageDimensions = (file) => {
         return new Promise((resolve, reject) => {
@@ -231,37 +193,6 @@ const CloudinaryUpload = ({onUpload, disabled, accept, label}) => {
 
         setError("");
         setUploading(true);
-
-        try {
-            // Delete a previous file if it exists
-            if (previousPublicId) {
-                let deleteSuccess = false;
-                for (let attempt = 1; attempt <= 3; attempt++) {
-                    try {
-                        await deleteFromCloudinary(previousPublicId);
-                        deleteSuccess = true;
-                        break;
-                    } catch (deleteError) {
-                        console.warn(`Deletion attempt ${attempt} failed:`, deleteError);
-                        if (attempt === 3) {
-                            setError("Failed to delete previous file. Proceeding with upload.");
-                        }
-                    }
-                }
-                if (!deleteSuccess) {
-                    console.warn("Proceeding with upload despite deletion failure.");
-                }
-            }
-
-            // Upload the new file
-            const {url, publicId} = await uploadToCloudinary(selectedFile);
-            setPreviousPublicId(publicId);
-            onUpload(url, publicId);
-        } catch (error) {
-            setError("Failed to upload file. Please try again.");
-        } finally {
-            setUploading(false);
-        }
     };
 
     // Render the component

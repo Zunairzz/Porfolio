@@ -1,10 +1,10 @@
 import axios from "axios";
-import {API_URLS} from "../utils/UrlConstants";
+import API_URLS from "../utils/UrlConstants";
 
 const ProjectService = {
     addProject: async (projectData) => {
         try {
-            const response = await axios.post(API_URLS.ADD_PROJECT, projectData);
+            const response = await axios.post(API_URLS.PROJECT.ADD, projectData);
             console.log("response: ", response);
             return {
                 success: true,
@@ -24,7 +24,7 @@ const ProjectService = {
 
     getProjects: async () => {
         try {
-            const response = await axios.get(API_URLS.GET_ALL_PROJECTS);
+            const response = await axios.get(API_URLS.PROJECT.GET_ALL);
             return {
                 success: true,
                 data: response.data,

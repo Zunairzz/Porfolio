@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_URLS} from "../utils/UrlConstants";
+import API_URLS from "../utils/UrlConstants";
 
 // UserService handles login and logout functionality
 export const UserService = {
@@ -7,7 +7,7 @@ export const UserService = {
     // Login function: sends email and password, stores token on success
     async loginUser(email, password) {
         try {
-            const response = await axios.post(API_URLS.LOGIN, {
+            const response = await axios.post(API_URLS.USER.LOGIN, {
                 email,
                 password
             });
@@ -19,7 +19,7 @@ export const UserService = {
 
             return token; // Returning token on successful login
         } catch (error) {
-            // Return meaningful error if login fails
+            // Return a meaningful error if login fails
             throw error.response?.data || error.message;
         }
     },
