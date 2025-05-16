@@ -28,7 +28,7 @@ const InfoCard = ({image, heading, description}) => {
             {/* Bottom Left Border */}
             <div className="bottom-left-border"></div>
 
-            <p className="info-card-title" style={{color: 'black'}}>{heading}</p>
+            <p className="info-card-title" style={{color: 'white'}}>{heading}</p>
         </motion.div>
     );
 };
