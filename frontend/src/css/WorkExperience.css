@@ -7,7 +7,7 @@
     font-family: "Lato", sans-serif;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 80px;
 }
 
 .timelineItem {
@@ -45,9 +45,19 @@
 }
 
 .iconDark {
-    color: #333;
+    color: #555555; /* softer dark gray */
     font-size: 1.5rem;
 }
+
+
+.txt,
+.mb-description,
+.mb-duration {
+    color: #4a4a4a; /* Softer modern dark gray */
+    line-height: 1.6; /* improves readability */
+    font-weight: 400;
+}
+
 
 @media only screen and (max-width: 10000px) {
     /* Styles for screens smaller than 600px */

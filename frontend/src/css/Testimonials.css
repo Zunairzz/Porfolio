@@ -2,10 +2,11 @@
     background-color: rgba(108, 108, 108, 0.45);
     color: white;
     border-radius: 15px;
-    padding: 20px;
-    gap: 10px;
+    padding: 40px;
+    gap: 30px;
     margin-left: 12px;
     margin-right: 12px;
+    margin-bottom: 50px;
 }
 
 .double-quotation-mark {

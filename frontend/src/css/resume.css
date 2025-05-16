@@ -141,7 +141,30 @@
 }
 
 @media (max-width: 600px) {
-    .resumes-grid {
-        grid-template-columns: 1fr;
+    .resume-parent {
+        margin-top: 6rem;
+    }
+
+    .resume-title {
+        font-size: 36px;
+    }
+
+    .resume-sub-title {
+        font-size: 18px;
+    }
+
+    .MuiButton-root {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+
+    .MuiDialog-paper {
+        margin: 16px;
+        max-width: 90%;
+    }
+
+    .MuiCircularProgress-root {
+        margin: 20px auto;
+        display: block;
     }
 }

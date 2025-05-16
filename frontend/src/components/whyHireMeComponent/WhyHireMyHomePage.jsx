@@ -1,79 +1,96 @@
-import { Col, Container, Row } from "reactstrap";
+import React from "react";
+import { Container, Row, Col } from "reactstrap";
 import { motion } from "framer-motion";
 import image from "../../assests/hire_me.png";
-import React from "react";
 import "../../css/HireMe.css";
+
+const fadeScaleVariant = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: (customDelay = 0) => ({
+        opacity: 1,
+        scale: 1,
+        transition: {
+            duration: 0.7,
+            delay: customDelay,
+            ease: "easeOut",
+        },
+    }),
+};
 
 export function WhyHireMyHomePage() {
     return (
-        <Container>
-            <Row
-                className="d-flex justify-content-center align-items-center align-content-center"
-                style={{ marginTop: "150px" }}
-            >
+        <Container style={{ marginTop: 150 }}>
+            <Row className="d-flex justify-content-center align-items-center">
                 <Col className="hide-on-mobile">
                     <motion.img
                         src={image}
-                        alt="title here"
+                        alt="Hire me illustration"
                         className="card-image"
-                        initial={{ opacity: 0, x: -100 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1 }}
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
+                        custom={0}
+                        variants={fadeScaleVariant}
+                        loading="lazy"
                     />
                 </Col>
                 <Col className="py-5 right-col">
                     <motion.h1
                         className="mt-2 heading-txt"
-                        initial={{ opacity: 0, x: 100 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1 }}
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
+                        custom={0.2}
+                        variants={fadeScaleVariant}
+                        style={{ marginBottom: "1rem" }}
                     >
-                        Why <span style={{ color: "#ff6600" }}>Hire me</span>?
+                        Why <span className="highlight-text">Hire me</span>?
                     </motion.h1>
+
                     <motion.p
                         className="txt pt-3"
-                        initial={{ opacity: 0, x: 100 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1, delay: 0.2 }}
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
+                        custom={0.4}
+                        variants={fadeScaleVariant}
+                        style={{ marginBottom: "2rem" }}
                     >
-                        As a highly skilled React and Node.js developer with over three years of
-                        experience, I bring a strong background in building scalable web applications
-                        using the MERN stack. My expertise extends to designing seamless user experiences,
-                        having a good grasp of UI/UX design principles, and translating them effectively
-                        using tools like Figma. I am committed to clean coding practices and have a deep
-                        understanding of industry-standard methodologies like SCRUM and KANBAN. With
-                        additional skills in Java, Spring Boot, and REST APIs, I am well-equipped to handle
-                        complex projects, ensuring efficient and high-quality delivery. My dedication to
-                        continuous learning, coupled with my passion for contributing to open-source projects,
-                        makes me a valuable asset to any development team.
+                        Experienced MERN stack developer with 3+ years building scalable web apps.
+                        Skilled in React, Node.js, and UI/UX design with tools like Figma.
+                        Strong in clean code, Agile (SCRUM/KANBAN), and RESTful APIs.
+                        Also proficient in Java and Spring Boot.
+                        Passionate about continuous learning and open-source contributions.
+                        Committed to delivering high-quality, efficient solutions.
                     </motion.p>
 
                     <motion.div
-                        className="d-flex py-3"
-                        initial={{ opacity: 0, x: 100 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1, delay: 0.4 }}
+                        className="d-flex py-3 stats-container"
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
+                        custom={0.6}
+                        variants={fadeScaleVariant}
+                        style={{ gap: "6rem" }}
                     >
-                        <div>
+                        <div className="stat-item">
                             <h1>100+</h1>
-                            <p className="txt">Project Completed</p>
+                            <p className="txt">Projects Completed</p>
                         </div>
-                        <div style={{ paddingLeft: "100px" }}>
+                        <div className="stat-item">
                             <h1>455+</h1>
-                            <p className="txt">Project Completed</p>
+                            <p className="txt">Happy Clients</p>
                         </div>
                     </motion.div>
 
                     <motion.button
                         className="button"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
+                        custom={0.8}
+                        variants={fadeScaleVariant}
+                        type="button"
                     >
                         Hire Me
                     </motion.button>

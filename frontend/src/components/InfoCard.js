@@ -1,15 +1,16 @@
 import React from "react";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 import "../css/InfoCard.css";
+import backgroundImage from "../assests/testimonials.jpg";
 
-const InfoCard = ({ image, heading, description }) => {
+const InfoCard = ({image, heading, description}) => {
     return (
         <motion.div
             className="info-card"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            whileHover={{ scale: 1.05 }}
+            initial={{opacity: 0, y: 50}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.5, ease: "easeOut"}}
+            whilexHover={{scale: 1.05}}
         >
             {/* Top Right Border */}
             <div className="top-right-border"></div>
@@ -17,12 +18,12 @@ const InfoCard = ({ image, heading, description }) => {
             <motion.img
                 src={image}
                 alt={heading}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
+                initial={{opacity: 0, scale: 0.8}}
+                animate={{opacity: 1, scale: 1}}
+                transition={{duration: 0.5}}
             />
 
-            <p className='mt-4'>{description}</p>
+            <p style={{marginTop: '40px', color: 'white', fontSize: '18px'}}>{description}</p>
 
             {/* Bottom Left Border */}
             <div className="bottom-left-border"></div>
@@ -35,17 +36,16 @@ const InfoCard = ({ image, heading, description }) => {
 export const MyServiceCard = () => {
     return (
         <motion.div
-            className="mx-auto py-12 px-4"
-            style={{backgroundColor: '#e9ecef', padding: '100px'}}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
+            className="mx-auto py-12 px-4 parent-info-card"
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 1}}
         >
             <motion.h2
-                className="text-2xl font-bold text-gray-800 text-center info-card-heading"
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6 }}
+                className="text-2xl font-bold text-white text-center info-card-heading"
+                initial={{y: -20, opacity: 0}}
+                animate={{y: 0, opacity: 1}}
+                transition={{duration: 0.6}}
             >
                 3 Reasons To <span style={{color: "#ff6600"}}> Choose Me</span>
             </motion.h2>

@@ -53,7 +53,7 @@ const ResumeCard = ({item, reverse, isAdmin, onDelete, onEdit}) => {
         setLoading(true);
         try {
             await resumeService.deleteResume(item._id);
-            setSnackbar({open: true, message: "ResumePage deleted successfully!", severity: "success"});
+            setSnackbar({open: true, message: "Resume deleted successfully!", severity: "success"});
             setLoading(false);
             onDelete(item._id);
         } catch (err) {
@@ -76,13 +76,13 @@ const ResumeCard = ({item, reverse, isAdmin, onDelete, onEdit}) => {
     };
 
     return (
-        <>
+        <div>
             <Row style={{height: "600px"}}>
                 <Col
                     style={{backgroundColor: reverse ? "#f1f1f1" : "#ffb680"}}
                     className="d-flex justify-content-center align-items-center"
                 >
-                    <div style={{textAlign: "left"}}>
+                    <div style={{textAlign: "left", padding: '0 15px 0 15px'}}>
                         <p className="resume-title">{item.name}</p>
                         <p className="resume-sub-title">{item.title}</p>
                         <div className="resume-details">
@@ -231,7 +231,7 @@ const ResumeCard = ({item, reverse, isAdmin, onDelete, onEdit}) => {
                     {snackbar.message}
                 </Alert>
             </Snackbar>
-        </>
+        </div>
     );
 };
 
@@ -308,7 +308,7 @@ export const ResumePage = () => {
         <Base>
             <Container className="resume-parent">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-black mb-12 bg-clip-text text-transparent">
-                    My <span style={{color:"#ff6200"}}>Resumes</span>
+                    My <span style={{color: "#ff6200"}}>Resumes</span>
                 </h1>
                 {loading &&
                     <div style={{textAlign: "center", padding: "20px"}}>

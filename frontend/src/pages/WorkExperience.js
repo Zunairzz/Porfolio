@@ -9,7 +9,7 @@ const WorkExperience = () => {
             company: "Upgenics International",
             duration: "May 2023 - Present",
             position: "Java Software Engineer",
-            description: "Developed a sophisticated JavaFX desktop application for diagnosing iPhones, Android devices, and iPads. Implemented multi-threading for handling multiple device connections on MacBooks. Integrated APIs for seamless data exchange and precise diagnostics. Collaborated using Git for version control and repository management. Provided remote technical support, troubleshooting client system issues to ensure optimal performance.",
+            description: "Developed a JavaFX desktop app for diagnosing iPhones, Android devices, and iPads, utilizing multithreading to manage multiple MacBook device connections. Integrated APIs for accurate diagnostics and data exchange. Collaborated with Git for version control and provided remote technical support to troubleshoot client system issues and optimize performance.",
         },
         {
             company: "Allied Bank Limited",
@@ -81,7 +81,7 @@ const WorkExperience = () => {
 
                     return (
                         <Row key={index} style={styles.timelineItem}>
-                            <Col xl={5} lg={5} md={5}>
+                            <Col xl={5} lg={5} md={5} className="text-end">
                                 <h5>{exp.company}</h5>
                                 <p>{exp.duration}</p>
                             </Col>
@@ -94,7 +94,7 @@ const WorkExperience = () => {
                                     <div style={styles.verticalLine}></div>
                                 )}
                             </Col>
-                            <Col xl={5} lg={5} md={5}>
+                            <Col xl={4} lg={4} md={4}>
                                 <h5>{exp.position}</h5>
                                 <p>{exp.description}</p>
                             </Col>

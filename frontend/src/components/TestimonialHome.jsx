@@ -11,7 +11,7 @@ const CardStyle = {
 export function TestimonialHome() {
     return (
         <div className="testimonial-parent">
-            <h1 className="text-center custom-text_heading mt-2 mb-5">
+            <h1 className="text-center custom-text_heading mt-2" style={{marginBottom: '150px'}}>
                 Testimonials That<br/>
                 Speaks to <span style={{color: '#ff6600'}}>My Results</span>
             </h1>

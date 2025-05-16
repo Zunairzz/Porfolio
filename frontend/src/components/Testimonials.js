@@ -104,9 +104,9 @@ export const Testimonials = () => {
 
         return (
             <Card className="testimonials-card">
-                <div className="d-flex gap-2 head">
+                <div className="d-flex gap- head">
                     <Avatar sx={{width: 60, height: 60}} src={item.src}>H</Avatar>
-                    <div>
+                    <div className="mx-3">
                         <h3 className="testimonials-heading">{item.name}</h3>
                         <p className="testimonials-paragraph">{item.jobTitle}</p>
                     </div>

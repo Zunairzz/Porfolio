@@ -221,7 +221,7 @@ const Service = () => {
     return (
         <Base>
             {/* Services Section */}
-            <Container className="text-center" style={{backgroundColor: '#ffffff', marginTop: '10rem'}}>
+            <Container className="text-center parent-container">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-black mb-12 bg-clip-text text-transparent">
                     My <span style={{color: "#ff6200"}}>Service</span>
                 </h1>
