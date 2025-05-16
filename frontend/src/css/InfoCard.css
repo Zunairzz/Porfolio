@@ -1,6 +1,6 @@
 .parent-info-card {
     position: relative; /* Ensure the container is positioned */
-    /*background-image: url("../assests/testimonials.jpg");*/
+    background-image: url("../assests/testimonials.jpg");
     background-color: #09122C;
     background-size: cover;
     background-position: center;
