@@ -43,7 +43,7 @@ const ProjectService = {
 
     deleteProject: async (projectId) => {
         try {
-            const response = await axios.delete(API_URLS.DELETE_PROJECT(projectId));
+            const response = await axios.delete(API_URLS.PROJECT.DELETE(projectId));
             return {
                 success: true,
                 data: response.data,
@@ -63,7 +63,7 @@ const ProjectService = {
 
     updateProject: async (projectId, projectData) => {
         try {
-            const response = await axios.put(API_URLS.UPDATE_PROJECT(projectId), projectData);
+            const response = await axios.put(API_URLS.PROJECT.UPDATE(projectId), projectData);
             return {
                 success: true,
                 data: response.data,

@@ -1,20 +1,19 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../css/Projects.css";
 import Base from "../components/Base";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import Button from "@mui/material/Button";
 import ProjectService from "../services/ProjectService";
-import {Alert, CircularProgress, Snackbar} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete"; // Add DeleteIcon
+import { Alert, CircularProgress, Snackbar, Dialog, DialogContent } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import Dialog from "@mui/material/Dialog";
-import EditProjectForm from "./EditProjectForm"; // Add Dialog for edit form
-import EditIcon from "@mui/icons-material/Edit"; // Add EditIcon
+import EditProjectForm from "./EditProjectForm";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ProjectsPage = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false); // State to track admin status
+    const [isAdmin, setIsAdmin] = useState(false);
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: "",
@@ -22,12 +21,13 @@ const ProjectsPage = () => {
     });
     const cardRefs = useRef([]);
     const [showTopButton, setShowTopButton] = useState(false);
-    const [editProject, setEditProject] = useState(null); // State for editing project
+    const [editProject, setEditProject] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null); // State for full-size image
 
     // Fetch projects on mount
     useEffect(() => {
-        const token = localStorage.getItem('token')
-        setIsAdmin(!!token)
+        const token = localStorage.getItem("token");
+        setIsAdmin(!!token);
 
         const fetchProjects = async () => {
             setLoading(true);
@@ -65,7 +65,7 @@ const ProjectsPage = () => {
                     }
                 });
             },
-            {threshold: 0.1}
+            { threshold: 0.1 }
         );
 
         cardRefs.current.forEach((ref) => {
@@ -89,12 +89,12 @@ const ProjectsPage = () => {
     }, []);
 
     const scrollToTop = () => {
-        window.scrollTo({top: 0, behavior: "smooth"});
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     // Close snackbar
     const handleCloseSnackbar = () => {
-        setSnackbar({...snackbar, open: false});
+        setSnackbar({ ...snackbar, open: false });
     };
 
     // Handle project deletion
@@ -148,22 +148,32 @@ const ProjectsPage = () => {
         });
     };
 
+    // Handle image click to show full-size
+    const handleImageClick = (imageUrl) => {
+        setSelectedImage(imageUrl);
+    };
+
+    // Close full-size image dialog
+    const handleCloseImageDialog = () => {
+        setSelectedImage(null);
+    };
+
     return (
         <Base>
             <section className="projects-section">
                 <div className="projects-container">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-black mb-12 bg-clip-text text-transparent">
-                        My <span style={{color: "#ff6200"}}>Projects</span>
+                        My <span style={{ color: "#ff6200" }}>Projects</span>
                     </h1>
                     <p className="projects-subtitle">
                         A collection of my recent work and coding projects
                     </p>
                     {loading ? (
-                        <div style={{textAlign: "center", padding: "20px"}}>
-                            <CircularProgress/>
+                        <div style={{ textAlign: "center", padding: "20px" }}>
+                            <CircularProgress />
                         </div>
                     ) : projects.length === 0 ? (
-                        <p style={{textAlign: "center"}}>No projects available.</p>
+                        <p style={{ textAlign: "center" }}>No projects available.</p>
                     ) : (
                         <div className="projects-grid">
                             {projects.map((project, index) => (
@@ -171,7 +181,7 @@ const ProjectsPage = () => {
                                     key={project._id}
                                     ref={(el) => (cardRefs.current[index] = el)}
                                     className="project-card"
-                                    style={{"--order": index}}
+                                    style={{ "--order": index }}
                                 >
                                     {project.image && (
                                         <div className="image-wrapper">
@@ -179,31 +189,35 @@ const ProjectsPage = () => {
                                                 src={project.image}
                                                 alt={`${project.title} screenshot`}
                                                 className="project-image"
+                                                onClick={() => handleImageClick(project.image)} // Add click handler
+                                                style={{ cursor: "pointer" }} // Make image clickable
                                             />
                                         </div>
                                     )}
                                     <div className="project-content">
-                                        <div style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "center"
-                                        }}>
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                justifyContent: "space-between",
+                                                alignItems: "center",
+                                            }}
+                                        >
                                             <h2 className="project-title">{project.title}</h2>
                                             {isAdmin && (
                                                 <div>
                                                     <IconButton
                                                         onClick={() => handleOpenEdit(project)}
-                                                        sx={{color: "#1976d2"}}
+                                                        sx={{ color: "#1976d2" }}
                                                         aria-label="edit project"
                                                     >
-                                                        <EditIcon/>
+                                                        <EditIcon />
                                                     </IconButton>
                                                     <IconButton
                                                         onClick={() => handleDeleteProject(project._id)}
-                                                        sx={{color: "#ff0000"}}
+                                                        sx={{ color: "#ff0000" }}
                                                         aria-label="delete project"
                                                     >
-                                                        <DeleteIcon/>
+                                                        <DeleteIcon />
                                                     </IconButton>
                                                 </div>
                                             )}
@@ -212,8 +226,8 @@ const ProjectsPage = () => {
                                         <div className="project-tech">
                                             {project.technologies.map((tech, idx) => (
                                                 <span key={idx} className="tech-tag">
-                                                    {tech}
-                                                </span>
+                          {tech}
+                        </span>
                                             ))}
                                         </div>
                                         <a
@@ -242,22 +256,22 @@ const ProjectsPage = () => {
                         minWidth: "50px",
                         height: "50px",
                         backgroundColor: "#ff6600",
-                        "&:hover": {backgroundColor: "#e65c00"},
+                        "&:hover": { backgroundColor: "#e65c00" },
                     }}
                 >
-                    <ArrowUpwardIcon sx={{color: "white"}}/>
+                    <ArrowUpwardIcon sx={{ color: "white" }} />
                 </Button>
             )}
             <Snackbar
                 open={snackbar.open}
                 autoHideDuration={6000}
                 onClose={handleCloseSnackbar}
-                anchorOrigin={{vertical: "top", horizontal: "center"}}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
             >
                 <Alert
                     onClose={handleCloseSnackbar}
                     severity={snackbar.severity}
-                    sx={{width: "100%"}}
+                    sx={{ width: "100%" }}
                 >
                     {snackbar.message}
                 </Alert>
@@ -270,6 +284,27 @@ const ProjectsPage = () => {
                         onUpdate={handleUpdateProject}
                     />
                 )}
+            </Dialog>
+            {/* Full-size image dialog */}
+            <Dialog
+                open={!!selectedImage}
+                onClose={handleCloseImageDialog}
+                maxWidth="lg"
+                fullWidth
+            >
+                <DialogContent sx={{ padding: 0, display: "flex", justifyContent: "center" }}>
+                    {selectedImage && (
+                        <img
+                            src={selectedImage}
+                            alt="Full-size project screenshot"
+                            style={{
+                                maxWidth: "100%",
+                                maxHeight: "90vh",
+                                objectFit: "contain",
+                            }}
+                        />
+                    )}
+                </DialogContent>
             </Dialog>
         </Base>
     );
