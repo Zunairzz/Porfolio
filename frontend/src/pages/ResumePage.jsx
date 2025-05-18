@@ -104,6 +104,7 @@ const ResumeCard = ({item, reverse, isAdmin, onDelete, onEdit}) => {
                                         sx={{
                                             marginTop: "60px",
                                             border: "2px solid black",
+                                            borderRadius: "5rem",
                                             color: "black",
                                             "&:hover": {
                                                 border: "2px solid #AB4459",
@@ -136,6 +137,7 @@ const ResumeCard = ({item, reverse, isAdmin, onDelete, onEdit}) => {
                                             sx={{
                                                 marginRight: "10px",
                                                 border: "2px solid black",
+                                                borderRadius: "5rem",
                                                 color: "black",
                                                 "&:hover": {
                                                     border: "2px solid #1976d2",
@@ -154,6 +156,7 @@ const ResumeCard = ({item, reverse, isAdmin, onDelete, onEdit}) => {
                                             onClick={handleOpenDialog}
                                             sx={{
                                                 border: "2px solid black",
+                                                borderRadius: "5rem",
                                                 color: "black",
                                                 "&:hover": {
                                                     border: "2px solid #d32f2f",

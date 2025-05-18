@@ -78,7 +78,7 @@ export function WhyHireMyHomePage() {
                             <p className="txt">Projects Completed</p>
                         </div>
                         <div className="stat-item">
-                            <h1>455+</h1>
+                            <h1>50+</h1>
                             <p className="txt">Happy Clients</p>
                         </div>
                     </motion.div>

@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "../css/Projects.css";
 import Base from "../components/Base";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import Button from "@mui/material/Button";
 import ProjectService from "../services/ProjectService";
-import { Alert, CircularProgress, Snackbar, Dialog, DialogContent } from "@mui/material";
+import {Alert, Box, CircularProgress, Dialog, DialogContent, Snackbar} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import EditProjectForm from "./EditProjectForm";
@@ -65,7 +65,7 @@ const ProjectsPage = () => {
                     }
                 });
             },
-            { threshold: 0.1 }
+            {threshold: 0.1}
         );
 
         cardRefs.current.forEach((ref) => {
@@ -89,12 +89,12 @@ const ProjectsPage = () => {
     }, []);
 
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({top: 0, behavior: "smooth"});
     };
 
     // Close snackbar
     const handleCloseSnackbar = () => {
-        setSnackbar({ ...snackbar, open: false });
+        setSnackbar({...snackbar, open: false});
     };
 
     // Handle project deletion
@@ -163,17 +163,17 @@ const ProjectsPage = () => {
             <section className="projects-section">
                 <div className="projects-container">
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-black mb-12 bg-clip-text text-transparent">
-                        My <span style={{ color: "#ff6200" }}>Projects</span>
+                        My <span style={{color: "#ff6200"}}>Projects</span>
                     </h1>
                     <p className="projects-subtitle">
                         A collection of my recent work and coding projects
                     </p>
                     {loading ? (
-                        <div style={{ textAlign: "center", padding: "20px" }}>
-                            <CircularProgress />
+                        <div style={{textAlign: "center", padding: "20px"}}>
+                            <CircularProgress/>
                         </div>
                     ) : projects.length === 0 ? (
-                        <p style={{ textAlign: "center" }}>No projects available.</p>
+                        <p style={{textAlign: "center"}}>No projects available.</p>
                     ) : (
                         <div className="projects-grid">
                             {projects.map((project, index) => (
@@ -181,7 +181,7 @@ const ProjectsPage = () => {
                                     key={project._id}
                                     ref={(el) => (cardRefs.current[index] = el)}
                                     className="project-card"
-                                    style={{ "--order": index }}
+                                    style={{"--order": index}}
                                 >
                                     {project.image && (
                                         <div className="image-wrapper">
@@ -190,7 +190,7 @@ const ProjectsPage = () => {
                                                 alt={`${project.title} screenshot`}
                                                 className="project-image"
                                                 onClick={() => handleImageClick(project.image)} // Add click handler
-                                                style={{ cursor: "pointer" }} // Make image clickable
+                                                style={{cursor: "pointer"}} // Make image clickable
                                             />
                                         </div>
                                     )}
@@ -207,17 +207,42 @@ const ProjectsPage = () => {
                                                 <div>
                                                     <IconButton
                                                         onClick={() => handleOpenEdit(project)}
-                                                        sx={{ color: "#1976d2" }}
+                                                        sx={{color: "#1976d2"}}
                                                         aria-label="edit project"
                                                     >
-                                                        <EditIcon />
+                                                        <Box
+                                                            sx={{
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center',
+                                                                width: 40, // Adjust size as needed
+                                                                height: 40,
+                                                                borderRadius: '50%', // Makes it rounded
+                                                                backgroundColor: '#1976d2', // Fill color (e.g., blue)
+                                                                color: '#fff', // Icon color (e.g., white)
+                                                                '&:hover': {
+                                                                    backgroundColor: '#1565c0', // Optional hover effect
+                                                                },
+                                                            }}
+                                                        >
+                                                            <EditIcon/>
+                                                        </Box>
                                                     </IconButton>
                                                     <IconButton
                                                         onClick={() => handleDeleteProject(project._id)}
-                                                        sx={{ color: "#ff0000" }}
                                                         aria-label="delete project"
+                                                        sx={{
+                                                            width: 40,
+                                                            height: 40,
+                                                            borderRadius: '50%',
+                                                            backgroundColor: '#d32f2f', // Red background
+                                                            color: '#fff', // White icon
+                                                            '&:hover': {
+                                                                backgroundColor: '#b71c1c', // Darker red on hover
+                                                            },
+                                                        }}
                                                     >
-                                                        <DeleteIcon />
+                                                        <DeleteIcon/>
                                                     </IconButton>
                                                 </div>
                                             )}
@@ -225,9 +250,7 @@ const ProjectsPage = () => {
                                         <p className="project-description">{project.description}</p>
                                         <div className="project-tech">
                                             {project.technologies.map((tech, idx) => (
-                                                <span key={idx} className="tech-tag">
-                          {tech}
-                        </span>
+                                                <span key={idx} className="tech-tag">{tech}</span>
                                             ))}
                                         </div>
                                         <a
@@ -256,22 +279,22 @@ const ProjectsPage = () => {
                         minWidth: "50px",
                         height: "50px",
                         backgroundColor: "#ff6600",
-                        "&:hover": { backgroundColor: "#e65c00" },
+                        "&:hover": {backgroundColor: "#e65c00"},
                     }}
                 >
-                    <ArrowUpwardIcon sx={{ color: "white" }} />
+                    <ArrowUpwardIcon sx={{color: "white"}}/>
                 </Button>
             )}
             <Snackbar
                 open={snackbar.open}
                 autoHideDuration={6000}
                 onClose={handleCloseSnackbar}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                anchorOrigin={{vertical: "top", horizontal: "center"}}
             >
                 <Alert
                     onClose={handleCloseSnackbar}
                     severity={snackbar.severity}
-                    sx={{ width: "100%" }}
+                    sx={{width: "100%"}}
                 >
                     {snackbar.message}
                 </Alert>
@@ -292,7 +315,7 @@ const ProjectsPage = () => {
                 maxWidth="lg"
                 fullWidth
             >
-                <DialogContent sx={{ padding: 0, display: "flex", justifyContent: "center" }}>
+                <DialogContent sx={{padding: 0, display: "flex", justifyContent: "center"}}>
                     {selectedImage && (
                         <img
                             src={selectedImage}

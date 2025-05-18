@@ -17,7 +17,8 @@
 
 /* Buttons */
 .see-all-btn {
-    background-color: #ff6200;
+    background-color: rgb(255, 136, 41);
+    border-radius: 5rem;
     border: none;
     padding: 0.625rem 1.5rem;
     font-weight: 600;

@@ -16,6 +16,7 @@ import {
     Typography,
 } from '@mui/material';
 import {ArrowUpward} from '@mui/icons-material';
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 const SolutionsPage = () => {
     const [isAdmin, setIsAdmin] = useState(false);
@@ -148,21 +149,22 @@ const SolutionsPage = () => {
                     </div>
                 )}
                 {showTopButton && (
-                    <IconButton
+
+                    <Button
                         onClick={scrollToTop}
                         sx={{
-                            position: 'fixed',
-                            bottom: 32,
-                            right: 32,
-                            bgcolor: 'orange',
-                            color: 'white',
-                            '&:hover': {bgcolor: 'darkorange'},
-                            boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+                            position: "fixed",
+                            bottom: "20px",
+                            right: "20px",
+                            borderRadius: "50%",
+                            minWidth: "50px",
+                            height: "50px",
+                            backgroundColor: "#ff6600",
+                            "&:hover": {backgroundColor: "#e65c00"},
                         }}
-                        aria-label="Back to Top"
                     >
-                        <ArrowUpward/>
-                    </IconButton>
+                        <ArrowUpwardIcon sx={{color: "white"}}/>
+                    </Button>
                 )}
             </div>
             {/* Edit Problem Dialog */}
