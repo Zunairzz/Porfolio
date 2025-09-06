@@ -1,4 +1,4 @@
-const BASE_API_URL = 'https://simplenodeapp-production.up.railway.app/api';
+const BASE_API_URL = 'https://simplenodeapp.vercel.app/api';
 // const BASE_API_URL = 'http://localhost:3022/api';
 
 /**
